@@ -7,7 +7,7 @@ BEGIN
     );
 END;
 
-GO
+
 
 CREATE TABLE [AccountTemplates] (
     [Id] uniqueidentifier NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE [AccountTemplates] (
     CONSTRAINT [PK_AccountTemplates] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 CREATE TABLE [AspNetRoles] (
     [Id] nvarchar(450) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE [AspNetRoles] (
     CONSTRAINT [PK_AspNetRoles] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 CREATE TABLE [AspNetUsers] (
     [Id] nvarchar(450) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE [AspNetUsers] (
     CONSTRAINT [PK_AspNetUsers] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 CREATE TABLE [Attachments] (
     [Id] uniqueidentifier NOT NULL,
@@ -65,13 +65,13 @@ CREATE TABLE [Attachments] (
     CONSTRAINT [PK_Attachments] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 CREATE TABLE [Companies] (
     [Id] uniqueidentifier NOT NULL,
     [CreatedDate] datetime2 NOT NULL,
     [Blocked] bit NOT NULL,
-    [LogoPath] nvarchar(max) NULL,
+    [LoPath] nvarchar(max) NULL,
     [HouseNumber] nvarchar(max) NULL,
     [CompanyRegNo] nvarchar(max) NULL,
     [NameEnglish] nvarchar(max) NULL,
@@ -82,8 +82,8 @@ CREATE TABLE [Companies] (
     [CityArabic] nvarchar(max) NULL,
     [CountryEnglish] nvarchar(max) NULL,
     [CountryArabic] nvarchar(max) NULL,
-    [CategoryInEnglish] nvarchar(max) NULL,
-    [CategoryInArabic] nvarchar(max) NULL,
+    [CateryInEnglish] nvarchar(max) NULL,
+    [CateryInArabic] nvarchar(max) NULL,
     [AddressEnglish] nvarchar(max) NULL,
     [AddressArabic] nvarchar(max) NULL,
     [PhoneNo] nvarchar(max) NULL,
@@ -98,7 +98,7 @@ CREATE TABLE [Companies] (
     CONSTRAINT [PK_Companies] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 CREATE TABLE [ModulesNames] (
     [Id] uniqueidentifier NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE [ModulesNames] (
     CONSTRAINT [PK_ModulesNames] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 CREATE TABLE [NobleModules] (
     [Id] int NOT NULL IDENTITY,
@@ -117,7 +117,7 @@ CREATE TABLE [NobleModules] (
     CONSTRAINT [PK_NobleModules] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 CREATE TABLE [AspNetRoleClaims] (
     [Id] int NOT NULL IDENTITY,
@@ -128,7 +128,7 @@ CREATE TABLE [AspNetRoleClaims] (
     CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [AspNetUserClaims] (
     [Id] int NOT NULL IDENTITY,
@@ -139,7 +139,7 @@ CREATE TABLE [AspNetUserClaims] (
     CONSTRAINT [FK_AspNetUserClaims_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [AspNetUserLogins] (
     [LoginProvider] nvarchar(450) NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE [AspNetUserLogins] (
     CONSTRAINT [FK_AspNetUserLogins_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [AspNetUserRoles] (
     [UserId] nvarchar(450) NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE [AspNetUserRoles] (
     CONSTRAINT [FK_AspNetUserRoles_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [AspNetUserTokens] (
     [UserId] nvarchar(450) NOT NULL,
@@ -171,7 +171,7 @@ CREATE TABLE [AspNetUserTokens] (
     CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId] FOREIGN KEY ([UserId]) REFERENCES [AspNetUsers] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [AccountsLevelOne] (
     [Id] uniqueidentifier NOT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE [AccountsLevelOne] (
     CONSTRAINT [FK_AccountsLevelOne_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [AccountsLevelTwo] (
     [Id] uniqueidentifier NOT NULL,
@@ -205,7 +205,7 @@ CREATE TABLE [AccountsLevelTwo] (
     CONSTRAINT [FK_AccountsLevelTwo_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [AccountTypes] (
     [Id] uniqueidentifier NOT NULL,
@@ -220,7 +220,7 @@ CREATE TABLE [AccountTypes] (
     CONSTRAINT [FK_AccountTypes_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Brands] (
     [Id] uniqueidentifier NOT NULL,
@@ -237,9 +237,9 @@ CREATE TABLE [Brands] (
     CONSTRAINT [FK_Brands_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
 
-CREATE TABLE [BundleCategories] (
+
+CREATE TABLE [BundleCateries] (
     [Id] uniqueidentifier NOT NULL,
     [Offer] nvarchar(max) NULL,
     [Buy] decimal(18,2) NOT NULL,
@@ -255,11 +255,11 @@ CREATE TABLE [BundleCategories] (
     [CreatedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
     [ModifiedById] nvarchar(max) NULL,
     [ModifiedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
-    CONSTRAINT [PK_BundleCategories] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_BundleCategories_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
+    CONSTRAINT [PK_BundleCateries] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_BundleCateries_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [CashCustomer] (
     [Id] uniqueidentifier NOT NULL,
@@ -276,7 +276,7 @@ CREATE TABLE [CashCustomer] (
     CONSTRAINT [FK_CashCustomer_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Colors] (
     [Id] uniqueidentifier NOT NULL,
@@ -293,7 +293,7 @@ CREATE TABLE [Colors] (
     CONSTRAINT [FK_Colors_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [CompanyAccountSetups] (
     [Id] uniqueidentifier NOT NULL,
@@ -322,7 +322,7 @@ CREATE TABLE [CompanyAccountSetups] (
     CONSTRAINT [FK_CompanyAccountSetups_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [CompanyAttachments] (
     [Id] uniqueidentifier NOT NULL,
@@ -330,14 +330,14 @@ CREATE TABLE [CompanyAttachments] (
     [BusinessLicence] nvarchar(max) NULL,
     [CivilDefenceLicense] nvarchar(max) NULL,
     [CctvLicence] nvarchar(max) NULL,
-    [Logo] nvarchar(max) NULL,
+    [Lo] nvarchar(max) NULL,
     [Date] datetime2 NOT NULL,
     [CompanyId] uniqueidentifier NOT NULL,
     CONSTRAINT [PK_CompanyAttachments] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_CompanyAttachments_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [companyInformations] (
     [Id] uniqueidentifier NOT NULL,
@@ -357,7 +357,7 @@ CREATE TABLE [companyInformations] (
     CONSTRAINT [FK_companyInformations_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [CompanyLicences] (
     [Id] uniqueidentifier NOT NULL,
@@ -373,7 +373,7 @@ CREATE TABLE [CompanyLicences] (
     CONSTRAINT [FK_CompanyLicences_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [Currencies] (
     [Id] uniqueidentifier NOT NULL,
@@ -390,7 +390,7 @@ CREATE TABLE [Currencies] (
     CONSTRAINT [FK_Currencies_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [CustomerDiscount] (
     [Id] uniqueidentifier NOT NULL,
@@ -409,7 +409,7 @@ CREATE TABLE [CustomerDiscount] (
     CONSTRAINT [FK_CustomerDiscount_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [DailyExpenses] (
     [Id] uniqueidentifier NOT NULL,
@@ -432,7 +432,7 @@ CREATE TABLE [DailyExpenses] (
     CONSTRAINT [FK_DailyExpenses_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [DayStarts] (
     [Id] uniqueidentifier NOT NULL,
@@ -459,7 +459,7 @@ CREATE TABLE [DayStarts] (
     CONSTRAINT [FK_DayStarts_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Departments] (
     [Id] uniqueidentifier NOT NULL,
@@ -475,7 +475,7 @@ CREATE TABLE [Departments] (
     CONSTRAINT [FK_Departments_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Designations] (
     [Id] uniqueidentifier NOT NULL,
@@ -491,7 +491,7 @@ CREATE TABLE [Designations] (
     CONSTRAINT [FK_Designations_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [EmployeeRegistrations] (
     [Id] uniqueidentifier NOT NULL,
@@ -549,7 +549,7 @@ CREATE TABLE [EmployeeRegistrations] (
     CONSTRAINT [FK_EmployeeRegistrations_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [JournalVouchers] (
     [Id] uniqueidentifier NOT NULL,
@@ -568,7 +568,7 @@ CREATE TABLE [JournalVouchers] (
     CONSTRAINT [FK_JournalVouchers_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [LoginPermissions] (
     [Id] uniqueidentifier NOT NULL,
@@ -592,7 +592,7 @@ CREATE TABLE [LoginPermissions] (
     CONSTRAINT [FK_LoginPermissions_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [MobileOrders] (
     [Id] uniqueidentifier NOT NULL,
@@ -609,16 +609,16 @@ CREATE TABLE [MobileOrders] (
     CONSTRAINT [FK_MobileOrders_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [MonthlyCosts] (
     [Id] uniqueidentifier NOT NULL,
     [MonthlyRent] decimal(18,2) NOT NULL,
     [MonthlySaleries] decimal(18,2) NOT NULL,
     [MonthlyUtilityBills] decimal(18,2) NOT NULL,
-    [MonthlyGovtFees] decimal(18,2) NOT NULL,
-    [MonthlyGovtZakat] decimal(18,2) NOT NULL,
-    [GovtFeeForLabour] decimal(18,2) NOT NULL,
+    [MonthlyvtFees] decimal(18,2) NOT NULL,
+    [MonthlyvtZakat] decimal(18,2) NOT NULL,
+    [vtFeeForLabour] decimal(18,2) NOT NULL,
     [CompanyId] uniqueidentifier NOT NULL,
     [CreatedById] nvarchar(max) NULL,
     [CreatedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
@@ -628,7 +628,7 @@ CREATE TABLE [MonthlyCosts] (
     CONSTRAINT [FK_MonthlyCosts_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [NobleRoles] (
     [Id] uniqueidentifier NOT NULL,
@@ -644,7 +644,7 @@ CREATE TABLE [NobleRoles] (
     CONSTRAINT [FK_NobleRoles_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Origins] (
     [Id] uniqueidentifier NOT NULL,
@@ -661,7 +661,7 @@ CREATE TABLE [Origins] (
     CONSTRAINT [FK_Origins_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [PaymentOptions] (
     [Id] uniqueidentifier NOT NULL,
@@ -677,7 +677,7 @@ CREATE TABLE [PaymentOptions] (
     CONSTRAINT [FK_PaymentOptions_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [PromotionOffers] (
     [Id] uniqueidentifier NOT NULL,
@@ -699,7 +699,7 @@ CREATE TABLE [PromotionOffers] (
     CONSTRAINT [FK_PromotionOffers_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Sizes] (
     [Id] uniqueidentifier NOT NULL,
@@ -716,7 +716,7 @@ CREATE TABLE [Sizes] (
     CONSTRAINT [FK_Sizes_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [TaxRates] (
     [Id] uniqueidentifier NOT NULL,
@@ -734,7 +734,7 @@ CREATE TABLE [TaxRates] (
     CONSTRAINT [FK_TaxRates_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Transporters] (
     [Id] uniqueidentifier NOT NULL,
@@ -749,7 +749,7 @@ CREATE TABLE [Transporters] (
     CONSTRAINT [FK_Transporters_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Units] (
     [Id] uniqueidentifier NOT NULL,
@@ -766,7 +766,7 @@ CREATE TABLE [Units] (
     CONSTRAINT [FK_Units_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Warehouses] (
     [Id] uniqueidentifier NOT NULL,
@@ -793,7 +793,7 @@ CREATE TABLE [Warehouses] (
     CONSTRAINT [FK_Warehouses_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Zones] (
     [Id] uniqueidentifier NOT NULL,
@@ -808,7 +808,7 @@ CREATE TABLE [Zones] (
     CONSTRAINT [FK_Zones_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [ModulesRights] (
     [Id] uniqueidentifier NOT NULL,
@@ -819,12 +819,12 @@ CREATE TABLE [ModulesRights] (
     CONSTRAINT [FK_ModulesRights_ModulesNames_ModuleId] FOREIGN KEY ([ModuleId]) REFERENCES [ModulesNames] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [CompanyPermissions] (
     [Id] int NOT NULL IDENTITY,
     [Description] nvarchar(max) NULL,
-    [Category] nvarchar(max) NULL,
+    [Catery] nvarchar(max) NULL,
     [NobleModuleId] int NOT NULL,
     [BusinessType] int NOT NULL,
     [CompanyId] uniqueidentifier NOT NULL,
@@ -838,18 +838,18 @@ CREATE TABLE [CompanyPermissions] (
     CONSTRAINT [FK_CompanyPermissions_NobleModules_NobleModuleId] FOREIGN KEY ([NobleModuleId]) REFERENCES [NobleModules] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [NoblePermissions] (
     [Id] int NOT NULL IDENTITY,
     [Description] nvarchar(max) NULL,
-    [Category] nvarchar(max) NULL,
+    [Catery] nvarchar(max) NULL,
     [NobleModuleId] int NOT NULL,
     CONSTRAINT [PK_NoblePermissions] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_NoblePermissions_NobleModules_NobleModuleId] FOREIGN KEY ([NobleModuleId]) REFERENCES [NobleModules] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [CostCenters] (
     [Id] uniqueidentifier NOT NULL,
@@ -869,11 +869,11 @@ CREATE TABLE [CostCenters] (
     CONSTRAINT [FK_CostCenters_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
 
-CREATE TABLE [BundleCategoryItems] (
+
+CREATE TABLE [BundleCateryItems] (
     [Id] uniqueidentifier NOT NULL,
-    [BundleCategoryId] uniqueidentifier NULL,
+    [BundleCateryId] uniqueidentifier NULL,
     [ProductId] uniqueidentifier NULL,
     [isActive] bit NOT NULL,
     [CompanyId] uniqueidentifier NOT NULL,
@@ -881,12 +881,12 @@ CREATE TABLE [BundleCategoryItems] (
     [CreatedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
     [ModifiedById] nvarchar(max) NULL,
     [ModifiedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
-    CONSTRAINT [PK_BundleCategoryItems] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_BundleCategoryItems_BundleCategories_BundleCategoryId] FOREIGN KEY ([BundleCategoryId]) REFERENCES [BundleCategories] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_BundleCategoryItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
+    CONSTRAINT [PK_BundleCateryItems] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_BundleCateryItems_BundleCateries_BundleCateryId] FOREIGN KEY ([BundleCateryId]) REFERENCES [BundleCateries] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_BundleCateryItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [OtherCurrencies] (
     [Id] uniqueidentifier NOT NULL,
@@ -897,7 +897,7 @@ CREATE TABLE [OtherCurrencies] (
     CONSTRAINT [FK_OtherCurrencies_Currencies_CurrencyId] FOREIGN KEY ([CurrencyId]) REFERENCES [Currencies] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [DailyExpenseDetails] (
     [Id] uniqueidentifier NOT NULL,
@@ -909,7 +909,7 @@ CREATE TABLE [DailyExpenseDetails] (
     CONSTRAINT [FK_DailyExpenseDetails_DailyExpenses_DailyExpenseId] FOREIGN KEY ([DailyExpenseId]) REFERENCES [DailyExpenses] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [EmployeeRegistrationAttachments] (
     [Id] uniqueidentifier NOT NULL,
@@ -923,7 +923,7 @@ CREATE TABLE [EmployeeRegistrationAttachments] (
     CONSTRAINT [FK_EmployeeRegistrationAttachments_EmployeeRegistrations_EmployeeId] FOREIGN KEY ([EmployeeId]) REFERENCES [EmployeeRegistrations] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [NobleUserRoles] (
     [Id] uniqueidentifier NOT NULL,
@@ -940,7 +940,7 @@ CREATE TABLE [NobleUserRoles] (
     CONSTRAINT [FK_NobleUserRoles_NobleRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [NobleRoles] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [RolesPermissions] (
     [Id] uniqueidentifier NOT NULL,
@@ -963,7 +963,7 @@ CREATE TABLE [RolesPermissions] (
     CONSTRAINT [FK_RolesPermissions_NobleRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [NobleRoles] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [PromotionOfferItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -980,7 +980,7 @@ CREATE TABLE [PromotionOfferItems] (
     CONSTRAINT [FK_PromotionOfferItems_PromotionOffers_PromotionOfferId] FOREIGN KEY ([PromotionOfferId]) REFERENCES [PromotionOffers] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [StockAdjustments] (
     [Id] uniqueidentifier NOT NULL,
@@ -1001,7 +1001,7 @@ CREATE TABLE [StockAdjustments] (
     CONSTRAINT [FK_StockAdjustments_Warehouses_WarehouseId] FOREIGN KEY ([WarehouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [WareHouseTransfers] (
     [Id] uniqueidentifier NOT NULL,
@@ -1020,7 +1020,7 @@ CREATE TABLE [WareHouseTransfers] (
     CONSTRAINT [FK_WareHouseTransfers_Warehouses_ToWareHouseId] FOREIGN KEY ([ToWareHouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [Employees] (
     [Id] uniqueidentifier NOT NULL,
@@ -1049,7 +1049,7 @@ CREATE TABLE [Employees] (
     CONSTRAINT [FK_Employees_Zones_ZoneId] FOREIGN KEY ([ZoneId]) REFERENCES [Zones] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [NobleRolePermissions] (
     [Id] int NOT NULL IDENTITY,
@@ -1068,7 +1068,7 @@ CREATE TABLE [NobleRolePermissions] (
     CONSTRAINT [FK_NobleRolePermissions_NobleRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [NobleRoles] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [Accounts] (
     [Id] uniqueidentifier NOT NULL,
@@ -1087,7 +1087,7 @@ CREATE TABLE [Accounts] (
     CONSTRAINT [FK_Accounts_CostCenters_CostCenterId] FOREIGN KEY ([CostCenterId]) REFERENCES [CostCenters] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [EmployeeAttachments] (
     [Id] uniqueidentifier NOT NULL,
@@ -1098,7 +1098,7 @@ CREATE TABLE [EmployeeAttachments] (
     CONSTRAINT [FK_EmployeeAttachments_Employees_EmployeeId] FOREIGN KEY ([EmployeeId]) REFERENCES [Employees] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [EmployeeDepartments] (
     [Id] uniqueidentifier NOT NULL,
@@ -1109,7 +1109,7 @@ CREATE TABLE [EmployeeDepartments] (
     CONSTRAINT [FK_EmployeeDepartments_Employees_EmployeeId] FOREIGN KEY ([EmployeeId]) REFERENCES [Employees] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [Banks] (
     [Id] uniqueidentifier NOT NULL,
@@ -1138,9 +1138,9 @@ CREATE TABLE [Banks] (
     CONSTRAINT [FK_Banks_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
 
-CREATE TABLE [Categories] (
+
+CREATE TABLE [Cateries] (
     [Id] uniqueidentifier NOT NULL,
     [Name] nvarchar(50) NOT NULL,
     [Description] nvarchar(150) NULL,
@@ -1156,21 +1156,21 @@ CREATE TABLE [Categories] (
     [CreatedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
     [ModifiedById] nvarchar(max) NULL,
     [ModifiedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
-    CONSTRAINT [PK_Categories] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_Categories_Accounts_COGSAccountId] FOREIGN KEY ([COGSAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Categories_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Categories_Accounts_IncomeAccountId] FOREIGN KEY ([IncomeAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Categories_Accounts_InventoryAccountId] FOREIGN KEY ([InventoryAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Categories_Accounts_PurchaseAccountId] FOREIGN KEY ([PurchaseAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Categories_Accounts_SaleAccountId] FOREIGN KEY ([SaleAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION
+    CONSTRAINT [PK_Cateries] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Cateries_Accounts_COGSAccountId] FOREIGN KEY ([COGSAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Cateries_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Cateries_Accounts_IncomeAccountId] FOREIGN KEY ([IncomeAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Cateries_Accounts_InventoryAccountId] FOREIGN KEY ([InventoryAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Cateries_Accounts_PurchaseAccountId] FOREIGN KEY ([PurchaseAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Cateries_Accounts_SaleAccountId] FOREIGN KEY ([SaleAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Contacts] (
     [Id] uniqueidentifier NOT NULL,
     [Code] nvarchar(max) NULL,
-    [Category] nvarchar(max) NULL,
+    [Catery] nvarchar(max) NULL,
     [EnglishName] nvarchar(max) NULL,
     [ArabicName] nvarchar(max) NULL,
     [CommercialRegistrationNo] nvarchar(max) NULL,
@@ -1212,7 +1212,7 @@ CREATE TABLE [Contacts] (
     CONSTRAINT [FK_Contacts_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [PaymentVouchers] (
     [Id] uniqueidentifier NOT NULL,
@@ -1239,7 +1239,7 @@ CREATE TABLE [PaymentVouchers] (
     CONSTRAINT [FK_PaymentVouchers_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Terminals] (
     [Id] uniqueidentifier NOT NULL,
@@ -1258,7 +1258,7 @@ CREATE TABLE [Terminals] (
     CONSTRAINT [FK_Terminals_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Transactions] (
     [Id] uniqueidentifier NOT NULL,
@@ -1289,15 +1289,15 @@ CREATE TABLE [Transactions] (
     CONSTRAINT [FK_Transactions_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Products] (
     [Id] uniqueidentifier NOT NULL,
     [Code] nvarchar(150) NULL,
     [EnglishName] nvarchar(80) NULL,
     [ArabicName] nvarchar(max) NULL,
-    [CategoryId] uniqueidentifier NOT NULL,
-    [SubCategoryId] uniqueidentifier NULL,
+    [CateryId] uniqueidentifier NOT NULL,
+    [SubCateryId] uniqueidentifier NULL,
     [BrandId] uniqueidentifier NULL,
     [UnitId] uniqueidentifier NULL,
     [SizeId] uniqueidentifier NULL,
@@ -1309,7 +1309,7 @@ CREATE TABLE [Products] (
     [TaxMethod] nvarchar(max) NULL,
     [SalePrice] decimal(18,2) NOT NULL,
     [PromotionOfferId] uniqueidentifier NULL,
-    [BundleCategoryId] uniqueidentifier NULL,
+    [BundleCateryId] uniqueidentifier NULL,
     [OriginId] uniqueidentifier NULL,
     [StockLevel] nvarchar(max) NULL,
     [SaleReturnDays] nvarchar(max) NULL,
@@ -1326,8 +1326,8 @@ CREATE TABLE [Products] (
     [ModifiedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
     CONSTRAINT [PK_Products] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Products_Brands_BrandId] FOREIGN KEY ([BrandId]) REFERENCES [Brands] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Products_BundleCategories_BundleCategoryId] FOREIGN KEY ([BundleCategoryId]) REFERENCES [BundleCategories] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Products_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [Categories] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Products_BundleCateries_BundleCateryId] FOREIGN KEY ([BundleCateryId]) REFERENCES [BundleCateries] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Products_Cateries_CateryId] FOREIGN KEY ([CateryId]) REFERENCES [Cateries] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_Products_Colors_ColorId] FOREIGN KEY ([ColorId]) REFERENCES [Colors] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_Products_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_Products_Origins_OriginId] FOREIGN KEY ([OriginId]) REFERENCES [Origins] ([Id]) ON DELETE NO ACTION,
@@ -1337,26 +1337,26 @@ CREATE TABLE [Products] (
     CONSTRAINT [FK_Products_Units_UnitId] FOREIGN KEY ([UnitId]) REFERENCES [Units] ([Id]) ON DELETE NO ACTION
 );
 
-GO
 
-CREATE TABLE [SubCategories] (
+
+CREATE TABLE [SubCateries] (
     [Id] uniqueidentifier NOT NULL,
     [Name] nvarchar(50) NOT NULL,
     [Description] nvarchar(150) NULL,
     [Code] nvarchar(30) NULL,
     [isActive] bit NOT NULL,
-    [CategoryId] uniqueidentifier NOT NULL,
+    [CateryId] uniqueidentifier NOT NULL,
     [CompanyId] uniqueidentifier NOT NULL,
     [CreatedById] nvarchar(max) NULL,
     [CreatedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
     [ModifiedById] nvarchar(max) NULL,
     [ModifiedOn] datetime2 NOT NULL DEFAULT (GetUtcDate()),
-    CONSTRAINT [PK_SubCategories] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_SubCategories_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [Categories] ([Id]) ON DELETE CASCADE,
-    CONSTRAINT [FK_SubCategories_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
+    CONSTRAINT [PK_SubCateries] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_SubCateries_Cateries_CateryId] FOREIGN KEY ([CateryId]) REFERENCES [Cateries] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_SubCateries_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [ContactAttachments] (
     [Id] uniqueidentifier NOT NULL,
@@ -1369,7 +1369,7 @@ CREATE TABLE [ContactAttachments] (
     CONSTRAINT [FK_ContactAttachments_Contacts_ContactId] FOREIGN KEY ([ContactId]) REFERENCES [Contacts] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [ContactBankAccounts] (
     [Id] uniqueidentifier NOT NULL,
@@ -1402,7 +1402,7 @@ CREATE TABLE [ContactBankAccounts] (
     CONSTRAINT [FK_ContactBankAccounts_Contacts_ContactId] FOREIGN KEY ([ContactId]) REFERENCES [Contacts] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [JournalVoucherItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -1419,7 +1419,7 @@ CREATE TABLE [JournalVoucherItems] (
     CONSTRAINT [FK_JournalVoucherItems_JournalVouchers_JournalVoucherId] FOREIGN KEY ([JournalVoucherId]) REFERENCES [JournalVouchers] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [PurchaseOrders] (
     [Id] uniqueidentifier NOT NULL,
@@ -1442,7 +1442,7 @@ CREATE TABLE [PurchaseOrders] (
     CONSTRAINT [FK_PurchaseOrders_Contacts_SupplierId] FOREIGN KEY ([SupplierId]) REFERENCES [Contacts] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [Sales] (
     [Id] uniqueidentifier NOT NULL,
@@ -1473,7 +1473,7 @@ CREATE TABLE [Sales] (
     CONSTRAINT [FK_Sales_OtherCurrencies_OtherCurrencyId] FOREIGN KEY ([OtherCurrencyId]) REFERENCES [OtherCurrencies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [PaymentVoucherDetails] (
     [Id] uniqueidentifier NOT NULL,
@@ -1489,7 +1489,7 @@ CREATE TABLE [PaymentVoucherDetails] (
     CONSTRAINT [FK_PaymentVoucherDetails_PaymentVouchers_PaymentVoucherId] FOREIGN KEY ([PaymentVoucherId]) REFERENCES [PaymentVouchers] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [UserTerminals] (
     [Id] uniqueidentifier NOT NULL,
@@ -1499,7 +1499,7 @@ CREATE TABLE [UserTerminals] (
     CONSTRAINT [FK_UserTerminals_Terminals_TerminalId] FOREIGN KEY ([TerminalId]) REFERENCES [Terminals] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [MobileOrderItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -1513,7 +1513,7 @@ CREATE TABLE [MobileOrderItems] (
     CONSTRAINT [FK_MobileOrderItems_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [StockAdjustmentDetails] (
     [Id] uniqueidentifier NOT NULL,
@@ -1529,7 +1529,7 @@ CREATE TABLE [StockAdjustmentDetails] (
     CONSTRAINT [FK_StockAdjustmentDetails_Warehouses_WarehouseId] FOREIGN KEY ([WarehouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [Stocks] (
     [Id] uniqueidentifier NOT NULL,
@@ -1552,7 +1552,7 @@ CREATE TABLE [Stocks] (
     CONSTRAINT [FK_Stocks_Warehouses_WareHouseId] FOREIGN KEY ([WareHouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [WareHouseTransferItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -1571,7 +1571,7 @@ CREATE TABLE [WareHouseTransferItems] (
     CONSTRAINT [FK_WareHouseTransferItems_WareHouseTransfers_WareHouseTransferId] FOREIGN KEY ([WareHouseTransferId]) REFERENCES [WareHouseTransfers] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [PurchaseAttachments] (
     [Id] uniqueidentifier NOT NULL,
@@ -1583,7 +1583,7 @@ CREATE TABLE [PurchaseAttachments] (
     CONSTRAINT [FK_PurchaseAttachments_PurchaseOrders_PurchaseOrderId] FOREIGN KEY ([PurchaseOrderId]) REFERENCES [PurchaseOrders] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [PurchaseOrderItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -1603,7 +1603,7 @@ CREATE TABLE [PurchaseOrderItems] (
     CONSTRAINT [FK_PurchaseOrderItems_TaxRates_TaxRateId] FOREIGN KEY ([TaxRateId]) REFERENCES [TaxRates] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [PurchasePosts] (
     [Id] uniqueidentifier NOT NULL,
@@ -1629,7 +1629,7 @@ CREATE TABLE [PurchasePosts] (
     CONSTRAINT [FK_PurchasePosts_Contacts_SupplierId] FOREIGN KEY ([SupplierId]) REFERENCES [Contacts] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [Purchases] (
     [Id] uniqueidentifier NOT NULL,
@@ -1656,7 +1656,7 @@ CREATE TABLE [Purchases] (
     CONSTRAINT [FK_Purchases_Contacts_SupplierId] FOREIGN KEY ([SupplierId]) REFERENCES [Contacts] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [SaleItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -1680,7 +1680,7 @@ CREATE TABLE [SaleItems] (
     [IsDeleted] bit NOT NULL,
     [UserId] uniqueidentifier NOT NULL,
     CONSTRAINT [PK_SaleItems] PRIMARY KEY ([Id]),
-    CONSTRAINT [FK_SaleItems_BundleCategories_BundleId] FOREIGN KEY ([BundleId]) REFERENCES [BundleCategories] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_SaleItems_BundleCateries_BundleId] FOREIGN KEY ([BundleId]) REFERENCES [BundleCateries] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_SaleItems_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE,
     CONSTRAINT [FK_SaleItems_PromotionOffers_PromotionId] FOREIGN KEY ([PromotionId]) REFERENCES [PromotionOffers] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_SaleItems_Sales_SaleId] FOREIGN KEY ([SaleId]) REFERENCES [Sales] ([Id]) ON DELETE CASCADE,
@@ -1688,7 +1688,7 @@ CREATE TABLE [SaleItems] (
     CONSTRAINT [FK_SaleItems_Warehouses_WareHouseId] FOREIGN KEY ([WareHouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [SalePayments] (
     [Id] uniqueidentifier NOT NULL,
@@ -1711,7 +1711,7 @@ CREATE TABLE [SalePayments] (
     CONSTRAINT [FK_SalePayments_Sales_SaleId] FOREIGN KEY ([SaleId]) REFERENCES [Sales] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [Inventories] (
     [Id] uniqueidentifier NOT NULL,
@@ -1748,7 +1748,7 @@ CREATE TABLE [Inventories] (
     CONSTRAINT [FK_Inventories_Stocks_StockId] FOREIGN KEY ([StockId]) REFERENCES [Stocks] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [PurchasePostItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -1770,7 +1770,7 @@ CREATE TABLE [PurchasePostItems] (
     CONSTRAINT [FK_PurchasePostItems_Warehouses_WareHouseId] FOREIGN KEY ([WareHouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [PurchaseItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -1792,16 +1792,16 @@ CREATE TABLE [PurchaseItems] (
     CONSTRAINT [FK_PurchaseItems_Warehouses_WareHouseId] FOREIGN KEY ([WareHouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Description', N'JsonTemplate', N'Name', N'Type') AND [object_id] = OBJECT_ID(N'[AccountTemplates]'))
     SET IDENTITY_INSERT [AccountTemplates] ON;
 INSERT INTO [AccountTemplates] ([Id], [Description], [JsonTemplate], [Name], [Type])
-VALUES ('ecfe29c8-c6af-4a3d-9c24-f87b30bf831c', N'SmallBusinessCOA', N'{"AccountsType":[{"Name":"Assets","IsActive":true,"CostCenters":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"101000","Accounts":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"10100001"}]},{"Name":"Cash in Hand - Store","Description":"Cash in Hand - Store","IsActive":true,"Code":"101001","Accounts":[{"Name":"Accounts receivable","Description":"Accounts receivable","IsActive":true,"Code":"10100101"}]},{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"111000","Accounts":[{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"11100001"}]},{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"120000","Accounts":[{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"1200001"}]},{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"105000","Accounts":[{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"10500001"}]},{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"170000","Accounts":[{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"17000001"}]},{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"150000","Accounts":[{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"1500001"}]},{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"126000","Accounts":[{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"12600001"}]}]},{"Name":"Liabilities","IsActive":true,"CostCenters":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"200000","Accounts":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"20000001"}]},{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"240000","Accounts":[{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"24000001"}]},{"Name":"Tax Payable","Description":"Tax Payable","IsActive":true,"Code":"250000","Accounts":[{"Name":"Tax Payable","Description":"Tax Payable","IsActive":true,"Code":"25000001"}]},{"Name":"Sales Tax Payable","Description":"Sales Tax Payable","IsActive":true,"Code":"251001","Accounts":[{"Name":"Sales Tax Payable","Description":"Sales Tax Payable","IsActive":true,"Code":"25100101"}]},{"Name":"Income Tax Payable","Description":"Income Tax Payable","IsActive":true,"Code":"252001","Accounts":[{"Name":"Income Tax Payable","Description":"Income Tax Payable","IsActive":true,"Code":"25200101"}]},{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"253001","Accounts":[{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"2530101"}]}]},{"Name":"Equity","IsActive":true,"CostCenters":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"300000","Accounts":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"30000001"}]},{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"301001","Accounts":[{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"30100101"}]},{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"302001","Accounts":[{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"30200101"}]},{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"320000","Accounts":[{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"32000001"}]},{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"321002","Accounts":[{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"32100201"}]}]},{"Name":"Income","IsActive":true,"CostCenters":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"420000","Accounts":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"42000001"}]},{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"421000","Accounts":[{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"42100001"}]},{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"425000","Accounts":[{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"42500001"}]},{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"426000","Accounts":[{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"42600001"}]}]},{"Name":"Expences","IsActive":true,"CostCenters":[{"Name":"Cost of Goods Sold","Description":"Cost of Goods Sold","IsActive":true,"Code":"600001","Accounts":[{"Name":"Cost of Goods Sold","Description":"Cost of Goods Sold","IsActive":true,"Code":"60000101"}]},{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"608001","Accounts":[{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"60800101"}]},{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"607001","Accounts":[{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"60700101"}]},{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"606001","Accounts":[{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"60600101"}]},{"Name":"General Expences","Description":"General Expences","IsActive":true,"Code":"605050","Accounts":[{"Name":"General Expences","Description":"General Expences","IsActive":true,"Code":"60505001"}]},{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"603001","Accounts":[{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"60300101"}]},{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"604001","Accounts":[{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"60400101"}]},{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"604050","Accounts":[{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"60405001"}]},{"Name":"Legal Expences","Description":"Legal Expences","IsActive":true,"Code":"605001","Accounts":[{"Name":"Legal Expences","Description":"Legal Expences","IsActive":true,"Code":"60500101"}]}]}]}', N'SmallBusinessCOA', N'Business');
+VALUES ('ecfe29c8-c6af-4a3d-9c24-f87b30bf831c', N'SmallBusinessCOA', N'{"AccountsType":[{"Name":"Assets","IsActive":true,"CostCenters":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"101000","Accounts":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"10100001"}]},{"Name":"Cash in Hand - Store","Description":"Cash in Hand - Store","IsActive":true,"Code":"101001","Accounts":[{"Name":"Accounts receivable","Description":"Accounts receivable","IsActive":true,"Code":"10100101"}]},{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"111000","Accounts":[{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"11100001"}]},{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"120000","Accounts":[{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"1200001"}]},{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"105000","Accounts":[{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"10500001"}]},{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"170000","Accounts":[{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"17000001"}]},{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"150000","Accounts":[{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"1500001"}]},{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"126000","Accounts":[{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"12600001"}]}]},{"Name":"Liabilities","IsActive":true,"CostCenters":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"200000","Accounts":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"20000001"}]},{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"240000","Accounts":[{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"24000001"}]},{"Name":"Tax Payable","Description":"Tax Payable","IsActive":true,"Code":"250000","Accounts":[{"Name":"Tax Payable","Description":"Tax Payable","IsActive":true,"Code":"25000001"}]},{"Name":"Sales Tax Payable","Description":"Sales Tax Payable","IsActive":true,"Code":"251001","Accounts":[{"Name":"Sales Tax Payable","Description":"Sales Tax Payable","IsActive":true,"Code":"25100101"}]},{"Name":"Income Tax Payable","Description":"Income Tax Payable","IsActive":true,"Code":"252001","Accounts":[{"Name":"Income Tax Payable","Description":"Income Tax Payable","IsActive":true,"Code":"25200101"}]},{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"253001","Accounts":[{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"2530101"}]}]},{"Name":"Equity","IsActive":true,"CostCenters":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"300000","Accounts":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"30000001"}]},{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"301001","Accounts":[{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"30100101"}]},{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"302001","Accounts":[{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"30200101"}]},{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"320000","Accounts":[{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"32000001"}]},{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"321002","Accounts":[{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"32100201"}]}]},{"Name":"Income","IsActive":true,"CostCenters":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"420000","Accounts":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"42000001"}]},{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"421000","Accounts":[{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"42100001"}]},{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"425000","Accounts":[{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"42500001"}]},{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"426000","Accounts":[{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"42600001"}]}]},{"Name":"Expences","IsActive":true,"CostCenters":[{"Name":"Cost of ods Sold","Description":"Cost of ods Sold","IsActive":true,"Code":"600001","Accounts":[{"Name":"Cost of ods Sold","Description":"Cost of ods Sold","IsActive":true,"Code":"60000101"}]},{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"608001","Accounts":[{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"60800101"}]},{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"607001","Accounts":[{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"60700101"}]},{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"606001","Accounts":[{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"60600101"}]},{"Name":"General Expences","Description":"General Expences","IsActive":true,"Code":"605050","Accounts":[{"Name":"General Expences","Description":"General Expences","IsActive":true,"Code":"60505001"}]},{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"603001","Accounts":[{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"60300101"}]},{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"604001","Accounts":[{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"60400101"}]},{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"604050","Accounts":[{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"60405001"}]},{"Name":"Legal Expences","Description":"Legal Expences","IsActive":true,"Code":"605001","Accounts":[{"Name":"Legal Expences","Description":"Legal Expences","IsActive":true,"Code":"60500101"}]}]}]}', N'SmallBusinessCOA', N'Business');
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Description', N'JsonTemplate', N'Name', N'Type') AND [object_id] = OBJECT_ID(N'[AccountTemplates]'))
     SET IDENTITY_INSERT [AccountTemplates] OFF;
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ConcurrencyStamp', N'Name', N'NormalizedName') AND [object_id] = OBJECT_ID(N'[AspNetRoles]'))
     SET IDENTITY_INSERT [AspNetRoles] ON;
@@ -1817,7 +1817,7 @@ VALUES (N'E5480E8E-A150-4C80-82AB-62B5A8EBFD1B', N'1590a33c-cd2d-4c93-9e17-fce19
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ConcurrencyStamp', N'Name', N'NormalizedName') AND [object_id] = OBJECT_ID(N'[AspNetRoles]'))
     SET IDENTITY_INSERT [AspNetRoles] OFF;
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AccessFailedCount', N'CompanyId', N'ConcurrencyStamp', N'Email', N'EmailConfirmed', N'EmployeeId', N'FirstName', N'ImagePath', N'LastName', N'LockoutEnabled', N'LockoutEnd', N'NormalizedEmail', N'NormalizedUserName', N'PasswordHash', N'PhoneNumber', N'PhoneNumberConfirmed', N'SecurityStamp', N'TerminalId', N'TwoFactorEnabled', N'UserName') AND [object_id] = OBJECT_ID(N'[AspNetUsers]'))
     SET IDENTITY_INSERT [AspNetUsers] ON;
@@ -1826,16 +1826,16 @@ VALUES (N'5f8d5614-2c7e-4ec0-868c-d254e6516b4d', 0, '5f8d5614-2c7e-4ec0-868c-d25
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AccessFailedCount', N'CompanyId', N'ConcurrencyStamp', N'Email', N'EmailConfirmed', N'EmployeeId', N'FirstName', N'ImagePath', N'LastName', N'LockoutEnabled', N'LockoutEnd', N'NormalizedEmail', N'NormalizedUserName', N'PasswordHash', N'PhoneNumber', N'PhoneNumberConfirmed', N'SecurityStamp', N'TerminalId', N'TwoFactorEnabled', N'UserName') AND [object_id] = OBJECT_ID(N'[AspNetUsers]'))
     SET IDENTITY_INSERT [AspNetUsers] OFF;
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AddressArabic', N'AddressEnglish', N'Blocked', N'BusinessParentId', N'CategoryInArabic', N'CategoryInEnglish', N'CityArabic', N'CityEnglish', N'ClientNo', N'ClientParentId', N'CompanyEmail', N'CompanyRegNo', N'CountryArabic', N'CountryEnglish', N'CreatedDate', N'HouseNumber', N'Landline', N'LogoPath', N'NameArabic', N'NameEnglish', N'ParentId', N'PhoneNo', N'Postcode', N'Town', N'VatRegistrationNo', N'Website') AND [object_id] = OBJECT_ID(N'[Companies]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AddressArabic', N'AddressEnglish', N'Blocked', N'BusinessParentId', N'CateryInArabic', N'CateryInEnglish', N'CityArabic', N'CityEnglish', N'ClientNo', N'ClientParentId', N'CompanyEmail', N'CompanyRegNo', N'CountryArabic', N'CountryEnglish', N'CreatedDate', N'HouseNumber', N'Landline', N'LoPath', N'NameArabic', N'NameEnglish', N'ParentId', N'PhoneNo', N'Postcode', N'Town', N'VatRegistrationNo', N'Website') AND [object_id] = OBJECT_ID(N'[Companies]'))
     SET IDENTITY_INSERT [Companies] ON;
-INSERT INTO [Companies] ([Id], [AddressArabic], [AddressEnglish], [Blocked], [BusinessParentId], [CategoryInArabic], [CategoryInEnglish], [CityArabic], [CityEnglish], [ClientNo], [ClientParentId], [CompanyEmail], [CompanyRegNo], [CountryArabic], [CountryEnglish], [CreatedDate], [HouseNumber], [Landline], [LogoPath], [NameArabic], [NameEnglish], [ParentId], [PhoneNo], [Postcode], [Town], [VatRegistrationNo], [Website])
+INSERT INTO [Companies] ([Id], [AddressArabic], [AddressEnglish], [Blocked], [BusinessParentId], [CateryInArabic], [CateryInEnglish], [CityArabic], [CityEnglish], [ClientNo], [ClientParentId], [CompanyEmail], [CompanyRegNo], [CountryArabic], [CountryEnglish], [CreatedDate], [HouseNumber], [Landline], [LoPath], [NameArabic], [NameEnglish], [ParentId], [PhoneNo], [Postcode], [Town], [VatRegistrationNo], [Website])
 VALUES ('5f8d5614-2c7e-4ec0-868c-d254e6516b4d', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, N'56ty60', NULL, NULL, '2021-07-12T11:42:27.7901496+05:00', NULL, NULL, NULL, NULL, N'noble@gmail.com', '00000000-0000-0000-0000-000000000000', NULL, NULL, NULL, NULL, NULL);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AddressArabic', N'AddressEnglish', N'Blocked', N'BusinessParentId', N'CategoryInArabic', N'CategoryInEnglish', N'CityArabic', N'CityEnglish', N'ClientNo', N'ClientParentId', N'CompanyEmail', N'CompanyRegNo', N'CountryArabic', N'CountryEnglish', N'CreatedDate', N'HouseNumber', N'Landline', N'LogoPath', N'NameArabic', N'NameEnglish', N'ParentId', N'PhoneNo', N'Postcode', N'Town', N'VatRegistrationNo', N'Website') AND [object_id] = OBJECT_ID(N'[Companies]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AddressArabic', N'AddressEnglish', N'Blocked', N'BusinessParentId', N'CateryInArabic', N'CateryInEnglish', N'CityArabic', N'CityEnglish', N'ClientNo', N'ClientParentId', N'CompanyEmail', N'CompanyRegNo', N'CountryArabic', N'CountryEnglish', N'CreatedDate', N'HouseNumber', N'Landline', N'LoPath', N'NameArabic', N'NameEnglish', N'ParentId', N'PhoneNo', N'Postcode', N'Town', N'VatRegistrationNo', N'Website') AND [object_id] = OBJECT_ID(N'[Companies]'))
     SET IDENTITY_INSERT [Companies] OFF;
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] ON;
@@ -1853,7 +1853,7 @@ VALUES (5, 0, N'HR', N'HR'),
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] OFF;
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ClaimType', N'ClaimValue', N'UserId') AND [object_id] = OBJECT_ID(N'[AspNetUserClaims]'))
     SET IDENTITY_INSERT [AspNetUserClaims] ON;
@@ -1865,7 +1865,7 @@ VALUES (1, N'Email', N'noble@gmail.com', N'5f8d5614-2c7e-4ec0-868c-d254e6516b4d'
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ClaimType', N'ClaimValue', N'UserId') AND [object_id] = OBJECT_ID(N'[AspNetUserClaims]'))
     SET IDENTITY_INSERT [AspNetUserClaims] OFF;
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'UserId', N'RoleId') AND [object_id] = OBJECT_ID(N'[AspNetUserRoles]'))
     SET IDENTITY_INSERT [AspNetUserRoles] ON;
@@ -1874,11 +1874,11 @@ VALUES (N'5f8d5614-2c7e-4ec0-868c-d254e6516b4d', N'C1448F88-49B4-476C-B07D-33514
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'UserId', N'RoleId') AND [object_id] = OBJECT_ID(N'[AspNetUserRoles]'))
     SET IDENTITY_INSERT [AspNetUserRoles] OFF;
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (2, N'Brand', N'Can Edit Brand', 1),
 (136, N'Stock Transfer', N'Can Save Stock Transfer', 3),
 (137, N'Stock Transfer', N'Can Edit Stock Transfer', 3),
@@ -2031,10 +2031,10 @@ VALUES (2, N'Brand', N'Can Edit Brand', 1),
 (6, N'BarCode Printing', N'Can Edit BarCode Printing', 1),
 (7, N'BarCode Printing', N'Can Delete BarCode Printing', 1),
 (8, N'BarCode Printing', N'Can View BarCode Printing', 1),
-(9, N'Category', N'Can Save Category', 1),
-(10, N'Category', N'Can Edit Category', 1),
-(11, N'Category', N'Can Delete Category', 1),
-(12, N'Category', N'Can View Category', 1),
+(9, N'Catery', N'Can Save Catery', 1),
+(10, N'Catery', N'Can Edit Catery', 1),
+(11, N'Catery', N'Can Delete Catery', 1),
+(12, N'Catery', N'Can View Catery', 1),
 (13, N'Color', N'Can Save Color', 1),
 (14, N'Color', N'Can Edit Color', 1),
 (15, N'Color', N'Can Delete Color', 1),
@@ -2043,10 +2043,10 @@ VALUES (2, N'Brand', N'Can Edit Brand', 1),
 (18, N'Origin', N'Can Edit Origin', 1),
 (19, N'Origin', N'Can Delete Origin', 1),
 (20, N'Origin', N'Can View Origin', 1),
-(21, N'SubCategories', N'Can Save SubCategories', 1),
-(22, N'SubCategories', N'Can Edit SubCategories', 1),
-(23, N'SubCategories', N'Can Delete SubCategories', 1),
-(24, N'SubCategories', N'Can View SubCategories', 1),
+(21, N'SubCateries', N'Can Save SubCateries', 1),
+(22, N'SubCateries', N'Can Edit SubCateries', 1),
+(23, N'SubCateries', N'Can Delete SubCateries', 1),
+(24, N'SubCateries', N'Can View SubCateries', 1),
 (25, N'Tax Rate', N'Can Save Tax Rate', 1),
 (26, N'Tax Rate', N'Can Edit Tax Rate', 1),
 (27, N'Tax Rate', N'Can Delete Tax Rate', 1),
@@ -2111,666 +2111,666 @@ VALUES (2, N'Brand', N'Can Edit Brand', 1),
 (248, N'Bank Pay', N'Can Edit Bank Pay as Post', 2),
 (70, N'Cash Pay', N'Can Edit  Cash Pay as Draft', 2),
 (110, N'Purchase Order as Post', N'Can Delete Purchase Order as Post', 3);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 CREATE INDEX [IX_Accounts_CompanyId] ON [Accounts] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Accounts_CostCenterId] ON [Accounts] ([CostCenterId]);
 
-GO
+
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Accounts_Code_CompanyId] ON [Accounts] ([Code], [CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_AccountsLevelOne_CompanyId] ON [AccountsLevelOne] ([CompanyId]);
 
-GO
+
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_AccountsLevelOne_Code_CompanyId] ON [AccountsLevelOne] ([Code], [CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_AccountsLevelTwo_CompanyId] ON [AccountsLevelTwo] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_AccountTypes_CompanyId] ON [AccountTypes] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_AspNetRoleClaims_RoleId] ON [AspNetRoleClaims] ([RoleId]);
 
-GO
+
 
 CREATE UNIQUE INDEX [RoleNameIndex] ON [AspNetRoles] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;
 
-GO
+
 
 CREATE INDEX [IX_AspNetUserClaims_UserId] ON [AspNetUserClaims] ([UserId]);
 
-GO
+
 
 CREATE INDEX [IX_AspNetUserLogins_UserId] ON [AspNetUserLogins] ([UserId]);
 
-GO
+
 
 CREATE INDEX [IX_AspNetUserRoles_RoleId] ON [AspNetUserRoles] ([RoleId]);
 
-GO
+
 
 CREATE INDEX [EmailIndex] ON [AspNetUsers] ([NormalizedEmail]);
 
-GO
+
 
 CREATE UNIQUE INDEX [UserNameIndex] ON [AspNetUsers] ([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL;
 
-GO
+
 
 CREATE INDEX [IX_Banks_AccountId] ON [Banks] ([AccountId]);
 
-GO
+
 
 CREATE INDEX [IX_Banks_CompanyId] ON [Banks] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Brands_CompanyId] ON [Brands] ([CompanyId]);
 
-GO
 
-CREATE INDEX [IX_BundleCategories_CompanyId] ON [BundleCategories] ([CompanyId]);
 
-GO
+CREATE INDEX [IX_BundleCateries_CompanyId] ON [BundleCateries] ([CompanyId]);
 
-CREATE INDEX [IX_BundleCategoryItems_BundleCategoryId] ON [BundleCategoryItems] ([BundleCategoryId]);
 
-GO
 
-CREATE INDEX [IX_BundleCategoryItems_CompanyId] ON [BundleCategoryItems] ([CompanyId]);
+CREATE INDEX [IX_BundleCateryItems_BundleCateryId] ON [BundleCateryItems] ([BundleCateryId]);
 
-GO
+
+
+CREATE INDEX [IX_BundleCateryItems_CompanyId] ON [BundleCateryItems] ([CompanyId]);
+
+
 
 CREATE INDEX [IX_CashCustomer_CompanyId] ON [CashCustomer] ([CompanyId]);
 
-GO
 
-CREATE INDEX [IX_Categories_COGSAccountId] ON [Categories] ([COGSAccountId]);
 
-GO
+CREATE INDEX [IX_Cateries_COGSAccountId] ON [Cateries] ([COGSAccountId]);
 
-CREATE INDEX [IX_Categories_CompanyId] ON [Categories] ([CompanyId]);
 
-GO
 
-CREATE INDEX [IX_Categories_IncomeAccountId] ON [Categories] ([IncomeAccountId]);
+CREATE INDEX [IX_Cateries_CompanyId] ON [Cateries] ([CompanyId]);
 
-GO
 
-CREATE INDEX [IX_Categories_InventoryAccountId] ON [Categories] ([InventoryAccountId]);
 
-GO
+CREATE INDEX [IX_Cateries_IncomeAccountId] ON [Cateries] ([IncomeAccountId]);
 
-CREATE INDEX [IX_Categories_PurchaseAccountId] ON [Categories] ([PurchaseAccountId]);
 
-GO
 
-CREATE INDEX [IX_Categories_SaleAccountId] ON [Categories] ([SaleAccountId]);
+CREATE INDEX [IX_Cateries_InventoryAccountId] ON [Cateries] ([InventoryAccountId]);
 
-GO
+
+
+CREATE INDEX [IX_Cateries_PurchaseAccountId] ON [Cateries] ([PurchaseAccountId]);
+
+
+
+CREATE INDEX [IX_Cateries_SaleAccountId] ON [Cateries] ([SaleAccountId]);
+
+
 
 CREATE INDEX [IX_Colors_CompanyId] ON [Colors] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_CompanyAccountSetups_CompanyId] ON [CompanyAccountSetups] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_CompanyAttachments_CompanyId] ON [CompanyAttachments] ([CompanyId]);
 
-GO
+
 
 CREATE UNIQUE INDEX [IX_companyInformations_CompanyId] ON [companyInformations] ([CompanyId]) WHERE [CompanyId] IS NOT NULL;
 
-GO
+
 
 CREATE INDEX [IX_CompanyLicences_CompanyId] ON [CompanyLicences] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_CompanyPermissions_CompanyId] ON [CompanyPermissions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_CompanyPermissions_NobleModuleId] ON [CompanyPermissions] ([NobleModuleId]);
 
-GO
+
 
 CREATE INDEX [IX_ContactAttachments_ContactId] ON [ContactAttachments] ([ContactId]);
 
-GO
+
 
 CREATE INDEX [IX_ContactBankAccounts_CompanyId] ON [ContactBankAccounts] ([CompanyId]);
 
-GO
+
 
 CREATE UNIQUE INDEX [IX_ContactBankAccounts_ContactId] ON [ContactBankAccounts] ([ContactId]);
 
-GO
+
 
 CREATE INDEX [IX_Contacts_AccountId] ON [Contacts] ([AccountId]);
 
-GO
+
 
 CREATE INDEX [IX_Contacts_CompanyId] ON [Contacts] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_CostCenters_AccountTypeId] ON [CostCenters] ([AccountTypeId]);
 
-GO
+
 
 CREATE INDEX [IX_CostCenters_CompanyId] ON [CostCenters] ([CompanyId]);
 
-GO
+
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_CostCenters_Code_CompanyId] ON [CostCenters] ([Code], [CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Currencies_CompanyId] ON [Currencies] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_CustomerDiscount_CompanyId] ON [CustomerDiscount] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_DailyExpenseDetails_DailyExpenseId] ON [DailyExpenseDetails] ([DailyExpenseId]);
 
-GO
+
 
 CREATE INDEX [IX_DailyExpenses_CompanyId] ON [DailyExpenses] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_DayStarts_CompanyId] ON [DayStarts] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Departments_CompanyId] ON [Departments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Designations_CompanyId] ON [Designations] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeAttachments_AttachmentId] ON [EmployeeAttachments] ([AttachmentId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeAttachments_EmployeeId] ON [EmployeeAttachments] ([EmployeeId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeDepartments_DepartmentId] ON [EmployeeDepartments] ([DepartmentId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeDepartments_EmployeeId] ON [EmployeeDepartments] ([EmployeeId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeRegistrationAttachments_EmployeeId] ON [EmployeeRegistrationAttachments] ([EmployeeId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeRegistrations_CompanyId] ON [EmployeeRegistrations] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Employees_CompanyId] ON [Employees] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Employees_DesignationId] ON [Employees] ([DesignationId]);
 
-GO
+
 
 CREATE INDEX [IX_Employees_ParentId] ON [Employees] ([ParentId]);
 
-GO
+
 
 CREATE INDEX [IX_Employees_ZoneId] ON [Employees] ([ZoneId]);
 
-GO
+
 
 CREATE INDEX [IX_Inventories_CompanyId] ON [Inventories] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Inventories_ProductId] ON [Inventories] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_Inventories_StockId] ON [Inventories] ([StockId]);
 
-GO
+
 
 CREATE INDEX [IX_JournalVoucherItems_AccountId] ON [JournalVoucherItems] ([AccountId]);
 
-GO
+
 
 CREATE INDEX [IX_JournalVoucherItems_ContactId] ON [JournalVoucherItems] ([ContactId]);
 
-GO
+
 
 CREATE INDEX [IX_JournalVoucherItems_JournalVoucherId] ON [JournalVoucherItems] ([JournalVoucherId]);
 
-GO
+
 
 CREATE INDEX [IX_JournalVouchers_CompanyId] ON [JournalVouchers] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_LoginPermissions_CompanyId] ON [LoginPermissions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_MobileOrderItems_MobileOrderId] ON [MobileOrderItems] ([MobileOrderId]);
 
-GO
+
 
 CREATE INDEX [IX_MobileOrderItems_ProductId] ON [MobileOrderItems] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_MobileOrders_CompanyId] ON [MobileOrders] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_ModulesRights_ModuleId] ON [ModulesRights] ([ModuleId]);
 
-GO
+
 
 CREATE INDEX [IX_MonthlyCosts_CompanyId] ON [MonthlyCosts] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_NoblePermissions_NobleModuleId] ON [NoblePermissions] ([NobleModuleId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_CompanyId] ON [NobleRolePermissions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_PermissionId] ON [NobleRolePermissions] ([PermissionId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_RoleId] ON [NobleRolePermissions] ([RoleId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRoles_CompanyId] ON [NobleRoles] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleUserRoles_CompanyId] ON [NobleUserRoles] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleUserRoles_RoleId] ON [NobleUserRoles] ([RoleId]);
 
-GO
+
 
 CREATE INDEX [IX_Origins_CompanyId] ON [Origins] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_OtherCurrencies_CurrencyId] ON [OtherCurrencies] ([CurrencyId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentOptions_CompanyId] ON [PaymentOptions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentVoucherDetails_ContactAccountId] ON [PaymentVoucherDetails] ([ContactAccountId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentVoucherDetails_PaymentVoucherId] ON [PaymentVoucherDetails] ([PaymentVoucherId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentVouchers_BankCashAccountId] ON [PaymentVouchers] ([BankCashAccountId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentVouchers_CompanyId] ON [PaymentVouchers] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Products_BrandId] ON [Products] ([BrandId]);
 
-GO
 
-CREATE INDEX [IX_Products_BundleCategoryId] ON [Products] ([BundleCategoryId]);
 
-GO
+CREATE INDEX [IX_Products_BundleCateryId] ON [Products] ([BundleCateryId]);
 
-CREATE INDEX [IX_Products_CategoryId] ON [Products] ([CategoryId]);
 
-GO
+
+CREATE INDEX [IX_Products_CateryId] ON [Products] ([CateryId]);
+
+
 
 CREATE INDEX [IX_Products_ColorId] ON [Products] ([ColorId]);
 
-GO
+
 
 CREATE INDEX [IX_Products_CompanyId] ON [Products] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Products_OriginId] ON [Products] ([OriginId]);
 
-GO
+
 
 CREATE INDEX [IX_Products_PromotionOfferId] ON [Products] ([PromotionOfferId]);
 
-GO
+
 
 CREATE INDEX [IX_Products_SizeId] ON [Products] ([SizeId]);
 
-GO
+
 
 CREATE INDEX [IX_Products_TaxRateId] ON [Products] ([TaxRateId]);
 
-GO
+
 
 CREATE INDEX [IX_Products_UnitId] ON [Products] ([UnitId]);
 
-GO
+
 
 CREATE INDEX [IX_PromotionOfferItems_CompanyId] ON [PromotionOfferItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PromotionOfferItems_PromotionOfferId] ON [PromotionOfferItems] ([PromotionOfferId]);
 
-GO
+
 
 CREATE INDEX [IX_PromotionOffers_CompanyId] ON [PromotionOffers] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseAttachments_PurchaseOrderId] ON [PurchaseAttachments] ([PurchaseOrderId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseItems_ProductId] ON [PurchaseItems] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseItems_PurchaseId] ON [PurchaseItems] ([PurchaseId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseItems_TaxRateId] ON [PurchaseItems] ([TaxRateId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseItems_WareHouseId] ON [PurchaseItems] ([WareHouseId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrderItems_ProductId] ON [PurchaseOrderItems] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrderItems_PurchaseOrderId] ON [PurchaseOrderItems] ([PurchaseOrderId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrderItems_TaxRateId] ON [PurchaseOrderItems] ([TaxRateId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrders_CompanyId] ON [PurchaseOrders] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrders_SupplierId] ON [PurchaseOrders] ([SupplierId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchasePostItems_ProductId] ON [PurchasePostItems] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchasePostItems_PurchasePostId] ON [PurchasePostItems] ([PurchasePostId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchasePostItems_TaxRateId] ON [PurchasePostItems] ([TaxRateId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchasePostItems_WareHouseId] ON [PurchasePostItems] ([WareHouseId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchasePosts_CompanyId] ON [PurchasePosts] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchasePosts_PurchaseOrderId] ON [PurchasePosts] ([PurchaseOrderId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchasePosts_SupplierId] ON [PurchasePosts] ([SupplierId]);
 
-GO
+
 
 CREATE INDEX [IX_Purchases_CompanyId] ON [Purchases] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Purchases_PurchaseOrderId] ON [Purchases] ([PurchaseOrderId]);
 
-GO
+
 
 CREATE INDEX [IX_Purchases_SupplierId] ON [Purchases] ([SupplierId]);
 
-GO
+
 
 CREATE INDEX [IX_RolesPermissions_CompanyId] ON [RolesPermissions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_RolesPermissions_RoleId] ON [RolesPermissions] ([RoleId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleItems_BundleId] ON [SaleItems] ([BundleId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleItems_ProductId] ON [SaleItems] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleItems_PromotionId] ON [SaleItems] ([PromotionId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleItems_SaleId] ON [SaleItems] ([SaleId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleItems_TaxRateId] ON [SaleItems] ([TaxRateId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleItems_WareHouseId] ON [SaleItems] ([WareHouseId]);
 
-GO
+
 
 CREATE INDEX [IX_SalePayments_CompanyId] ON [SalePayments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_SalePayments_PaymentOptionId] ON [SalePayments] ([PaymentOptionId]);
 
-GO
+
 
 CREATE INDEX [IX_SalePayments_SaleId] ON [SalePayments] ([SaleId]);
 
-GO
+
 
 CREATE INDEX [IX_Sales_CashCustomerId] ON [Sales] ([CashCustomerId]);
 
-GO
+
 
 CREATE INDEX [IX_Sales_CompanyId] ON [Sales] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Sales_CustomerId] ON [Sales] ([CustomerId]);
 
-GO
+
 
 CREATE UNIQUE INDEX [IX_Sales_OtherCurrencyId] ON [Sales] ([OtherCurrencyId]) WHERE [OtherCurrencyId] IS NOT NULL;
 
-GO
+
 
 CREATE INDEX [IX_Sizes_CompanyId] ON [Sizes] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_StockAdjustmentDetails_ProductId] ON [StockAdjustmentDetails] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_StockAdjustmentDetails_StockAdjustmentId] ON [StockAdjustmentDetails] ([StockAdjustmentId]);
 
-GO
+
 
 CREATE INDEX [IX_StockAdjustmentDetails_WarehouseId] ON [StockAdjustmentDetails] ([WarehouseId]);
 
-GO
+
 
 CREATE INDEX [IX_StockAdjustments_CompanyId] ON [StockAdjustments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_StockAdjustments_WarehouseId] ON [StockAdjustments] ([WarehouseId]);
 
-GO
+
 
 CREATE INDEX [IX_Stocks_CompanyId] ON [Stocks] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Stocks_ProductId] ON [Stocks] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_Stocks_WareHouseId] ON [Stocks] ([WareHouseId]);
 
-GO
 
-CREATE INDEX [IX_SubCategories_CategoryId] ON [SubCategories] ([CategoryId]);
 
-GO
+CREATE INDEX [IX_SubCateries_CateryId] ON [SubCateries] ([CateryId]);
 
-CREATE INDEX [IX_SubCategories_CompanyId] ON [SubCategories] ([CompanyId]);
 
-GO
+
+CREATE INDEX [IX_SubCateries_CompanyId] ON [SubCateries] ([CompanyId]);
+
+
 
 CREATE INDEX [IX_TaxRates_CompanyId] ON [TaxRates] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Terminals_AccountId] ON [Terminals] ([AccountId]);
 
-GO
+
 
 CREATE INDEX [IX_Terminals_CompanyId] ON [Terminals] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Transactions_AccountId] ON [Transactions] ([AccountId]);
 
-GO
+
 
 CREATE INDEX [IX_Transactions_CompanyId] ON [Transactions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Transporters_CompanyId] ON [Transporters] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Units_CompanyId] ON [Units] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_UserTerminals_TerminalId] ON [UserTerminals] ([TerminalId]);
 
-GO
+
 
 CREATE INDEX [IX_Warehouses_CompanyId] ON [Warehouses] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_WareHouseTransferItems_CompanyId] ON [WareHouseTransferItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_WareHouseTransferItems_ProductId] ON [WareHouseTransferItems] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_WareHouseTransferItems_WareHouseTransferId] ON [WareHouseTransferItems] ([WareHouseTransferId]);
 
-GO
+
 
 CREATE INDEX [IX_WareHouseTransfers_CompanyId] ON [WareHouseTransfers] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_WareHouseTransfers_ToWareHouseId] ON [WareHouseTransfers] ([ToWareHouseId]);
 
-GO
+
 
 CREATE INDEX [IX_Zones_CompanyId] ON [Zones] ([CompanyId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210712064229_All-In-One', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-14T16:40:00.9946851+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (251, N'Role', N'Can Save Role', 1),
 (252, N'Role', N'Can View Role', 1),
 (253, N'Permission', N'Can View Permission', 1),
@@ -2779,15 +2779,15 @@ VALUES (251, N'Role', N'Can Save Role', 1),
 (256, N'Permission', N'Can Change Profile', 1),
 (257, N'View Dashboard', N'Can View Dashboard', 1),
 (258, N'Can View Location Attachment', N'Can View Location Attachment', 1);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210714114003_ChangeInPermission1.5', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
@@ -2797,7 +2797,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[NobleRolePermissions]') AND [c].[na
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [NobleRolePermissions] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [NobleRolePermissions] DROP COLUMN [IsDeleted];
 
-GO
+
 
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
@@ -2807,19 +2807,19 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyPermissions]') AND [c].[name
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [CompanyPermissions] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [CompanyPermissions] DROP COLUMN [IsDeleted];
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-14T19:51:08.0115998+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210714145110_CascadingDeleteInPermission', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var2 sysname;
 SELECT @var2 = [d].[name]
@@ -2829,7 +2829,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var2 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [VatReceiableAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var3 sysname;
 SELECT @var3 = [d].[name]
@@ -2839,7 +2839,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var3 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [VatPayableAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var4 sysname;
 SELECT @var4 = [d].[name]
@@ -2849,7 +2849,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var4 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var4 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [StockOutAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var5 sysname;
 SELECT @var5 = [d].[name]
@@ -2859,7 +2859,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var5 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var5 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [StockInAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var6 sysname;
 SELECT @var6 = [d].[name]
@@ -2869,7 +2869,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var6 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var6 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [SaleAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var7 sysname;
 SELECT @var7 = [d].[name]
@@ -2879,7 +2879,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var7 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var7 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [PromotionAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var8 sysname;
 SELECT @var8 = [d].[name]
@@ -2889,7 +2889,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var8 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var8 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [InventoryAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var9 sysname;
 SELECT @var9 = [d].[name]
@@ -2899,7 +2899,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var9 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var9 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [FreeofCostAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var10 sysname;
 SELECT @var10 = [d].[name]
@@ -2909,7 +2909,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var10 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var10 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [DiscountReceivableAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var11 sysname;
 SELECT @var11 = [d].[name]
@@ -2919,7 +2919,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var11 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var11 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [DiscountPayableAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var12 sysname;
 SELECT @var12 = [d].[name]
@@ -2929,7 +2929,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var12 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var12 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [CashId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var13 sysname;
 SELECT @var13 = [d].[name]
@@ -2939,7 +2939,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var13 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var13 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [BundleAccountId] uniqueidentifier NULL;
 
-GO
+
 
 DECLARE @var14 sysname;
 SELECT @var14 = [d].[name]
@@ -2949,7 +2949,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var14 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var14 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [BarcodeType] nvarchar(max) NULL;
 
-GO
+
 
 DECLARE @var15 sysname;
 SELECT @var15 = [d].[name]
@@ -2959,35 +2959,35 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CompanyAccountSetups]') AND [c].[na
 IF @var15 IS NOT NULL EXEC(N'ALTER TABLE [CompanyAccountSetups] DROP CONSTRAINT [' + @var15 + '];');
 ALTER TABLE [CompanyAccountSetups] ALTER COLUMN [BankId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-15T11:26:53.8812825+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210715062656_NullableCompanyAccount', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [CompanyAccountSetups] ADD [TaxMethod] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-15T12:12:06.3714226+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210715071208_TaxMethodInCompanyAccount', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var16 sysname;
 SELECT @var16 = [d].[name]
@@ -2997,7 +2997,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Warehouses]') AND [c].[name] = N'Li
 IF @var16 IS NOT NULL EXEC(N'ALTER TABLE [Warehouses] DROP CONSTRAINT [' + @var16 + '];');
 ALTER TABLE [Warehouses] ALTER COLUMN [LicenseExpiry] datetime2 NULL;
 
-GO
+
 
 DECLARE @var17 sysname;
 SELECT @var17 = [d].[name]
@@ -3007,7 +3007,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Warehouses]') AND [c].[name] = N'Ci
 IF @var17 IS NOT NULL EXEC(N'ALTER TABLE [Warehouses] DROP CONSTRAINT [' + @var17 + '];');
 ALTER TABLE [Warehouses] ALTER COLUMN [CivilDefenceLicenseExpiry] datetime2 NULL;
 
-GO
+
 
 DECLARE @var18 sysname;
 SELECT @var18 = [d].[name]
@@ -3017,86 +3017,86 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Warehouses]') AND [c].[name] = N'CC
 IF @var18 IS NOT NULL EXEC(N'ALTER TABLE [Warehouses] DROP CONSTRAINT [' + @var18 + '];');
 ALTER TABLE [Warehouses] ALTER COLUMN [CCTVLicenseExpiry] datetime2 NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-16T12:52:46.2422166+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210716075248_WareHouseDateNullable', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [CompanyAccountSetups] ADD [TaxRateId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-17T11:44:43.3972476+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210717064445_TaxRateInCompanyAccount', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Currencies] ADD [ArabicSign] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-27T10:48:46.9237313+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210727054849_ChnageInCurrency', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [Change] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-27T19:08:49.9854182+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210727140852_change-field-in-invoice', N'2.2.6-servicing-10079');
 
-GO
 
-UPDATE [AccountTemplates] SET [JsonTemplate] = N'{"AccountsType":[{"Name":"Assets","IsActive":true,"CostCenters":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"101000","Accounts":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"10100001"}]},{"Name":"Cash in Hand - Store","Description":"Cash in Hand - Store","IsActive":true,"Code":"101001","Accounts":[{"Name":"Accounts receivable","Description":"Accounts receivable","IsActive":true,"Code":"10100101"}]},{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"111000","Accounts":[{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"11100001"}]},{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"120000","Accounts":[{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"1200001"}]},{"Name":"VAT Paid","Description":"VAT Paid","IsActive":true,"Code":"130000","Accounts":[{"Name":"VAT Paid on Purchases","Description":"VAT Paid on Purchases","IsActive":true,"Code":"1300001"}]},{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"105000","Accounts":[{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"10500001"}]},{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"170000","Accounts":[{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"17000001"}]},{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"150000","Accounts":[{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"1500001"}]},{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"126000","Accounts":[{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"12600001"}]}]},{"Name":"Liabilities","IsActive":true,"CostCenters":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"200000","Accounts":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"20000001"}]},{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"240000","Accounts":[{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"24000001"}]},{"Name":"VAT Payable","Description":"VAT Payable","IsActive":true,"Code":"250000","Accounts":[{"Name":"VAT Payable on Sale","Description":"VAT Payable on Sale","IsActive":true,"Code":"25000001"}]},{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"253001","Accounts":[{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"2530101"}]}]},{"Name":"Equity","IsActive":true,"CostCenters":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"300000","Accounts":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"30000001"}]},{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"301001","Accounts":[{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"30100101"}]},{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"302001","Accounts":[{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"30200101"}]},{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"320000","Accounts":[{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"32000001"}]},{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"321002","Accounts":[{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"32100201"}]}]},{"Name":"Income","IsActive":true,"CostCenters":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"420000","Accounts":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"42000001"}]},{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"421000","Accounts":[{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"42100001"}]},{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"425000","Accounts":[{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"42500001"}]},{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"426000","Accounts":[{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"42600001"}]}]},{"Name":"Expences","IsActive":true,"CostCenters":[{"Name":"Cost of Goods Sold","Description":"Cost of Goods Sold","IsActive":true,"Code":"600001","Accounts":[{"Name":"Cost of Goods Sold","Description":"Cost of Goods Sold","IsActive":true,"Code":"60000101"}]},{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"608001","Accounts":[{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"60800101"}]},{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"607001","Accounts":[{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"60700101"}]},{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"606001","Accounts":[{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"60600101"}]},{"Name":"General Expences","Description":"General Expences","IsActive":true,"Code":"605050","Accounts":[{"Name":"General Expences","Description":"General Expences","IsActive":true,"Code":"60505001"}]},{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"603001","Accounts":[{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"60300101"}]},{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"604001","Accounts":[{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"60400101"}]},{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"604050","Accounts":[{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"60405001"}]},{"Name":"Legal Expences","Description":"Legal Expences","IsActive":true,"Code":"605001","Accounts":[{"Name":"Legal Expences","Description":"Legal Expences","IsActive":true,"Code":"60500101"}]}]}]}'
+
+UPDATE [AccountTemplates] SET [JsonTemplate] = N'{"AccountsType":[{"Name":"Assets","IsActive":true,"CostCenters":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"101000","Accounts":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"10100001"}]},{"Name":"Cash in Hand - Store","Description":"Cash in Hand - Store","IsActive":true,"Code":"101001","Accounts":[{"Name":"Accounts receivable","Description":"Accounts receivable","IsActive":true,"Code":"10100101"}]},{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"111000","Accounts":[{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"11100001"}]},{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"120000","Accounts":[{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"1200001"}]},{"Name":"VAT Paid","Description":"VAT Paid","IsActive":true,"Code":"130000","Accounts":[{"Name":"VAT Paid on Purchases","Description":"VAT Paid on Purchases","IsActive":true,"Code":"1300001"}]},{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"105000","Accounts":[{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"10500001"}]},{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"170000","Accounts":[{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"17000001"}]},{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"150000","Accounts":[{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"1500001"}]},{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"126000","Accounts":[{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"12600001"}]}]},{"Name":"Liabilities","IsActive":true,"CostCenters":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"200000","Accounts":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"20000001"}]},{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"240000","Accounts":[{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"24000001"}]},{"Name":"VAT Payable","Description":"VAT Payable","IsActive":true,"Code":"250000","Accounts":[{"Name":"VAT Payable on Sale","Description":"VAT Payable on Sale","IsActive":true,"Code":"25000001"}]},{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"253001","Accounts":[{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"2530101"}]}]},{"Name":"Equity","IsActive":true,"CostCenters":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"300000","Accounts":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"30000001"}]},{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"301001","Accounts":[{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"30100101"}]},{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"302001","Accounts":[{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"30200101"}]},{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"320000","Accounts":[{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"32000001"}]},{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"321002","Accounts":[{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"32100201"}]}]},{"Name":"Income","IsActive":true,"CostCenters":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"420000","Accounts":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"42000001"}]},{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"421000","Accounts":[{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"42100001"}]},{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"425000","Accounts":[{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"42500001"}]},{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"426000","Accounts":[{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"42600001"}]}]},{"Name":"Expences","IsActive":true,"CostCenters":[{"Name":"Cost of ods Sold","Description":"Cost of ods Sold","IsActive":true,"Code":"600001","Accounts":[{"Name":"Cost of ods Sold","Description":"Cost of ods Sold","IsActive":true,"Code":"60000101"}]},{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"608001","Accounts":[{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"60800101"}]},{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"607001","Accounts":[{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"60700101"}]},{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"606001","Accounts":[{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"60600101"}]},{"Name":"General Expences","Description":"General Expences","IsActive":true,"Code":"605050","Accounts":[{"Name":"General Expences","Description":"General Expences","IsActive":true,"Code":"60505001"}]},{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"603001","Accounts":[{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"60300101"}]},{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"604001","Accounts":[{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"60400101"}]},{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"604050","Accounts":[{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"60405001"}]},{"Name":"Legal Expences","Description":"Legal Expences","IsActive":true,"Code":"605001","Accounts":[{"Name":"Legal Expences","Description":"Legal Expences","IsActive":true,"Code":"60500101"}]}]}]}'
 WHERE [Id] = 'ecfe29c8-c6af-4a3d-9c24-f87b30bf831c';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-07-28T15:03:28.6883439+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210728100331_ChangeInCoa', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [Cities] (
     [Id] uniqueidentifier NOT NULL,
@@ -3113,7 +3113,7 @@ CREATE TABLE [Cities] (
     CONSTRAINT [FK_Cities_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [Regions] (
     [Id] uniqueidentifier NOT NULL,
@@ -3134,139 +3134,139 @@ CREATE TABLE [Regions] (
     CONSTRAINT [FK_Regions_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-09T11:39:38.5762276+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_Cities_CompanyId] ON [Cities] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Regions_CityId] ON [Regions] ([CityId]);
 
-GO
+
 
 CREATE INDEX [IX_Regions_CompanyId] ON [Regions] ([CompanyId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210809063941_RegionStateAndCountry', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [IsMultiUnit] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [IsProduction] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-09T16:01:34.6998311+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210809110136_add-multiunit-setting', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [AreaId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [Sales] ADD [EmployeeId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-09T16:18:44.1892076+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_Sales_AreaId] ON [Sales] ([AreaId]);
 
-GO
+
 
 CREATE INDEX [IX_Sales_EmployeeId] ON [Sales] ([EmployeeId]);
 
-GO
+
 
 ALTER TABLE [Sales] ADD CONSTRAINT [FK_Sales_Regions_AreaId] FOREIGN KEY ([AreaId]) REFERENCES [Regions] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [Sales] ADD CONSTRAINT [FK_Sales_Employees_EmployeeId] FOREIGN KEY ([EmployeeId]) REFERENCES [Employees] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210809111846_EmployeeAndAeraInSaLeInvoice', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] DROP CONSTRAINT [FK_Sales_Employees_EmployeeId];
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-09T17:30:31.8166350+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 ALTER TABLE [Sales] ADD CONSTRAINT [FK_Sales_EmployeeRegistrations_EmployeeId] FOREIGN KEY ([EmployeeId]) REFERENCES [EmployeeRegistrations] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210809123034_EmployeeRelationWithSaleInvoice', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Products] ADD [BasicUnit] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Products] ADD [IsRaw] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Products] ADD [LevelOneUnit] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Products] ADD [SalePriceUnit] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Products] ADD [UnitPerPack] decimal(18,2) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-09T19:07:25.7088235+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210809140727_Add-Product-Unit-Level', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [SaleOrders] (
     [Id] uniqueidentifier NOT NULL,
@@ -3293,7 +3293,7 @@ CREATE TABLE [SaleOrders] (
     CONSTRAINT [FK_SaleOrders_Contacts_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [Contacts] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [SaleOrderItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -3313,75 +3313,75 @@ CREATE TABLE [SaleOrderItems] (
     CONSTRAINT [FK_SaleOrderItems_TaxRates_TaxRateId] FOREIGN KEY ([TaxRateId]) REFERENCES [TaxRates] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-10T11:12:44.8090542+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_SaleOrderItems_ProductId] ON [SaleOrderItems] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleOrderItems_SaleOrderId] ON [SaleOrderItems] ([SaleOrderId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleOrderItems_TaxRateId] ON [SaleOrderItems] ([TaxRateId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleOrders_CompanyId] ON [SaleOrders] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleOrders_CustomerId] ON [SaleOrders] ([CustomerId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210810061247_SaleOrder', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PurchasePostItems] ADD [HighQty] decimal(18,2) NULL;
 
-GO
+
 
 ALTER TABLE [PurchasePostItems] ADD [UnitPerPack] decimal(18,2) NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseOrderItems] ADD [HighQty] decimal(18,2) NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseOrderItems] ADD [UnitPerPack] decimal(18,2) NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseItems] ADD [HighQty] decimal(18,2) NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseItems] ADD [UnitPerPack] decimal(18,2) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-10T18:14:40.0395883+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210810131442_high-quantity-in-purchase', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [RecipeNos] (
     [Id] uniqueidentifier NOT NULL,
@@ -3404,7 +3404,7 @@ CREATE TABLE [RecipeNos] (
     CONSTRAINT [FK_RecipeNos_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [RecipeItems] (
     [Id] uniqueidentifier NOT NULL,
@@ -3419,95 +3419,95 @@ CREATE TABLE [RecipeItems] (
     CONSTRAINT [FK_RecipeItems_RecipeNos_RecipeNoId] FOREIGN KEY ([RecipeNoId]) REFERENCES [RecipeNos] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-11T12:51:00.0408165+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_RecipeItems_ProductId] ON [RecipeItems] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_RecipeItems_RecipeNoId] ON [RecipeItems] ([RecipeNoId]);
 
-GO
+
 
 CREATE INDEX [IX_RecipeNos_CompanyId] ON [RecipeNos] ([CompanyId]);
 
-GO
+
 
 CREATE UNIQUE INDEX [IX_RecipeNos_ProductId] ON [RecipeNos] ([ProductId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210811075102_RecipeNo', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [RecipeItems] ADD [BaseUnit] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [RecipeItems] ADD [LevelOneUnit] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [RecipeItems] ADD [UnitPerPack] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-11T15:03:18.6067176+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210811100320_ChangeinReciptItem', N'2.2.6-servicing-10079');
 
-GO
+
 
 DROP INDEX [IX_RecipeNos_ProductId] ON [RecipeNos];
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-11T15:40:23.6176625+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_RecipeNos_ProductId] ON [RecipeNos] ([ProductId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210811104026_ChangeInRelationProduct', N'2.2.6-servicing-10079');
 
-GO
+
 
 EXEC sp_rename N'[RecipeItems].[BaseUnit]', N'BasicUnit', N'COLUMN';
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-11T15:44:11.7495012+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210811104414_BasicUnitInRecipt', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [DispatchNote] (
     [Id] uniqueidentifier NOT NULL,
@@ -3528,7 +3528,7 @@ CREATE TABLE [DispatchNote] (
     CONSTRAINT [FK_DispatchNote_Contacts_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [Contacts] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [DispatchNoteItem] (
     [Id] uniqueidentifier NOT NULL,
@@ -3542,147 +3542,147 @@ CREATE TABLE [DispatchNoteItem] (
     CONSTRAINT [FK_DispatchNoteItem_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-11T16:07:26.0976394+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_DispatchNote_CompanyId] ON [DispatchNote] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_DispatchNote_CustomerId] ON [DispatchNote] ([CustomerId]);
 
-GO
+
 
 CREATE INDEX [IX_DispatchNoteItem_DispatchNoteId] ON [DispatchNoteItem] ([DispatchNoteId]);
 
-GO
+
 
 CREATE INDEX [IX_DispatchNoteItem_ProductId] ON [DispatchNoteItem] ([ProductId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210811110729_dispatch-note-database', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [DispatchNote] DROP CONSTRAINT [FK_DispatchNote_Companies_CompanyId];
 
-GO
+
 
 ALTER TABLE [DispatchNote] DROP CONSTRAINT [FK_DispatchNote_Contacts_CustomerId];
 
-GO
+
 
 ALTER TABLE [DispatchNoteItem] DROP CONSTRAINT [FK_DispatchNoteItem_DispatchNote_DispatchNoteId];
 
-GO
+
 
 ALTER TABLE [DispatchNoteItem] DROP CONSTRAINT [FK_DispatchNoteItem_Products_ProductId];
 
-GO
+
 
 ALTER TABLE [DispatchNoteItem] DROP CONSTRAINT [PK_DispatchNoteItem];
 
-GO
+
 
 ALTER TABLE [DispatchNote] DROP CONSTRAINT [PK_DispatchNote];
 
-GO
+
 
 EXEC sp_rename N'[DispatchNoteItem]', N'DispatchNoteItems';
 
-GO
+
 
 EXEC sp_rename N'[DispatchNote]', N'DispatchNotes';
 
-GO
+
 
 EXEC sp_rename N'[DispatchNoteItems].[IX_DispatchNoteItem_ProductId]', N'IX_DispatchNoteItems_ProductId', N'INDEX';
 
-GO
+
 
 EXEC sp_rename N'[DispatchNoteItems].[IX_DispatchNoteItem_DispatchNoteId]', N'IX_DispatchNoteItems_DispatchNoteId', N'INDEX';
 
-GO
+
 
 EXEC sp_rename N'[DispatchNotes].[IX_DispatchNote_CustomerId]', N'IX_DispatchNotes_CustomerId', N'INDEX';
 
-GO
+
 
 EXEC sp_rename N'[DispatchNotes].[IX_DispatchNote_CompanyId]', N'IX_DispatchNotes_CompanyId', N'INDEX';
 
-GO
+
 
 ALTER TABLE [DispatchNoteItems] ADD CONSTRAINT [PK_DispatchNoteItems] PRIMARY KEY ([Id]);
 
-GO
+
 
 ALTER TABLE [DispatchNotes] ADD CONSTRAINT [PK_DispatchNotes] PRIMARY KEY ([Id]);
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-11T18:52:04.6100378+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 ALTER TABLE [DispatchNoteItems] ADD CONSTRAINT [FK_DispatchNoteItems_DispatchNotes_DispatchNoteId] FOREIGN KEY ([DispatchNoteId]) REFERENCES [DispatchNotes] ([Id]) ON DELETE CASCADE;
 
-GO
+
 
 ALTER TABLE [DispatchNoteItems] ADD CONSTRAINT [FK_DispatchNoteItems_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE;
 
-GO
+
 
 ALTER TABLE [DispatchNotes] ADD CONSTRAINT [FK_DispatchNotes_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [DispatchNotes] ADD CONSTRAINT [FK_DispatchNotes_Contacts_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [Contacts] ([Id]) ON DELETE CASCADE;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210811135206_dispatch-note-database-dbcontext', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SaleOrderItems] ADD [QuantityOut] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [DispatchNotes] ADD [SaleOrderId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-12T11:47:20.4913383+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_DispatchNotes_SaleOrderId] ON [DispatchNotes] ([SaleOrderId]);
 
-GO
+
 
 ALTER TABLE [DispatchNotes] ADD CONSTRAINT [FK_DispatchNotes_SaleOrders_SaleOrderId] FOREIGN KEY ([SaleOrderId]) REFERENCES [SaleOrders] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210812064723_dispatch-relation-with-saleorder', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [ProductionBatch] (
     [Id] uniqueidentifier NOT NULL,
@@ -3706,7 +3706,7 @@ CREATE TABLE [ProductionBatch] (
     CONSTRAINT [FK_ProductionBatch_SaleOrders_SaleOrderId] FOREIGN KEY ([SaleOrderId]) REFERENCES [SaleOrders] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [ProductionBatchItem] (
     [Id] uniqueidentifier NOT NULL,
@@ -3724,178 +3724,178 @@ CREATE TABLE [ProductionBatchItem] (
     CONSTRAINT [FK_ProductionBatchItem_ProductionBatch_ProductionBatchId] FOREIGN KEY ([ProductionBatchId]) REFERENCES [ProductionBatch] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-12T12:25:30.1812018+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_ProductionBatch_CompanyId] ON [ProductionBatch] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_ProductionBatch_RecipeNoId] ON [ProductionBatch] ([RecipeNoId]);
 
-GO
+
 
 CREATE INDEX [IX_ProductionBatch_SaleOrderId] ON [ProductionBatch] ([SaleOrderId]);
 
-GO
+
 
 CREATE INDEX [IX_ProductionBatchItem_ProductId] ON [ProductionBatchItem] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_ProductionBatchItem_ProductionBatchId] ON [ProductionBatchItem] ([ProductionBatchId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210812072533_ProductionBatch', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [ProductionBatch] DROP CONSTRAINT [FK_ProductionBatch_Companies_CompanyId];
 
-GO
+
 
 ALTER TABLE [ProductionBatch] DROP CONSTRAINT [FK_ProductionBatch_RecipeNos_RecipeNoId];
 
-GO
+
 
 ALTER TABLE [ProductionBatch] DROP CONSTRAINT [FK_ProductionBatch_SaleOrders_SaleOrderId];
 
-GO
+
 
 ALTER TABLE [ProductionBatchItem] DROP CONSTRAINT [FK_ProductionBatchItem_Products_ProductId];
 
-GO
+
 
 ALTER TABLE [ProductionBatchItem] DROP CONSTRAINT [FK_ProductionBatchItem_ProductionBatch_ProductionBatchId];
 
-GO
+
 
 ALTER TABLE [ProductionBatchItem] DROP CONSTRAINT [PK_ProductionBatchItem];
 
-GO
+
 
 ALTER TABLE [ProductionBatch] DROP CONSTRAINT [PK_ProductionBatch];
 
-GO
+
 
 EXEC sp_rename N'[ProductionBatchItem]', N'ProductionBatchItems';
 
-GO
+
 
 EXEC sp_rename N'[ProductionBatch]', N'ProductionBatchs';
 
-GO
+
 
 EXEC sp_rename N'[ProductionBatchItems].[IX_ProductionBatchItem_ProductionBatchId]', N'IX_ProductionBatchItems_ProductionBatchId', N'INDEX';
 
-GO
+
 
 EXEC sp_rename N'[ProductionBatchItems].[IX_ProductionBatchItem_ProductId]', N'IX_ProductionBatchItems_ProductId', N'INDEX';
 
-GO
+
 
 EXEC sp_rename N'[ProductionBatchs].[IX_ProductionBatch_SaleOrderId]', N'IX_ProductionBatchs_SaleOrderId', N'INDEX';
 
-GO
+
 
 EXEC sp_rename N'[ProductionBatchs].[IX_ProductionBatch_RecipeNoId]', N'IX_ProductionBatchs_RecipeNoId', N'INDEX';
 
-GO
+
 
 EXEC sp_rename N'[ProductionBatchs].[IX_ProductionBatch_CompanyId]', N'IX_ProductionBatchs_CompanyId', N'INDEX';
 
-GO
+
 
 ALTER TABLE [ProductionBatchItems] ADD CONSTRAINT [PK_ProductionBatchItems] PRIMARY KEY ([Id]);
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD CONSTRAINT [PK_ProductionBatchs] PRIMARY KEY ([Id]);
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-12T12:33:16.6823969+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 ALTER TABLE [ProductionBatchItems] ADD CONSTRAINT [FK_ProductionBatchItems_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE;
 
-GO
+
 
 ALTER TABLE [ProductionBatchItems] ADD CONSTRAINT [FK_ProductionBatchItems_ProductionBatchs_ProductionBatchId] FOREIGN KEY ([ProductionBatchId]) REFERENCES [ProductionBatchs] ([Id]) ON DELETE CASCADE;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD CONSTRAINT [FK_ProductionBatchs_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD CONSTRAINT [FK_ProductionBatchs_RecipeNos_RecipeNoId] FOREIGN KEY ([RecipeNoId]) REFERENCES [RecipeNos] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD CONSTRAINT [FK_ProductionBatchs_SaleOrders_SaleOrderId] FOREIGN KEY ([SaleOrderId]) REFERENCES [SaleOrders] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210812073319_ProductionBatch1.1', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [RecipeItems] ADD [WareHouseId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [ProductionBatchItems] ADD [WarehouseId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-12T15:21:34.2177359+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_RecipeItems_WareHouseId] ON [RecipeItems] ([WareHouseId]);
 
-GO
+
 
 CREATE INDEX [IX_ProductionBatchItems_WarehouseId] ON [ProductionBatchItems] ([WarehouseId]);
 
-GO
+
 
 ALTER TABLE [ProductionBatchItems] ADD CONSTRAINT [FK_ProductionBatchItems_Warehouses_WarehouseId] FOREIGN KEY ([WarehouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [RecipeItems] ADD CONSTRAINT [FK_RecipeItems_Warehouses_WareHouseId] FOREIGN KEY ([WareHouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210812102137_ProductionBatch1.2', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-13T15:23:44.9801980+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] ON;
@@ -3904,11 +3904,11 @@ VALUES (12, 0, N'Production', N'Production');
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] OFF;
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (259, N'Recipe', N'Can Save Recipe as Draft', 12),
 (281, N'Despatch Note', N'Can Delete Despatch Note as Post', 12),
 (282, N'Despatch Note', N'Can View Despatch Note as Post', 12),
@@ -3949,175 +3949,175 @@ VALUES (259, N'Recipe', N'Can Save Recipe as Draft', 12),
 (276, N'Despatch Note', N'Can Edit Despatch Note as Draft', 12),
 (297, N'Sale Order', N'Can Sale Order as Post', 12),
 (298, N'Sale Order', N'Can Sale Order as Post', 12);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210813102348_PermissionOnProductionBatch', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-13T16:33:22.8243756+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Save Sale Order as Draft'
 WHERE [Id] = 291;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Edit Sale Order as Draft'
 WHERE [Id] = 292;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Delete Sale Order as Draft'
 WHERE [Id] = 293;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can View Sale Order as Draft'
 WHERE [Id] = 294;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Save Sale Order as Post'
 WHERE [Id] = 295;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Edit Sale Order as Post'
 WHERE [Id] = 296;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Delete Sale Order as Post'
 WHERE [Id] = 297;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can View Sale Order as Post'
 WHERE [Id] = 298;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210813113326_PermissionOnProductionBatch1.1', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Purchases] ADD [TaxMethod] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Purchases] ADD [TaxRateId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [PurchasePosts] ADD [TaxMethod] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PurchasePosts] ADD [TaxRateId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [PurchaseOrders] ADD [TaxMethod] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseOrders] ADD [TaxRateId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-23T18:03:24.6667220+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210823130326_purchase-taxrate-method-db', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Contacts] ADD [Coordinator] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Contacts] ADD [Currency1] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Contacts] ADD [Currency2] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Contacts] ADD [Location] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Contacts] ADD [Telephone] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Contacts] ADD [Website] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-24T16:35:17.8653533+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210824113521_ChangeInEmployee', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [LoginPermissions] ADD [InvoiceWoInventory] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [InvoiceWoInventory] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-26T10:48:44.8605199+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210826054847_InvoiceWoInventory', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [PrintSettings] (
     [Id] uniqueidentifier NOT NULL,
@@ -4134,59 +4134,59 @@ CREATE TABLE [PrintSettings] (
     CONSTRAINT [FK_PrintSettings_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-27T14:51:23.4973322+05:00'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_PrintSettings_CompanyId] ON [PrintSettings] ([CompanyId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210827095127_PrintSetting', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [CompanyNameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [CompanyNameEnglish] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-08-31T08:31:43.1801882Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210831083145_ChangeInCompanyTable', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [IsTouchInvoice] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-02T06:00:39.9513337Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210902060041_salesman-assign-invoice-screen', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var19 sysname;
 SELECT @var19 = [d].[name]
@@ -4196,215 +4196,215 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Companies]') AND [c].[name] = N'IsT
 IF @var19 IS NOT NULL EXEC(N'ALTER TABLE [Companies] DROP CONSTRAINT [' + @var19 + '];');
 ALTER TABLE [Companies] DROP COLUMN [IsTouchInvoice];
 
-GO
+
 
 ALTER TABLE [LoginPermissions] ADD [IsTouchInvoice] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-02T06:58:52.7269535Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210902065854_salesman-assign-invoice-screen-role', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Inventories] ADD [CurrentStockValue] decimal(18,4) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [Inventories] ADD [SalePrice] decimal(18,4) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-02T12:47:18.4346202Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210902124721_Update-InventoryTable', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [RefrenceNo] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-03T05:52:30.1738548Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210903055232_RefrenceNoInSaleInvoice', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Warehouses] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Units] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [TaxRates] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
 
-ALTER TABLE [SubCategories] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+ALTER TABLE [SubCateries] ADD [NameArabic] nvarchar(max) NULL;
+
+
 
 ALTER TABLE [Sizes] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [RolesPermissions] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseAttachments] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PaymentOptions] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Origins] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [NobleRoles] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [NobleModules] ADD [ArabicName] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [ModulesNames] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [MobileOrders] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Currencies] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [CostCenters] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Colors] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Cities] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
 
-ALTER TABLE [Categories] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+ALTER TABLE [Cateries] ADD [NameArabic] nvarchar(max) NULL;
+
+
 
 ALTER TABLE [CashCustomer] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
 
-ALTER TABLE [BundleCategories] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+ALTER TABLE [BundleCateries] ADD [NameArabic] nvarchar(max) NULL;
+
+
 
 ALTER TABLE [Brands] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Banks] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Attachments] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [AccountTypes] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [AccountTemplates] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [AccountsLevelTwo] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [AccountsLevelOne] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Accounts] ADD [NameArabic] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-06T06:35:42.5752533Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210906063544_ArabicNameInAllTable', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [AspNetUsers] ADD [IsActive] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-06T12:46:59.1508349Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210906124700_User-Isactive', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrations] ADD [IsActive] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-06T14:37:14.7891795Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210906143716_Employee-Isactive', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [SyncRecords] (
     [Id] int NOT NULL IDENTITY,
@@ -4421,42 +4421,42 @@ CREATE TABLE [SyncRecords] (
     CONSTRAINT [PK_SyncRecords] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-07T02:44:23.7019659Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210907024426_add-syncRecord', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [IsArea] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-08T11:02:27.6363060Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210908110229_IsArea-add-in-Company', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-08T11:25:30.3993743Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ArabicName', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] ON;
@@ -4465,109 +4465,109 @@ VALUES (13, NULL, 0, N'System', N'System');
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ArabicName', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] OFF;
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (299, N'System', N'Can Change Company Profile', 13),
 (300, N'System', N'Database Backup', 13),
 (301, N'System', N'Restore Database', 13),
 (302, N'System', N'Flush Database', 13),
 (303, N'System', N'Can Change Invoice Setting', 13);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210908112532_ChangeInPermissionForSystem', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [LoginPermissions] ADD [AllowAll] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-08T12:22:07.7576345Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210908122209_AllowAll-to-See-User', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [IsProceed] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-09T10:37:04.9401548Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210909103706_IsProceedInCompanyProfile', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [AspNetUsers] ADD [IsProceed] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-09T10:55:41.1899230Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210909105543_IsProceed', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [Arabic] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [English] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-12T09:35:18.5454370Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210912093520_Language-Setting', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SyncRecords] ADD [ColumnName] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-12T19:34:47.2877559Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210912193452_add-columnName', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var20 sysname;
 SELECT @var20 = [d].[name]
@@ -4577,7 +4577,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[StockAdjustments]') AND [c].[name] 
 IF @var20 IS NOT NULL EXEC(N'ALTER TABLE [StockAdjustments] DROP CONSTRAINT [' + @var20 + '];');
 ALTER TABLE [StockAdjustments] ALTER COLUMN [Narration] nvarchar(200) NULL;
 
-GO
+
 
 DECLARE @var21 sysname;
 SELECT @var21 = [d].[name]
@@ -4587,602 +4587,602 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[CashCustomer]') AND [c].[name] = N'
 IF @var21 IS NOT NULL EXEC(N'ALTER TABLE [CashCustomer] DROP CONSTRAINT [' + @var21 + '];');
 ALTER TABLE [CashCustomer] ALTER COLUMN [Mobile] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-14T06:31:13.4991192Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210914063116_Change-required', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Products] ADD [Assortment] nvarchar(200) NULL;
 
-GO
+
 
 ALTER TABLE [Products] ADD [StyleNumber] nvarchar(200) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-15T12:34:59.0007502Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210915123500_assortment-style-in-product', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SyncRecords] ADD [IsGeneral] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-16T02:31:06.8996512Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210916023110_Add-IsGeneral', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [DayStart] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [Terminal] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-16T06:53:41.7915655Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210916065343_daystart=terminal-on-company-base', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [UserTerminals] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [StockAdjustmentDetails] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [SaleOrderItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [SaleItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [RecipeItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [PurchasePostItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [PurchaseOrderItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [PurchaseItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [PurchaseAttachments] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [ProductionBatchItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [OtherCurrencies] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [MobileOrderItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [JournalVoucherItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrationAttachments] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [EmployeeDepartments] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [EmployeeAttachments] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [DispatchNoteItems] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [DailyExpenseDetails] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [ContactAttachments] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [Attachments] ADD [CompanyId] uniqueidentifier NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-16T16:37:31.8820727Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_UserTerminals_CompanyId] ON [UserTerminals] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_StockAdjustmentDetails_CompanyId] ON [StockAdjustmentDetails] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleOrderItems_CompanyId] ON [SaleOrderItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_SaleItems_CompanyId] ON [SaleItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_RecipeItems_CompanyId] ON [RecipeItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchasePostItems_CompanyId] ON [PurchasePostItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrderItems_CompanyId] ON [PurchaseOrderItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseItems_CompanyId] ON [PurchaseItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseAttachments_CompanyId] ON [PurchaseAttachments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_ProductionBatchItems_CompanyId] ON [ProductionBatchItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentVoucherDetails_CompanyId] ON [PaymentVoucherDetails] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_OtherCurrencies_CompanyId] ON [OtherCurrencies] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_MobileOrderItems_CompanyId] ON [MobileOrderItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_JournalVoucherItems_CompanyId] ON [JournalVoucherItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeRegistrationAttachments_CompanyId] ON [EmployeeRegistrationAttachments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeDepartments_CompanyId] ON [EmployeeDepartments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_EmployeeAttachments_CompanyId] ON [EmployeeAttachments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_DispatchNoteItems_CompanyId] ON [DispatchNoteItems] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_DailyExpenseDetails_CompanyId] ON [DailyExpenseDetails] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_ContactAttachments_CompanyId] ON [ContactAttachments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Attachments_CompanyId] ON [Attachments] ([CompanyId]);
 
-GO
+
 
 ALTER TABLE [Attachments] ADD CONSTRAINT [FK_Attachments_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [ContactAttachments] ADD CONSTRAINT [FK_ContactAttachments_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [DailyExpenseDetails] ADD CONSTRAINT [FK_DailyExpenseDetails_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [DispatchNoteItems] ADD CONSTRAINT [FK_DispatchNoteItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [EmployeeAttachments] ADD CONSTRAINT [FK_EmployeeAttachments_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [EmployeeDepartments] ADD CONSTRAINT [FK_EmployeeDepartments_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrationAttachments] ADD CONSTRAINT [FK_EmployeeRegistrationAttachments_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [JournalVoucherItems] ADD CONSTRAINT [FK_JournalVoucherItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [MobileOrderItems] ADD CONSTRAINT [FK_MobileOrderItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [OtherCurrencies] ADD CONSTRAINT [FK_OtherCurrencies_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] ADD CONSTRAINT [FK_PaymentVoucherDetails_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [ProductionBatchItems] ADD CONSTRAINT [FK_ProductionBatchItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [PurchaseAttachments] ADD CONSTRAINT [FK_PurchaseAttachments_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [PurchaseItems] ADD CONSTRAINT [FK_PurchaseItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [PurchaseOrderItems] ADD CONSTRAINT [FK_PurchaseOrderItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [PurchasePostItems] ADD CONSTRAINT [FK_PurchasePostItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [RecipeItems] ADD CONSTRAINT [FK_RecipeItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [SaleItems] ADD CONSTRAINT [FK_SaleItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [SaleOrderItems] ADD CONSTRAINT [FK_SaleOrderItems_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [StockAdjustmentDetails] ADD CONSTRAINT [FK_StockAdjustmentDetails_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [UserTerminals] ADD CONSTRAINT [FK_UserTerminals_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210916163735_add-Itenant-Interface', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [Step1] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [Step2] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [Step3] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [Step4] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [Step5] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-20T06:38:36.8091472Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210920063838_StepsOfPermissionInComanyTable', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [StockAdjustments] ADD [TaxMethod] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [StockAdjustments] ADD [TaxRateId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-20T10:12:22.1455430Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_StockAdjustments_TaxRateId] ON [StockAdjustments] ([TaxRateId]);
 
-GO
+
 
 ALTER TABLE [StockAdjustments] ADD CONSTRAINT [FK_StockAdjustments_TaxRates_TaxRateId] FOREIGN KEY ([TaxRateId]) REFERENCES [TaxRates] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210920101223_taxrate-relation-stockadjustment', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [LoginPermissions] ADD [PermissionToStartExpenseDay] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [DailyExpenses] ADD [ApprovalStatus] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [DailyExpenses] ADD [OperationBy] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [DailyExpenses] ADD [OperationDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [DailyExpenses] ADD [OperationPerson] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-21T07:28:28.2916233Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210921072830_ChanginInDailyExpense', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [StockAdjustments] ADD [Reason] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-21T14:37:08.4126597Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210921143710_reason-in-stocadjust', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Contacts] ADD [IsRaw] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-22T06:52:23.1792647Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210922065224_Raw-Supplier', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [DailyExpenses] ADD [PaymetType] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DailyExpenses] ADD [Reason] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-22T11:03:24.6674855Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210922110326_ReasonInDailyExpense', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [IsExpenseDay] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-23T06:58:13.6403115Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210923065815_expenseday-in-daystart', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrations] ADD [AccountId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-23T10:51:25.3967698Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_EmployeeRegistrations_AccountId] ON [EmployeeRegistrations] ([AccountId]);
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrations] ADD CONSTRAINT [FK_EmployeeRegistrations_Accounts_AccountId] FOREIGN KEY ([AccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210923105127_AddEmployeeAccount', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrations] DROP CONSTRAINT [FK_EmployeeRegistrations_Accounts_AccountId];
 
-GO
+
 
 EXEC sp_rename N'[EmployeeRegistrations].[AccountId]', N'PayableAccountId', N'COLUMN';
 
-GO
+
 
 EXEC sp_rename N'[EmployeeRegistrations].[IX_EmployeeRegistrations_AccountId]', N'IX_EmployeeRegistrations_PayableAccountId', N'INDEX';
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrations] ADD [EmployeeAccountId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-23T11:51:47.3444558Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_EmployeeRegistrations_EmployeeAccountId] ON [EmployeeRegistrations] ([EmployeeAccountId]);
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrations] ADD CONSTRAINT [FK_EmployeeRegistrations_Accounts_EmployeeAccountId] FOREIGN KEY ([EmployeeAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [EmployeeRegistrations] ADD CONSTRAINT [FK_EmployeeRegistrations_Accounts_PayableAccountId] FOREIGN KEY ([PayableAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210923115149_AccountInEmployee', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-27T07:06:01.9567097Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Save Expense as Draft'
 WHERE [Id] = 196;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Edit Expense as Draft'
 WHERE [Id] = 197;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Delete Expense as Draft'
 WHERE [Id] = 198;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can View  Expense as Draft'
 WHERE [Id] = 199;
 SELECT @@ROWCOUNT;
 
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (304, N'Expense', N'Can Save Expense as Post', 10),
 (305, N'Expense', N'Can Edit Expense as Post', 10),
 (306, N'Expense', N'Can Delete Expense as Post', 10),
@@ -5191,124 +5191,124 @@ VALUES (304, N'Expense', N'Can Save Expense as Post', 10),
 (309, N'Expense', N'Can Edit Expense as Reject', 10),
 (310, N'Expense', N'Can Delete Expense as Reject', 10),
 (311, N'Expense', N'Can View  Expense as Reject', 10);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210927070603_PermissionOfExpenseAsDraftPostRejct', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-27T07:20:03.6386913Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (312, N'Expense', N'Can Bulk Expense Rejected', 10);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (313, N'Expense', N'Can Bulk Expense Approved', 10);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210927072005_BulkApproveAndRejectInExpense', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Purchases] ADD [Raw] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PurchasePosts] ADD [Raw] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PurchaseOrders] ADD [Raw] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-27T07:20:46.0931188Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210927072047_purchase-raw-material-check', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [WareHouseTransfers] ADD [ApprovalStatus] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-29T10:08:15.5468048Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210929100817_ApprovalStatusInStockTransfer', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-30T07:51:25.5207358Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Save Stock Transfer as Draft'
 WHERE [Id] = 136;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Edit Stock Transfer as Draft'
 WHERE [Id] = 137;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can Delete Stock Transfer as Draft'
 WHERE [Id] = 138;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can View  Stock Transfer as Draft'
 WHERE [Id] = 139;
 SELECT @@ROWCOUNT;
 
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (318, N'Denomination Setup', N'Can Save Denomination Setup', 1),
 (319, N'Denomination Setup', N'Can Edit Denomination Setup', 1),
 (320, N'Denomination Setup', N'Can Delete Denomination Setup', 1),
@@ -5317,15 +5317,15 @@ VALUES (318, N'Denomination Setup', N'Can Save Denomination Setup', 1),
 (315, N'Stock Transfer', N'Can Edit Stock Transfer as Post', 3),
 (316, N'Stock Transfer', N'Can Delete Stock Transfer as Post', 3),
 (317, N'Stock Transfer', N'Can View  Stock Transfer as Draft', 3);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210930075127_DenominationSetupAndPermission', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [DenominationSetups] (
     [Id] uniqueidentifier NOT NULL,
@@ -5340,23 +5340,23 @@ CREATE TABLE [DenominationSetups] (
     CONSTRAINT [FK_DenominationSetups_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-30T08:52:20.3510789Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_DenominationSetups_CompanyId] ON [DenominationSetups] ([CompanyId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210930085222_DenominationSetup', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var22 sysname;
 SELECT @var22 = [d].[name]
@@ -5366,106 +5366,106 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DenominationSetups]') AND [c].[name
 IF @var22 IS NOT NULL EXEC(N'ALTER TABLE [DenominationSetups] DROP CONSTRAINT [' + @var22 + '];');
 ALTER TABLE [DenominationSetups] ALTER COLUMN [Number] decimal(18,4) NOT NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-30T10:44:03.9039604Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210930104405_DenominationSetupDecimalNumber', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-09-30T11:07:22.5902166Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [Description] = N'Can View  Stock Transfer as Post'
 WHERE [Id] = 317;
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20210930110724_PermissionOnStockTransfer', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [RecipeNos] ADD [RecipeName] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-04T05:57:21.0710002Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211004055722_recipe-name', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [DamageStock] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [EndTime] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [LateReason] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [RemainingStock] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [StartTime] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-04T06:06:33.3448685Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211004060635_ExectuationTimeInBatch', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [LateReasonCompletion] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [LateReasonTransfer] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-04T14:38:59.5574543Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211004143901_ReasonFromCompletionInBatch', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var23 sysname;
 SELECT @var23 = [d].[name]
@@ -5475,7 +5475,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ProductionBatchs]') AND [c].[name] 
 IF @var23 IS NOT NULL EXEC(N'ALTER TABLE [ProductionBatchs] DROP CONSTRAINT [' + @var23 + '];');
 ALTER TABLE [ProductionBatchs] ALTER COLUMN [StartTime] datetime2 NULL;
 
-GO
+
 
 DECLARE @var24 sysname;
 SELECT @var24 = [d].[name]
@@ -5485,31 +5485,31 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ProductionBatchs]') AND [c].[name] 
 IF @var24 IS NOT NULL EXEC(N'ALTER TABLE [ProductionBatchs] DROP CONSTRAINT [' + @var24 + '];');
 ALTER TABLE [ProductionBatchs] ALTER COLUMN [EndTime] datetime2 NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-05T08:15:49.3625443Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211005081551_NullableDatesInBatch', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [CompleteBy] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [ProcessBy] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [TransferBy] nvarchar(max) NULL;
 
-GO
+
 
 CREATE TABLE [ProductionStockTransfer] (
     [Id] uniqueidentifier NOT NULL,
@@ -5526,23 +5526,23 @@ CREATE TABLE [ProductionStockTransfer] (
     CONSTRAINT [PK_ProductionStockTransfer] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-05T10:56:43.3630218Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211005105645_ProductionStockTransferInBatch', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfer] DROP CONSTRAINT [PK_ProductionStockTransfer];
 
-GO
+
 
 DECLARE @var25 sysname;
 SELECT @var25 = [d].[name]
@@ -5552,59 +5552,59 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ProductionStockTransfer]') AND [c].
 IF @var25 IS NOT NULL EXEC(N'ALTER TABLE [ProductionStockTransfer] DROP CONSTRAINT [' + @var25 + '];');
 ALTER TABLE [ProductionStockTransfer] DROP COLUMN [Quantity];
 
-GO
+
 
 EXEC sp_rename N'[ProductionStockTransfer]', N'ProductionStockTransfers';
 
-GO
+
 
 EXEC sp_rename N'[ProductionStockTransfers].[RecipeName]', N'ModifiedById', N'COLUMN';
 
-GO
+
 
 EXEC sp_rename N'[ProductionStockTransfers].[Product]', N'RecipeId', N'COLUMN';
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfers] ADD [CompanyId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfers] ADD [CreatedById] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfers] ADD [CreatedOn] datetime2 NOT NULL DEFAULT (GetUtcDate());
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfers] ADD [ModifiedOn] datetime2 NOT NULL DEFAULT (GetUtcDate());
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfers] ADD CONSTRAINT [PK_ProductionStockTransfers] PRIMARY KEY ([Id]);
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-05T13:07:52.8525560Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_ProductionStockTransfers_CompanyId] ON [ProductionStockTransfers] ([CompanyId]);
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfers] ADD CONSTRAINT [FK_ProductionStockTransfers_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211005130754_ProductionStockTransfer1.1', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var26 sysname;
 SELECT @var26 = [d].[name]
@@ -5614,7 +5614,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ProductionStockTransfers]') AND [c]
 IF @var26 IS NOT NULL EXEC(N'ALTER TABLE [ProductionStockTransfers] DROP CONSTRAINT [' + @var26 + '];');
 ALTER TABLE [ProductionStockTransfers] ALTER COLUMN [RemainingStock] decimal(18,4) NOT NULL;
 
-GO
+
 
 DECLARE @var27 sysname;
 SELECT @var27 = [d].[name]
@@ -5624,71 +5624,71 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ProductionStockTransfers]') AND [c]
 IF @var27 IS NOT NULL EXEC(N'ALTER TABLE [ProductionStockTransfers] DROP CONSTRAINT [' + @var27 + '];');
 ALTER TABLE [ProductionStockTransfers] ALTER COLUMN [DamageStock] decimal(18,4) NOT NULL;
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfers] ADD [UnitPrice] decimal(18,4) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-06T07:20:34.8936243Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211006072037_UnitPriceInProductionBatchStockTransfer', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [SaleInvoiceId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-06T08:42:44.8630754Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211006084246_saleinvoiceid-in-sale', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [IsSaleReturn] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-06T08:51:52.2035465Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211006085154_IsSaleReturn-in-sale', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [IsSaleReturnPost] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-06T10:55:57.1876147Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211006105559_IsSaleReturnPost-in-sale', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var28 sysname;
 SELECT @var28 = [d].[name]
@@ -5698,7 +5698,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ProductionBatchs]') AND [c].[name] 
 IF @var28 IS NOT NULL EXEC(N'ALTER TABLE [ProductionBatchs] DROP CONSTRAINT [' + @var28 + '];');
 ALTER TABLE [ProductionBatchs] ALTER COLUMN [RemainingStock] decimal(18,4) NOT NULL;
 
-GO
+
 
 DECLARE @var29 sysname;
 SELECT @var29 = [d].[name]
@@ -5708,197 +5708,197 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ProductionBatchs]') AND [c].[name] 
 IF @var29 IS NOT NULL EXEC(N'ALTER TABLE [ProductionBatchs] DROP CONSTRAINT [' + @var29 + '];');
 ALTER TABLE [ProductionBatchs] ALTER COLUMN [DamageStock] decimal(18,4) NOT NULL;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [CompleteDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [ProcessDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [RecipeQuantity] decimal(18,4) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [ProductionBatchs] ADD [TransferDate] datetime2 NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-06T13:56:26.2790321Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211006135628_ProductionBatch1.4', N'2.2.6-servicing-10079');
 
-GO
+
 
 EXEC sp_rename N'[ProductionStockTransfers].[RecipeId]', N'ProductionBatchId', N'COLUMN';
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-07T11:09:21.8494498Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211007110923_ProductionBatchView1.1', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [ProductionStockTransfers] ADD [ProductId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-07T11:27:28.0138505Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211007112729_ProductionBatchView1.2', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [SaleReturnInvoiceId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-08T12:13:00.3238884Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211008121302_salereturnid-in-sale', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [TermsCondition] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-12T07:19:22.7319282Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211012071924_TermsAndConditionBoolInCompany', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PurchasePosts] ADD [PurchaseInvoiceId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-15T07:29:37.9303277Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211015072939_purchaseInvoiceId-In-PurchasePost', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PurchasePosts] ADD [IsClose] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PurchasePostItems] ADD [RemainingQuantity] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-15T09:50:41.2433639Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211015095043_purchaseInvoice-remaining-quantity', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SaleItems] ADD [RemainingQuantity] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-20T08:28:47.3588406Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211020082849_RemainingQuantity-In-SaleInvoice', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SalePayments] ADD [Amount] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [SalePayments] ADD [Rate] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-25T12:00:05.8589440Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211025120007_amount-rate-in-othercurrency', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [CashCustomer] ADD [CustomerId] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [CashCustomer] ADD [Email] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-25T12:57:58.4994891Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211025125800_email-customerid-in-cashcustomer', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [LoginHistories] (
     [Id] int NOT NULL IDENTITY,
     [UserId] uniqueidentifier NOT NULL,
     [LoginDateTime] datetime2 NOT NULL,
-    [LogoutDateTime] datetime2 NOT NULL,
+    [LoutDateTime] datetime2 NOT NULL,
     [IpAddress] nvarchar(max) NULL,
     [OperatingSystem] nvarchar(max) NULL,
     [CompanyId] uniqueidentifier NOT NULL,
@@ -5906,75 +5906,75 @@ CREATE TABLE [LoginHistories] (
     CONSTRAINT [FK_LoginHistories_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-26T08:08:19.4002526Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_LoginHistories_CompanyId] ON [LoginHistories] ([CompanyId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211026080822_loginHistory', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [LoginHistories] DROP CONSTRAINT [FK_LoginHistories_Companies_CompanyId];
 
-GO
+
 
 DROP INDEX [IX_LoginHistories_CompanyId] ON [LoginHistories];
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-26T10:30:18.4235793Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211026103020_addCompanyIdInLoginHistory', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [CompanyAccountSetups] ADD [BackupPath] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-27T02:15:54.8123514Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211027021559_add-backup-path', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [JournalVouchers] ADD [OpeningCash] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-28T06:59:38.5841923Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211028065940_OpeningCashOneTimeEntry', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [InventoryBlinds] (
     [Id] uniqueidentifier NOT NULL,
@@ -5992,7 +5992,7 @@ CREATE TABLE [InventoryBlinds] (
     CONSTRAINT [FK_InventoryBlinds_Warehouses_WarehouseId] FOREIGN KEY ([WarehouseId]) REFERENCES [Warehouses] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 CREATE TABLE [InventoryBlindDetails] (
     [Id] uniqueidentifier NOT NULL,
@@ -6006,95 +6006,95 @@ CREATE TABLE [InventoryBlindDetails] (
     CONSTRAINT [FK_InventoryBlindDetails_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-28T07:14:34.1614657Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_InventoryBlindDetails_InventoryBlindId] ON [InventoryBlindDetails] ([InventoryBlindId]);
 
-GO
+
 
 CREATE INDEX [IX_InventoryBlindDetails_ProductId] ON [InventoryBlindDetails] ([ProductId]);
 
-GO
+
 
 CREATE INDEX [IX_InventoryBlinds_CompanyId] ON [InventoryBlinds] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_InventoryBlinds_WarehouseId] ON [InventoryBlinds] ([WarehouseId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211028071435_inventoryBlind', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [JournalVouchers] ADD [OneTimeEntry] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-28T10:40:50.3858944Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211028104052_OneTimeEntryInOpeningCash', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [PartiallyInvoices] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PurchasePosts] ADD [PartiallyInvoices] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] ADD [PurchaseInvoice] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] ADD [SaleInvoice] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-29T05:52:55.9062319Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211029055257_PartiallyPaidEnumInPurchaseAndSale', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [InventoryBlinds] ADD [IsCounted] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-10-29T08:11:30.5353447Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211029081132_isCountedAddedInBlindInventory', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [CashVouchers] (
     [Id] uniqueidentifier NOT NULL,
@@ -6114,28 +6114,28 @@ CREATE TABLE [CashVouchers] (
     CONSTRAINT [FK_CashVouchers_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211101112808_cash-voucher-table', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [CashVoucher] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-02T10:26:21.2332662Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211102102623_cash-voucher-in-company', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var30 sysname;
 SELECT @var30 = [d].[name]
@@ -6145,7 +6145,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[PaymentVouchers]') AND [c].[name] =
 IF @var30 IS NOT NULL EXEC(N'ALTER TABLE [PaymentVouchers] DROP CONSTRAINT [' + @var30 + '];');
 ALTER TABLE [PaymentVouchers] ALTER COLUMN [Narration] nvarchar(200) NULL;
 
-GO
+
 
 DECLARE @var31 sysname;
 SELECT @var31 = [d].[name]
@@ -6155,47 +6155,47 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[PaymentVoucherDetails]') AND [c].[n
 IF @var31 IS NOT NULL EXEC(N'ALTER TABLE [PaymentVoucherDetails] DROP CONSTRAINT [' + @var31 + '];');
 ALTER TABLE [PaymentVoucherDetails] ALTER COLUMN [Description] nvarchar(200) NULL;
 
-GO
+
 
 ALTER TABLE [CompanyAccountSetups] ADD [AutoSync] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [CompanyAccountSetups] ADD [AutoSyncInterval] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-02T22:18:31.9372407Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211102221834_add-autosync', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] DROP CONSTRAINT [FK_PaymentVoucherDetails_Accounts_ContactAccountId];
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] DROP CONSTRAINT [FK_PaymentVoucherDetails_PaymentVouchers_PaymentVoucherId];
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] DROP CONSTRAINT [FK_PaymentVouchers_Accounts_BankCashAccountId];
 
-GO
+
 
 DROP INDEX [IX_PaymentVouchers_BankCashAccountId] ON [PaymentVouchers];
 
-GO
+
 
 DROP INDEX [IX_PaymentVoucherDetails_ContactAccountId] ON [PaymentVoucherDetails];
 
-GO
+
 
 DECLARE @var32 sysname;
 SELECT @var32 = [d].[name]
@@ -6205,7 +6205,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[PaymentVouchers]') AND [c].[name] =
 IF @var32 IS NOT NULL EXEC(N'ALTER TABLE [PaymentVouchers] DROP CONSTRAINT [' + @var32 + '];');
 ALTER TABLE [PaymentVouchers] DROP COLUMN [isDraft];
 
-GO
+
 
 DECLARE @var33 sysname;
 SELECT @var33 = [d].[name]
@@ -6215,166 +6215,166 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[PaymentVouchers]') AND [c].[name] =
 IF @var33 IS NOT NULL EXEC(N'ALTER TABLE [PaymentVouchers] DROP CONSTRAINT [' + @var33 + '];');
 ALTER TABLE [PaymentVouchers] ALTER COLUMN [Narration] nvarchar(500) NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [Amount] decimal(18,4) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [ApprovalStatus] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [ApprovedBy] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [ApprovedDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [ContactAccountId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [DraftBy] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [DraftDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [PurchaseInvoice] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [Reason] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [RejectBy] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [RejectDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [SaleInvoice] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [VoidBy] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [VoidDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] ADD [AccountId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-03T14:00:02.7627173Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE UNIQUE INDEX [IX_PaymentVouchers_BankCashAccountId] ON [PaymentVouchers] ([BankCashAccountId]);
 
-GO
+
 
 CREATE UNIQUE INDEX [IX_PaymentVouchers_ContactAccountId] ON [PaymentVouchers] ([ContactAccountId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentVoucherDetails_AccountId] ON [PaymentVoucherDetails] ([AccountId]);
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] ADD CONSTRAINT [FK_PaymentVoucherDetails_Accounts_AccountId] FOREIGN KEY ([AccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [PaymentVoucherDetails] ADD CONSTRAINT [FK_PaymentVoucherDetails_PaymentVouchers_PaymentVoucherId] FOREIGN KEY ([PaymentVoucherId]) REFERENCES [PaymentVouchers] ([Id]) ON DELETE CASCADE;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD CONSTRAINT [FK_PaymentVouchers_Accounts_BankCashAccountId] FOREIGN KEY ([BankCashAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD CONSTRAINT [FK_PaymentVouchers_Accounts_ContactAccountId] FOREIGN KEY ([ContactAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211103140005_PaymentVoucherSingleEntrySystem', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [ReturnDays] decimal(18,2) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-04T05:41:59.0771458Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211104054201_salereturn-days-in-print-setting', N'2.2.6-servicing-10079');
 
-GO
+
 
 DROP INDEX [IX_PaymentVouchers_BankCashAccountId] ON [PaymentVouchers];
 
-GO
+
 
 DROP INDEX [IX_PaymentVouchers_ContactAccountId] ON [PaymentVouchers];
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [PettyCash] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-04T11:38:16.9366845Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_PaymentVouchers_BankCashAccountId] ON [PaymentVouchers] ([BankCashAccountId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentVouchers_ContactAccountId] ON [PaymentVouchers] ([ContactAccountId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211104113818_paymentVoucherRelationwithAccountChanging', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-08T07:57:21.4378154Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (334, N'Petty Cash', N'Can View Petty Cash as Draft', 2),
 (335, N'Petty Cash', N'Can Save Petty Cash as Post', 2),
 (336, N'Petty Cash', N'Can Edit  Petty Cash as Post', 2),
@@ -6429,190 +6429,190 @@ VALUES (334, N'Petty Cash', N'Can View Petty Cash as Draft', 2),
 (329, N'Opening Cash', N'Can View Opening Cash as Post', 2),
 (343, N'Bank Receipt', N'Can Reject Bank Receipt', 2),
 (372, N'System', N'Push Record of Database', 13);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211108075723_PermissionOnForms', N'2.2.6-servicing-10079');
 
-GO
 
-ALTER TABLE [Categories] ADD [IsReturn] bit NOT NULL DEFAULT 0;
 
-GO
+ALTER TABLE [Cateries] ADD [IsReturn] bit NOT NULL DEFAULT 0;
 
-ALTER TABLE [Categories] ADD [ReturnDays] int NOT NULL DEFAULT 0;
 
-GO
 
-UPDATE [AccountTemplates] SET [JsonTemplate] = N'{"AccountsType":[{"Name":"Assets","IsActive":true,"CostCenters":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"101000","Accounts":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"10100001"}]},{"Name":"Cash in Hand - Store","Description":"Cash in Hand - Store","IsActive":true,"Code":"101001","Accounts":[{"Name":"Accounts receivable","Description":"Accounts receivable","IsActive":true,"Code":"10100101"}]},{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"111000","Accounts":[{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"11100001"}]},{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"120000","Accounts":[{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"1200001"}]},{"Name":"VAT Paid","Description":"VAT Paid","IsActive":true,"Code":"130000","Accounts":[{"Name":"VAT Paid on Purchases","Description":"VAT Paid on Purchases","IsActive":true,"Code":"1300001"}]},{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"105000","Accounts":[{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"10500001"}]},{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"170000","Accounts":[{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"17000001"}]},{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"150000","Accounts":[{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"1500001"}]},{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"126000","Accounts":[{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"12600001"}]}]},{"Name":"Liabilities","IsActive":true,"CostCenters":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"200000","Accounts":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"20000001"}]},{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"240000","Accounts":[{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"24000001"}]},{"Name":"VAT Payable","Description":"VAT Payable","IsActive":true,"Code":"250000","Accounts":[{"Name":"VAT Payable on Sale","Description":"VAT Payable on Sale","IsActive":true,"Code":"25000001"}]},{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"253001","Accounts":[{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"2530101"}]}]},{"Name":"Equity","IsActive":true,"CostCenters":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"300000","Accounts":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"30000001"}]},{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"301001","Accounts":[{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"30100101"}]},{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"302001","Accounts":[{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"30200101"}]},{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"320000","Accounts":[{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"32000001"}]},{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"321002","Accounts":[{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"32100201"}]}]},{"Name":"Income","IsActive":true,"CostCenters":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"420000","Accounts":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"42000001"}]},{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"421000","Accounts":[{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"42100001"}]},{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"425000","Accounts":[{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"42500001"}]},{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"426000","Accounts":[{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"42600001"}]}]},{"Name":"Expenses","IsActive":true,"CostCenters":[{"Name":"Cost of Goods Sold","Description":"Cost of Goods Sold","IsActive":true,"Code":"600001","Accounts":[{"Name":"Cost of Goods Sold","Description":"Cost of Goods Sold","IsActive":true,"Code":"60000101"}]},{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"608001","Accounts":[{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"60800101"}]},{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"607001","Accounts":[{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"60700101"}]},{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"606001","Accounts":[{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"60600101"}]},{"Name":"General Expenses","Description":"General Expenses","IsActive":true,"Code":"605050","Accounts":[{"Name":"General Expenses","Description":"General Expenses","IsActive":true,"Code":"60505001"}]},{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"603001","Accounts":[{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"60300101"}]},{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"604001","Accounts":[{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"60400101"}]},{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"604050","Accounts":[{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"60405001"}]},{"Name":"Legal Expenses","Description":"Legal Expenses","IsActive":true,"Code":"605001","Accounts":[{"Name":"Legal Expenses","Description":"Legal Expenses","IsActive":true,"Code":"60500101"}]}]}]}'
+ALTER TABLE [Cateries] ADD [ReturnDays] int NOT NULL DEFAULT 0;
+
+
+
+UPDATE [AccountTemplates] SET [JsonTemplate] = N'{"AccountsType":[{"Name":"Assets","IsActive":true,"CostCenters":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"101000","Accounts":[{"Name":"Cash in Hand","Description":"Cash in Hand","IsActive":true,"Code":"10100001"}]},{"Name":"Cash in Hand - Store","Description":"Cash in Hand - Store","IsActive":true,"Code":"101001","Accounts":[{"Name":"Accounts receivable","Description":"Accounts receivable","IsActive":true,"Code":"10100101"}]},{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"111000","Accounts":[{"Name":"Inventory","Description":"Inventory","IsActive":true,"Code":"11100001"}]},{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"120000","Accounts":[{"Name":"Customer Reciveables","Description":"Customer Reciveables","IsActive":true,"Code":"1200001"}]},{"Name":"VAT Paid","Description":"VAT Paid","IsActive":true,"Code":"130000","Accounts":[{"Name":"VAT Paid on Purchases","Description":"VAT Paid on Purchases","IsActive":true,"Code":"1300001"}]},{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"105000","Accounts":[{"Name":"Banks","Description":"Banks","IsActive":true,"Code":"10500001"}]},{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"170000","Accounts":[{"Name":"Accumulated Depreciation","Description":"Accumulated Depreciation","IsActive":true,"Code":"17000001"}]},{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"150000","Accounts":[{"Name":"Fixed Assets","Description":"Fixed Assets","IsActive":true,"Code":"1500001"}]},{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"126000","Accounts":[{"Name":"Due from Employee","Description":"Due from Employee","IsActive":true,"Code":"12600001"}]}]},{"Name":"Liabilities","IsActive":true,"CostCenters":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"200000","Accounts":[{"Name":"Supplier Payable","Description":"Supplier Payable","IsActive":true,"Code":"20000001"}]},{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"240000","Accounts":[{"Name":"Payroll Liabilities","Description":"Payroll Liabilities","IsActive":true,"Code":"24000001"}]},{"Name":"VAT Payable","Description":"VAT Payable","IsActive":true,"Code":"250000","Accounts":[{"Name":"VAT Payable on Sale","Description":"VAT Payable on Sale","IsActive":true,"Code":"25000001"}]},{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"253001","Accounts":[{"Name":"Loan Payable","Description":"Loan Payable","IsActive":true,"Code":"2530101"}]}]},{"Name":"Equity","IsActive":true,"CostCenters":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"300000","Accounts":[{"Name":"Opening Balance Equity","Description":"Opening Balance Equity","IsActive":true,"Code":"30000001"}]},{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"301001","Accounts":[{"Name":"Owner Investment","Description":"Owner Investment","IsActive":true,"Code":"30100101"}]},{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"302001","Accounts":[{"Name":"Owner Withdrawals","Description":"Owner Withdrawals","IsActive":true,"Code":"30200101"}]},{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"320000","Accounts":[{"Name":"Retained Earnings","Description":"Retained Earnings","IsActive":true,"Code":"32000001"}]},{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"321002","Accounts":[{"Name":"Net Profit for the period","Description":"Net Profit for the period","IsActive":true,"Code":"32100201"}]}]},{"Name":"Income","IsActive":true,"CostCenters":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"420000","Accounts":[{"Name":"Sale","Description":"Sale","IsActive":true,"Code":"42000001"}]},{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"421000","Accounts":[{"Name":"Teller","Description":"Teller","IsActive":true,"Code":"42100001"}]},{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"425000","Accounts":[{"Name":"POS-Terminal","Description":"POS-Terminal","IsActive":true,"Code":"42500001"}]},{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"426000","Accounts":[{"Name":"Discount Taken","Description":"Discount Taken","IsActive":true,"Code":"42600001"}]}]},{"Name":"Expenses","IsActive":true,"CostCenters":[{"Name":"Cost of ods Sold","Description":"Cost of ods Sold","IsActive":true,"Code":"600001","Accounts":[{"Name":"Cost of ods Sold","Description":"Cost of ods Sold","IsActive":true,"Code":"60000101"}]},{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"608001","Accounts":[{"Name":"Freight Paid","Description":"Freight Paid","IsActive":true,"Code":"60800101"}]},{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"607001","Accounts":[{"Name":"Discount Given","Description":"Discount Given","IsActive":true,"Code":"60700101"}]},{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"606001","Accounts":[{"Name":"Depreciation Expense","Description":"Depreciation Expense","IsActive":true,"Code":"60600101"}]},{"Name":"General Expenses","Description":"General Expenses","IsActive":true,"Code":"605050","Accounts":[{"Name":"General Expenses","Description":"General Expenses","IsActive":true,"Code":"60505001"}]},{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"603001","Accounts":[{"Name":"Payroll","Description":"Payroll","IsActive":true,"Code":"60300101"}]},{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"604001","Accounts":[{"Name":"Utilities","Description":"Utilities","IsActive":true,"Code":"60400101"}]},{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"604050","Accounts":[{"Name":"Rent","Description":"Rent","IsActive":true,"Code":"60405001"}]},{"Name":"Legal Expenses","Description":"Legal Expenses","IsActive":true,"Code":"605001","Accounts":[{"Name":"Legal Expenses","Description":"Legal Expenses","IsActive":true,"Code":"60500101"}]}]}]}'
 WHERE [Id] = 'ecfe29c8-c6af-4a3d-9c24-f87b30bf831c';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-08T13:17:06.0891730Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20211108131708_ReturnDaysInCategory', N'2.2.6-servicing-10079');
+VALUES (N'20211108131708_ReturnDaysInCatery', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Terminals] ADD [CashAccountId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [BankAccountId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [CashAccountId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [IsOpenDay] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [IsTransferAllow] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-09T08:32:12.6409591Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_Terminals_CashAccountId] ON [Terminals] ([CashAccountId]);
 
-GO
+
 
 CREATE INDEX [IX_PrintSettings_BankAccountId] ON [PrintSettings] ([BankAccountId]);
 
-GO
+
 
 CREATE INDEX [IX_PrintSettings_CashAccountId] ON [PrintSettings] ([CashAccountId]);
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD CONSTRAINT [FK_PrintSettings_Accounts_BankAccountId] FOREIGN KEY ([BankAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD CONSTRAINT [FK_PrintSettings_Accounts_CashAccountId] FOREIGN KEY ([CashAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [Terminals] ADD CONSTRAINT [FK_Terminals_Accounts_CashAccountId] FOREIGN KEY ([CashAccountId]) REFERENCES [Accounts] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211109083214_forDayStartChanging', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [LoginPermissions] ADD [IsSupervisor] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [CreditReason] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [DayStartId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [EndTime] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [IsDayStart] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [Password] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [StartBy] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [StartFor] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [StartTime] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [SupervisorPassword] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [SupervisorUserName] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [TerminalId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [TransferFrom] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [TransferTo] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [UserName] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-10T06:58:42.6288192Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211110065844_dayStarChanging', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [ExpenseCash] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [SupervisorCash] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-10T13:27:32.8176346Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211110132734_ExpenseAndSupplierCashInDayStart', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var34 sysname;
 SELECT @var34 = [d].[name]
@@ -6622,7 +6622,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DayStarts]') AND [c].[name] = N'End
 IF @var34 IS NOT NULL EXEC(N'ALTER TABLE [DayStarts] DROP CONSTRAINT [' + @var34 + '];');
 ALTER TABLE [DayStarts] DROP COLUMN [EndTime];
 
-GO
+
 
 DECLARE @var35 sysname;
 SELECT @var35 = [d].[name]
@@ -6632,7 +6632,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DayStarts]') AND [c].[name] = N'Pas
 IF @var35 IS NOT NULL EXEC(N'ALTER TABLE [DayStarts] DROP CONSTRAINT [' + @var35 + '];');
 ALTER TABLE [DayStarts] DROP COLUMN [Password];
 
-GO
+
 
 DECLARE @var36 sysname;
 SELECT @var36 = [d].[name]
@@ -6642,7 +6642,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DayStarts]') AND [c].[name] = N'Sta
 IF @var36 IS NOT NULL EXEC(N'ALTER TABLE [DayStarts] DROP CONSTRAINT [' + @var36 + '];');
 ALTER TABLE [DayStarts] DROP COLUMN [StartBy];
 
-GO
+
 
 DECLARE @var37 sysname;
 SELECT @var37 = [d].[name]
@@ -6652,7 +6652,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DayStarts]') AND [c].[name] = N'Sta
 IF @var37 IS NOT NULL EXEC(N'ALTER TABLE [DayStarts] DROP CONSTRAINT [' + @var37 + '];');
 ALTER TABLE [DayStarts] DROP COLUMN [StartFor];
 
-GO
+
 
 DECLARE @var38 sysname;
 SELECT @var38 = [d].[name]
@@ -6662,7 +6662,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DayStarts]') AND [c].[name] = N'Sta
 IF @var38 IS NOT NULL EXEC(N'ALTER TABLE [DayStarts] DROP CONSTRAINT [' + @var38 + '];');
 ALTER TABLE [DayStarts] DROP COLUMN [StartTime];
 
-GO
+
 
 DECLARE @var39 sysname;
 SELECT @var39 = [d].[name]
@@ -6672,35 +6672,35 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[DayStarts]') AND [c].[name] = N'Ter
 IF @var39 IS NOT NULL EXEC(N'ALTER TABLE [DayStarts] DROP CONSTRAINT [' + @var39 + '];');
 ALTER TABLE [DayStarts] DROP COLUMN [TerminalId];
 
-GO
+
 
 EXEC sp_rename N'[DayStarts].[UserName]', N'StartTerminalFor', N'COLUMN';
 
-GO
+
 
 EXEC sp_rename N'[DayStarts].[TransferTo]', N'StartTerminalBy', N'COLUMN';
 
-GO
+
 
 EXEC sp_rename N'[DayStarts].[TransferFrom]', N'EndTerminalFor', N'COLUMN';
 
-GO
+
 
 EXEC sp_rename N'[DayStarts].[SupervisorUserName]', N'EndTerminalBy', N'COLUMN';
 
-GO
+
 
 EXEC sp_rename N'[DayStarts].[SupervisorPassword]', N'DuringSaleCloseReason', N'COLUMN';
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [DuringSaleClose] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [TotalCash] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 CREATE TABLE [TransferHistories] (
     [Id] uniqueidentifier NOT NULL,
@@ -6733,135 +6733,135 @@ CREATE TABLE [TransferHistories] (
     CONSTRAINT [FK_TransferHistories_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-11T07:57:08.8683770Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_TransferHistories_CompanyId] ON [TransferHistories] ([CompanyId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211111075710_addTransferHistory', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [BankAmount] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [NoOfTransaction] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-11T10:50:32.7284814Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211111105034_addBankAmountAndTotalTransaction', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SalePayments] ADD [BusinessId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [SalePayments] ADD [ClientId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [SalePayments] ADD [CounterId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [SalePayments] ADD [DayId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [SalePayments] ADD [UserId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-11T16:32:18.1919878Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211111163220_addCounterId', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [TransferHistories] ADD [BankAmount] decimal(18,2) NOT NULL DEFAULT 0.0;
 
-GO
+
 
 ALTER TABLE [TransferHistories] ADD [NoOfTransaction] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-12T09:38:26.8040010Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211112093828_addbankAccountinTranseferHistory', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [DayStarts] ADD [SuperVisorName] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-17T13:17:53.6875501Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211117131755_SuperVisorNameInDayStart', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [BarCode] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [PrintTemplate] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-18T09:00:58.9134046Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211118090100_invoice-template-and-InvoicebarCode', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Terminals] ADD [PosTerminalId] uniqueidentifier NULL;
 
-GO
+
 
 CREATE TABLE [BankPosTerminals] (
     [Id] uniqueidentifier NOT NULL,
@@ -6878,83 +6878,83 @@ CREATE TABLE [BankPosTerminals] (
     CONSTRAINT [FK_BankPosTerminals_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-18T10:32:01.0031476Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_Terminals_PosTerminalId] ON [Terminals] ([PosTerminalId]);
 
-GO
+
 
 CREATE INDEX [IX_BankPosTerminals_BankId] ON [BankPosTerminals] ([BankId]);
 
-GO
+
 
 CREATE INDEX [IX_BankPosTerminals_CompanyId] ON [BankPosTerminals] ([CompanyId]);
 
-GO
+
 
 ALTER TABLE [Terminals] ADD CONSTRAINT [FK_Terminals_BankPosTerminals_PosTerminalId] FOREIGN KEY ([PosTerminalId]) REFERENCES [BankPosTerminals] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211118103203_BankPosTerminal', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [BankPosTerminals] DROP CONSTRAINT [FK_BankPosTerminals_Banks_BankId];
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-18T12:23:51.2546537Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 ALTER TABLE [BankPosTerminals] ADD CONSTRAINT [FK_BankPosTerminals_Accounts_BankId] FOREIGN KEY ([BankId]) REFERENCES [Accounts] ([Id]) ON DELETE CASCADE;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211118122353_AccountRelationWithPOSBank', N'2.2.6-servicing-10079');
 
-GO
+
 
 EXEC sp_rename N'[Banks].[Currency]', N'SwiftCode', N'COLUMN';
 
-GO
+
 
 ALTER TABLE [Products] ADD [ProductMasterId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [Companies] ADD [MasterProduct] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Banks] ADD [AccoutNameArabic] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Banks] ADD [BranchAddress] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Banks] ADD [BranchCode] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [Banks] ADD [CurrencyId] uniqueidentifier NULL;
 
-GO
+
 
 CREATE TABLE [ProductMasters] (
     [Id] uniqueidentifier NOT NULL,
@@ -6972,132 +6972,132 @@ CREATE TABLE [ProductMasters] (
     CONSTRAINT [FK_ProductMasters_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-22T09:04:34.6055071Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES (376, N'Super Product', N'Can Save Super Product', 6),
 (377, N'Super Product', N'Can Edit Super Product', 6),
 (378, N'Super Product', N'Can Delete Super Product', 6),
 (379, N'Super Product', N'Can View  Super Product', 6);
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 CREATE INDEX [IX_Products_ProductMasterId] ON [Products] ([ProductMasterId]);
 
-GO
+
 
 CREATE INDEX [IX_Banks_CurrencyId] ON [Banks] ([CurrencyId]);
 
-GO
+
 
 CREATE INDEX [IX_ProductMasters_CompanyId] ON [ProductMasters] ([CompanyId]);
 
-GO
+
 
 ALTER TABLE [Banks] ADD CONSTRAINT [FK_Banks_Currencies_CurrencyId] FOREIGN KEY ([CurrencyId]) REFERENCES [Currencies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 ALTER TABLE [Products] ADD CONSTRAINT [FK_Products_ProductMasters_ProductMasterId] FOREIGN KEY ([ProductMasterId]) REFERENCES [ProductMasters] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211122090437_ProductMaster', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [PrinterName] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-22T12:07:54.7590742Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211122120756_PrinterNameInPrintSetting', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [Image] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [PaymentMethod] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PaymentVouchers] ADD [PaymentMode] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [JournalVoucherItems] ADD [ChequeNo] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [JournalVoucherItems] ADD [ChequeNumber] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [JournalVoucherItems] ADD [PaymentMethod] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [JournalVoucherItems] ADD [PaymentMode] int NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-22T13:04:06.0373355Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211122130408_PaymentVoucherCustomerAndSupplierChanging', N'2.2.6-servicing-10079');
 
-GO
+
 
 DROP TABLE [NobleRolePermissions];
 
-GO
+
 
 DROP TABLE [CompanyPermissions];
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-22T20:12:25.5264378Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211122201229_remoove-CompanyPermission-NobleRolePermission', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [CompanyPermissions] (
     [Id] uniqueidentifier NOT NULL,
     [Description] nvarchar(max) NULL,
-    [Category] nvarchar(max) NULL,
+    [Catery] nvarchar(max) NULL,
     [NobleModuleId] int NOT NULL,
     [BusinessType] int NOT NULL,
     [CompanyId] uniqueidentifier NOT NULL,
@@ -7110,7 +7110,7 @@ CREATE TABLE [CompanyPermissions] (
     CONSTRAINT [FK_CompanyPermissions_NobleModules_NobleModuleId] FOREIGN KEY ([NobleModuleId]) REFERENCES [NobleModules] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [NobleRolePermissions] (
     [Id] uniqueidentifier NOT NULL,
@@ -7128,39 +7128,39 @@ CREATE TABLE [NobleRolePermissions] (
     CONSTRAINT [FK_NobleRolePermissions_NobleRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [NobleRoles] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-22T20:38:49.1499363Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_CompanyPermissions_CompanyId] ON [CompanyPermissions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_CompanyPermissions_NobleModuleId] ON [CompanyPermissions] ([NobleModuleId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_CompanyId] ON [NobleRolePermissions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_PermissionId] ON [NobleRolePermissions] ([PermissionId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_RoleId] ON [NobleRolePermissions] ([RoleId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211122203857_Add-CompanyPermission-NobleRolePermission', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var40 sysname;
 SELECT @var40 = [d].[name]
@@ -7170,7 +7170,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[PaymentVouchers]') AND [c].[name] =
 IF @var40 IS NOT NULL EXEC(N'ALTER TABLE [PaymentVouchers] DROP CONSTRAINT [' + @var40 + '];');
 ALTER TABLE [PaymentVouchers] DROP COLUMN [Image];
 
-GO
+
 
 CREATE TABLE [PaymentVoucherAttachments] (
     [Id] uniqueidentifier NOT NULL,
@@ -7185,71 +7185,71 @@ CREATE TABLE [PaymentVoucherAttachments] (
     CONSTRAINT [FK_PaymentVoucherAttachments_PaymentVouchers_PaymentVoucherId] FOREIGN KEY ([PaymentVoucherId]) REFERENCES [PaymentVouchers] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-23T05:33:16.8229225Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_PaymentVoucherAttachments_CompanyId] ON [PaymentVoucherAttachments] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PaymentVoucherAttachments_PaymentVoucherId] ON [PaymentVoucherAttachments] ([PaymentVoucherId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211123053319_AttachmENTInPaymentVoucher', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [IsHeaderFooter] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-23T10:33:13.9327012Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211123103315_header-footer-invoice', N'2.2.6-servicing-10079');
 
-GO
+
 
 DROP TABLE [NoblePermissions];
 
-GO
+
 
 DROP TABLE [NobleRolePermissions];
 
-GO
+
 
 DROP TABLE [CompanyPermissions];
 
-GO
+
 
 DROP TABLE [NobleModules];
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-24T07:21:35.8810786Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211124072138_moduleandNoblePermission1', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [NobleModules] (
     [Id] uniqueidentifier NOT NULL,
@@ -7260,12 +7260,12 @@ CREATE TABLE [NobleModules] (
     CONSTRAINT [PK_NobleModules] PRIMARY KEY ([Id])
 );
 
-GO
+
 
 CREATE TABLE [CompanyPermissions] (
     [Id] uniqueidentifier NOT NULL,
     [Description] nvarchar(max) NULL,
-    [Category] nvarchar(max) NULL,
+    [Catery] nvarchar(max) NULL,
     [NobleModuleId] uniqueidentifier NOT NULL,
     [BusinessType] int NOT NULL,
     [CompanyId] uniqueidentifier NOT NULL,
@@ -7278,18 +7278,18 @@ CREATE TABLE [CompanyPermissions] (
     CONSTRAINT [FK_CompanyPermissions_NobleModules_NobleModuleId] FOREIGN KEY ([NobleModuleId]) REFERENCES [NobleModules] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [NoblePermissions] (
     [Id] uniqueidentifier NOT NULL,
     [Description] nvarchar(max) NULL,
-    [Category] nvarchar(max) NULL,
+    [Catery] nvarchar(max) NULL,
     [NobleModuleId] uniqueidentifier NOT NULL,
     CONSTRAINT [PK_NoblePermissions] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_NoblePermissions_NobleModules_NobleModuleId] FOREIGN KEY ([NobleModuleId]) REFERENCES [NobleModules] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 CREATE TABLE [NobleRolePermissions] (
     [Id] uniqueidentifier NOT NULL,
@@ -7307,43 +7307,43 @@ CREATE TABLE [NobleRolePermissions] (
     CONSTRAINT [FK_NobleRolePermissions_NobleRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [NobleRoles] ([Id]) ON DELETE CASCADE
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-24T07:32:23.9776054Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_CompanyPermissions_CompanyId] ON [CompanyPermissions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_CompanyPermissions_NobleModuleId] ON [CompanyPermissions] ([NobleModuleId]);
 
-GO
+
 
 CREATE INDEX [IX_NoblePermissions_NobleModuleId] ON [NoblePermissions] ([NobleModuleId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_CompanyId] ON [NobleRolePermissions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_PermissionId] ON [NobleRolePermissions] ([PermissionId]);
 
-GO
+
 
 CREATE INDEX [IX_NobleRolePermissions_RoleId] ON [NobleRolePermissions] ([RoleId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211124073226_changeinttoguid', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var41 sysname;
 SELECT @var41 = [d].[name]
@@ -7353,7 +7353,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[PurchasePostItems]') AND [c].[name]
 IF @var41 IS NOT NULL EXEC(N'ALTER TABLE [PurchasePostItems] DROP CONSTRAINT [' + @var41 + '];');
 ALTER TABLE [PurchasePostItems] ALTER COLUMN [Discount] decimal(18,2) NOT NULL;
 
-GO
+
 
 DECLARE @var42 sysname;
 SELECT @var42 = [d].[name]
@@ -7363,7 +7363,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[PurchaseItems]') AND [c].[name] = N
 IF @var42 IS NOT NULL EXEC(N'ALTER TABLE [PurchaseItems] DROP CONSTRAINT [' + @var42 + '];');
 ALTER TABLE [PurchaseItems] ALTER COLUMN [Discount] decimal(18,2) NOT NULL;
 
-GO
+
 
 DECLARE @var43 sysname;
 SELECT @var43 = [d].[name]
@@ -7373,50 +7373,50 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Accounts]') AND [c].[name] = N'Name
 IF @var43 IS NOT NULL EXEC(N'ALTER TABLE [Accounts] DROP CONSTRAINT [' + @var43 + '];');
 ALTER TABLE [Accounts] ALTER COLUMN [Name] nvarchar(100) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-24T11:42:13.8199555Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211124114216_ChangingInQuantityToIntAndDiscountToDecimal', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [SaleOrderId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-24T13:18:50.0541623Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_Sales_SaleOrderId] ON [Sales] ([SaleOrderId]);
 
-GO
+
 
 ALTER TABLE [Sales] ADD CONSTRAINT [FK_Sales_SaleOrders_SaleOrderId] FOREIGN KEY ([SaleOrderId]) REFERENCES [SaleOrders] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211124131852_saleorder-relation-to-saleInvoive', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-24T14:15:35.0904117Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ArabicName', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] ON;
@@ -7436,11 +7436,11 @@ VALUES ('f172d244-fef6-4cb0-826e-55778f3e196f', NULL, 0, N'Setup Form', N'Setup 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ArabicName', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] OFF;
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES ('91b7b87b-9c39-49c4-89b9-19c52cfcc592', N'Brand', N'Can Save Brand', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('cc65a663-483f-4bd3-855f-65ea1d7c8f75', N'Bundles', N'Can Edit Bundles', 'ca3978f8-9aa3-49a3-95da-7bb35be89289'),
 ('e646c347-d3d1-41d5-88db-2cd5f672b6a5', N'Bundles', N'Can Save Bundles', 'ca3978f8-9aa3-49a3-95da-7bb35be89289'),
@@ -7636,10 +7636,10 @@ VALUES ('91b7b87b-9c39-49c4-89b9-19c52cfcc592', N'Brand', N'Can Save Brand', 'f1
 ('53805cd0-480d-49e3-a792-040611c2776f', N'Color', N'Can Delete Color', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('b11a0c0c-934c-4e0b-b652-932c8c507c1f', N'Color', N'Can Edit Color', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('df168358-99a7-41cf-bc2d-32dcd6b62d03', N'Color', N'Can Save Color', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('669ed81d-96bc-4ed6-a3e5-0f3f01954114', N'Category', N'Can View Category', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('4ad20abc-4e2d-4cdf-a70d-863ae4ee5588', N'Category', N'Can Delete Category', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('06bff7fc-ecca-4305-886e-3d7aa5246bea', N'Category', N'Can Edit Category', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('079f4f75-7b77-4339-bc73-fc3e40e36c8d', N'Category', N'Can Save Category', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('669ed81d-96bc-4ed6-a3e5-0f3f01954114', N'Catery', N'Can View Catery', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('4ad20abc-4e2d-4cdf-a70d-863ae4ee5588', N'Catery', N'Can Delete Catery', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('06bff7fc-ecca-4305-886e-3d7aa5246bea', N'Catery', N'Can Edit Catery', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('079f4f75-7b77-4339-bc73-fc3e40e36c8d', N'Catery', N'Can Save Catery', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('f161d9bd-7db7-467e-a86d-7eb812bead04', N'BarCode Printing', N'Can View BarCode Printing', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('f1e667a4-b7d4-4105-a232-eac63c804ccd', N'BarCode Printing', N'Can Delete BarCode Printing', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('6e045010-76d2-4261-8c0b-378d5252af49', N'BarCode Printing', N'Can Edit BarCode Printing', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
@@ -7662,10 +7662,10 @@ VALUES ('91b7b87b-9c39-49c4-89b9-19c52cfcc592', N'Brand', N'Can Save Brand', 'f1
 ('6c5a8310-4508-48da-9228-c81da9b4f84a', N'Tax Rate', N'Can Delete Tax Rate', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('2a2a3400-d8e4-4d85-83e8-adfa8d3e6428', N'Tax Rate', N'Can Edit Tax Rate', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('3aecc007-62cc-4657-9cff-f26e6d91d3f4', N'Tax Rate', N'Can Save Tax Rate', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('c6c23136-17b8-4787-8f96-563389a204ab', N'SubCategories', N'Can View SubCategories', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('7e04d43e-aa36-404c-9633-288da5ae072e', N'SubCategories', N'Can Delete SubCategories', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('977102ef-9524-4ab8-a163-1fe4672348a8', N'SubCategories', N'Can Edit SubCategories', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('e72be317-8c29-4487-9382-a0cca1aed819', N'SubCategories', N'Can Save SubCategories', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('c6c23136-17b8-4787-8f96-563389a204ab', N'SubCateries', N'Can View SubCateries', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('7e04d43e-aa36-404c-9633-288da5ae072e', N'SubCateries', N'Can Delete SubCateries', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('977102ef-9524-4ab8-a163-1fe4672348a8', N'SubCateries', N'Can Edit SubCateries', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('e72be317-8c29-4487-9382-a0cca1aed819', N'SubCateries', N'Can Save SubCateries', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('e14bc4e1-8d09-4a3e-8550-04bcc331af1c', N'Origin', N'Can Delete Origin', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('091991aa-37ce-467a-9ef4-e9358a201d2a', N'Stock Out', N'Can Delete Stock Out as Draft', '7600596a-7cad-4514-91f3-21fe30628593'),
 ('d5565381-58f5-4c97-975e-3d7cd44e7c0b', N'Bank', N'Can Delete Bank', '29aac720-971b-43ef-9f02-9c60cd4e168b'),
@@ -7744,78 +7744,78 @@ VALUES ('91b7b87b-9c39-49c4-89b9-19c52cfcc592', N'Brand', N'Can Save Brand', 'f1
 ('272e9227-35f4-47bc-9566-c2eec585e66b', N'Bank Pay', N'Can Save Bank Pay  as Post', '29aac720-971b-43ef-9f02-9c60cd4e168b'),
 ('5e489851-97b6-4c42-be7d-4aff035e17aa', N'Bank Pay', N'Can Delete Bank Pay as Draft', '29aac720-971b-43ef-9f02-9c60cd4e168b'),
 ('3f674de2-d92a-4633-9d76-b48d6dfc4612', N'System', N'Can Change Invoice Setting', '0a00c448-c2ba-4ee4-972d-9352bc6175b8');
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211124141537_Addsetupdata1', N'2.2.6-servicing-10079');
 
-GO
 
-UPDATE [AccountTemplates] SET [JsonTemplate] = N'{"AccountsType":[{"Name":"Assets","NameArabic":"الاساس","IsActive":true,"CostCenters":[{"Name":"Cash in Hand","NameArabic":"صندوق","Description":"Cash in Hand","IsActive":true,"Code":"101000","Accounts":[{"Name":"Cash in Hand","NameArabic":"صندوق","Description":"Cash in Hand","IsActive":true,"Code":"10100001"}]},{"Name":"Cash in Hand - Store","NameArabic":"صندوق المستودع","Description":"Cash in Hand - Store","IsActive":true,"Code":"101001","Accounts":[{"Name":"Accounts receivable","NameArabic":"الحسبات المستحقه","Description":"Accounts receivable","IsActive":true,"Code":"10100101"}]},{"Name":"Inventory","NameArabic":"المخزون","Description":"Inventory","IsActive":true,"Code":"111000","Accounts":[{"Name":"Inventory","NameArabic":"المخزون","Description":"Inventory","IsActive":true,"Code":"11100001"}]},{"Name":"Customer Reciveables","NameArabic":"مستحقات العملاء","Description":"Customer Reciveables","IsActive":true,"Code":"120000","Accounts":[{"Name":"Customer Reciveables","NameArabic":"مستحقات العملاء","Description":"Customer Reciveables","IsActive":true,"Code":"1200001"}]},{"Name":"VAT Paid","NameArabic":"مدفوعات القيمه المضافه","Description":"VAT Paid","IsActive":true,"Code":"130000","Accounts":[{"Name":"VAT Paid on Purchases","NameArabic":"","Description":"VAT Paid on Purchases","IsActive":true,"Code":"1300001"}]},{"Name":"Banks","NameArabic":"البنوك","Description":"Banks","IsActive":true,"Code":"105000","Accounts":[{"Name":"Banks","NameArabic":"البنوك","Description":"Banks","IsActive":true,"Code":"10500001"}]},{"Name":"Accumulated Depreciation","NameArabic":"الاستهلاك التراكمي","Description":"Accumulated Depreciation","IsActive":true,"Code":"170000","Accounts":[{"Name":"Accumulated Depreciation","NameArabic":"الاستهلاك التراكمي","Description":"Accumulated Depreciation","IsActive":true,"Code":"17000001"}]},{"Name":"Fixed Assets","NameArabic":"الاساس الثابت","Description":"Fixed Assets","IsActive":true,"Code":"150000","Accounts":[{"Name":"Fixed Assets","NameArabic":"الاساس الثابت","Description":"Fixed Assets","IsActive":true,"Code":"1500001"}]},{"Name":"Due from Employee","NameArabic":"مديونات الموظف","Description":"Due from Employee","IsActive":true,"Code":"126000","Accounts":[{"Name":"Due from Employee","NameArabic":"مديونات الموظف","Description":"Due from Employee","IsActive":true,"Code":"12600001"}]}]},{"Name":"Liabilities","NameArabic":"التزامات","IsActive":true,"CostCenters":[{"Name":"Supplier Payable","NameArabic":"مدفوعات الموردين","Description":"Supplier Payable","IsActive":true,"Code":"200000","Accounts":[{"Name":"Supplier Payable","NameArabic":"مدفوعات الموردين","Description":"Supplier Payable","IsActive":true,"Code":"20000001"}]},{"Name":"Payroll Liabilities","NameArabic":"مدفوعات الرواتب","Description":"Payroll Liabilities","IsActive":true,"Code":"240000","Accounts":[{"Name":"Payroll Liabilities","NameArabic":"مدفوعات الرواتب","Description":"Payroll Liabilities","IsActive":true,"Code":"24000001"}]},{"Name":"VAT Payable","NameArabic":"مدفوعات الضريبه","Description":"VAT Payable","IsActive":true,"Code":"250000","Accounts":[{"Name":"VAT Payable on Sale","NameArabic":"مدفوعات الضريبه","Description":"VAT Payable on Sale","IsActive":true,"Code":"25000001"}]},{"Name":"Loan Payable","NameArabic":"قرض مستحق الدفع","Description":"Loan Payable","IsActive":true,"Code":"253001","Accounts":[{"Name":"Loan Payable","NameArabic":"قرض مستحق الدفع","Description":"Loan Payable","IsActive":true,"Code":"2530101"}]}]},{"Name":"Equity","NameArabic":"رأس المال","IsActive":true,"CostCenters":[{"Name":"Opening Balance Equity","NameArabic":"الرصيد الافتتاحي","Description":"Opening Balance Equity","IsActive":true,"Code":"300000","Accounts":[{"Name":"Opening Balance Equity","NameArabic":"الرصيد الافتتاحي","Description":"Opening Balance Equity","IsActive":true,"Code":"30000001"}]},{"Name":"Owner Investment","NameArabic":"استثمار المالك ","Description":"Owner Investment","IsActive":true,"Code":"301001","Accounts":[{"Name":"Owner Investment","NameArabic":"استثمار المالك ","Description":"Owner Investment","IsActive":true,"Code":"30100101"}]},{"Name":"Owner Withdrawals","NameArabic":"انسحابات المالك ","Description":"Owner Withdrawals","IsActive":true,"Code":"302001","Accounts":[{"Name":"Owner Withdrawals","NameArabic":"انسحابات المالك ","Description":"Owner Withdrawals","IsActive":true,"Code":"30200101"}]},{"Name":"Retained Earnings","NameArabic":"الارباح","Description":"Retained Earnings","IsActive":true,"Code":"320000","Accounts":[{"Name":"Retained Earnings","NameArabic":"الارباح","Description":"Retained Earnings","IsActive":true,"Code":"32000001"}]},{"Name":"Net Profit for the period","NameArabic":"صافي الربح للفتره","Description":"Net Profit for the period","IsActive":true,"Code":"321002","Accounts":[{"Name":"Net Profit for the period","NameArabic":"صافي الربح للفتره","Description":"Net Profit for the period","IsActive":true,"Code":"32100201"}]}]},{"Name":"Income","NameArabic":"ايرادات","IsActive":true,"CostCenters":[{"Name":"Sale","NameArabic":"مبيعات","Description":"Sale","IsActive":true,"Code":"420000","Accounts":[{"Name":"Sale","NameArabic":"مبيعات","Description":"Sale","IsActive":true,"Code":"42000001"}]},{"Name":"Teller","NameArabic":"الصندوق","Description":"Teller","IsActive":true,"Code":"421000","Accounts":[{"Name":"Teller","NameArabic":"الصندوق","Description":"Teller","IsActive":true,"Code":"42100001"}]},{"Name":"POS-Terminal","NameArabic":"نقاط البيع - بنك","Description":"POS-Terminal","IsActive":true,"Code":"425000","Accounts":[{"Name":"POS-Terminal","NameArabic":"نقاط البيع - بنك","Description":"POS-Terminal","IsActive":true,"Code":"42500001"}]},{"Name":"Discount Taken","NameArabic":"الخصم المأخوذ","Description":"Discount Taken","IsActive":true,"Code":"426000","Accounts":[{"Name":"Discount Taken","NameArabic":"الخصم المأخوذ","Description":"Discount Taken","IsActive":true,"Code":"42600001"}]}]},{"Name":"Expenses","NameArabic":"المصاريف","IsActive":true,"CostCenters":[{"Name":"Cost of Goods Sold","NameArabic":"تكلفه البضاعه المباعه","Description":"Cost of Goods Sold","IsActive":true,"Code":"600001","Accounts":[{"Name":"Cost of Goods Sold","NameArabic":"تكلفه البضاعه المباعه","Description":"Cost of Goods Sold","IsActive":true,"Code":"60000101"}]},{"Name":"Freight Paid","NameArabic":"مدفوعات الشحن","Description":"Freight Paid","IsActive":true,"Code":"608001","Accounts":[{"Name":"Freight Paid","NameArabic":"مدفوعات الشحن","Description":"Freight Paid","IsActive":true,"Code":"60800101"}]},{"Name":"Discount Given","NameArabic":"الخصم المقدم","Description":"Discount Given","IsActive":true,"Code":"607001","Accounts":[{"Name":"Discount Given","NameArabic":"الخصم المقدم","Description":"Discount Given","IsActive":true,"Code":"60700101"}]},{"Name":"Depreciation Expense","NameArabic":"مصاريف الاستقدام","Description":"Depreciation Expense","IsActive":true,"Code":"606001","Accounts":[{"Name":"Depreciation Expense","NameArabic":"مصاريف الاستقدام","Description":"Depreciation Expense","IsActive":true,"Code":"60600101"}]},{"Name":"General Expenses","NameArabic":"المصاريف العامة","Description":"General Expenses","IsActive":true,"Code":"605050","Accounts":[{"Name":"General Expenses","NameArabic":"المصاريف العامة","Description":"General Expenses","IsActive":true,"Code":"60505001"}]},{"Name":"Payroll","NameArabic":"الرواتب","Description":"Payroll","IsActive":true,"Code":"603001","Accounts":[{"Name":"Payroll","NameArabic":"الرواتب","Description":"Payroll","IsActive":true,"Code":"60300101"}]},{"Name":"Utilities","NameArabic":"الخدمات","Description":"Utilities","IsActive":true,"Code":"604001","Accounts":[{"Name":"Utilities","NameArabic":"الخدمات","Description":"Utilities","IsActive":true,"Code":"60400101"}]},{"Name":"Rent","NameArabic":"ايجارات","Description":"Rent","IsActive":true,"Code":"604050","Accounts":[{"Name":"Rent","NameArabic":"ايجارات","Description":"Rent","IsActive":true,"Code":"60405001"}]},{"Name":"Legal Expenses","NameArabic":"المصاريف القانونيه","Description":"Legal Expenses","IsActive":true,"Code":"605001","Accounts":[{"Name":"Legal Expenses","NameArabic":"المصاريف القانونيه","Description":"Legal Expenses","IsActive":true,"Code":"60500101"}]}]}]}'
+
+UPDATE [AccountTemplates] SET [JsonTemplate] = N'{"AccountsType":[{"Name":"Assets","NameArabic":"الاساس","IsActive":true,"CostCenters":[{"Name":"Cash in Hand","NameArabic":"صندوق","Description":"Cash in Hand","IsActive":true,"Code":"101000","Accounts":[{"Name":"Cash in Hand","NameArabic":"صندوق","Description":"Cash in Hand","IsActive":true,"Code":"10100001"}]},{"Name":"Cash in Hand - Store","NameArabic":"صندوق المستودع","Description":"Cash in Hand - Store","IsActive":true,"Code":"101001","Accounts":[{"Name":"Accounts receivable","NameArabic":"الحسبات المستحقه","Description":"Accounts receivable","IsActive":true,"Code":"10100101"}]},{"Name":"Inventory","NameArabic":"المخزون","Description":"Inventory","IsActive":true,"Code":"111000","Accounts":[{"Name":"Inventory","NameArabic":"المخزون","Description":"Inventory","IsActive":true,"Code":"11100001"}]},{"Name":"Customer Reciveables","NameArabic":"مستحقات العملاء","Description":"Customer Reciveables","IsActive":true,"Code":"120000","Accounts":[{"Name":"Customer Reciveables","NameArabic":"مستحقات العملاء","Description":"Customer Reciveables","IsActive":true,"Code":"1200001"}]},{"Name":"VAT Paid","NameArabic":"مدفوعات القيمه المضافه","Description":"VAT Paid","IsActive":true,"Code":"130000","Accounts":[{"Name":"VAT Paid on Purchases","NameArabic":"","Description":"VAT Paid on Purchases","IsActive":true,"Code":"1300001"}]},{"Name":"Banks","NameArabic":"البنوك","Description":"Banks","IsActive":true,"Code":"105000","Accounts":[{"Name":"Banks","NameArabic":"البنوك","Description":"Banks","IsActive":true,"Code":"10500001"}]},{"Name":"Accumulated Depreciation","NameArabic":"الاستهلاك التراكمي","Description":"Accumulated Depreciation","IsActive":true,"Code":"170000","Accounts":[{"Name":"Accumulated Depreciation","NameArabic":"الاستهلاك التراكمي","Description":"Accumulated Depreciation","IsActive":true,"Code":"17000001"}]},{"Name":"Fixed Assets","NameArabic":"الاساس الثابت","Description":"Fixed Assets","IsActive":true,"Code":"150000","Accounts":[{"Name":"Fixed Assets","NameArabic":"الاساس الثابت","Description":"Fixed Assets","IsActive":true,"Code":"1500001"}]},{"Name":"Due from Employee","NameArabic":"مديونات الموظف","Description":"Due from Employee","IsActive":true,"Code":"126000","Accounts":[{"Name":"Due from Employee","NameArabic":"مديونات الموظف","Description":"Due from Employee","IsActive":true,"Code":"12600001"}]}]},{"Name":"Liabilities","NameArabic":"التزامات","IsActive":true,"CostCenters":[{"Name":"Supplier Payable","NameArabic":"مدفوعات الموردين","Description":"Supplier Payable","IsActive":true,"Code":"200000","Accounts":[{"Name":"Supplier Payable","NameArabic":"مدفوعات الموردين","Description":"Supplier Payable","IsActive":true,"Code":"20000001"}]},{"Name":"Payroll Liabilities","NameArabic":"مدفوعات الرواتب","Description":"Payroll Liabilities","IsActive":true,"Code":"240000","Accounts":[{"Name":"Payroll Liabilities","NameArabic":"مدفوعات الرواتب","Description":"Payroll Liabilities","IsActive":true,"Code":"24000001"}]},{"Name":"VAT Payable","NameArabic":"مدفوعات الضريبه","Description":"VAT Payable","IsActive":true,"Code":"250000","Accounts":[{"Name":"VAT Payable on Sale","NameArabic":"مدفوعات الضريبه","Description":"VAT Payable on Sale","IsActive":true,"Code":"25000001"}]},{"Name":"Loan Payable","NameArabic":"قرض مستحق الدفع","Description":"Loan Payable","IsActive":true,"Code":"253001","Accounts":[{"Name":"Loan Payable","NameArabic":"قرض مستحق الدفع","Description":"Loan Payable","IsActive":true,"Code":"2530101"}]}]},{"Name":"Equity","NameArabic":"رأس المال","IsActive":true,"CostCenters":[{"Name":"Opening Balance Equity","NameArabic":"الرصيد الافتتاحي","Description":"Opening Balance Equity","IsActive":true,"Code":"300000","Accounts":[{"Name":"Opening Balance Equity","NameArabic":"الرصيد الافتتاحي","Description":"Opening Balance Equity","IsActive":true,"Code":"30000001"}]},{"Name":"Owner Investment","NameArabic":"استثمار المالك ","Description":"Owner Investment","IsActive":true,"Code":"301001","Accounts":[{"Name":"Owner Investment","NameArabic":"استثمار المالك ","Description":"Owner Investment","IsActive":true,"Code":"30100101"}]},{"Name":"Owner Withdrawals","NameArabic":"انسحابات المالك ","Description":"Owner Withdrawals","IsActive":true,"Code":"302001","Accounts":[{"Name":"Owner Withdrawals","NameArabic":"انسحابات المالك ","Description":"Owner Withdrawals","IsActive":true,"Code":"30200101"}]},{"Name":"Retained Earnings","NameArabic":"الارباح","Description":"Retained Earnings","IsActive":true,"Code":"320000","Accounts":[{"Name":"Retained Earnings","NameArabic":"الارباح","Description":"Retained Earnings","IsActive":true,"Code":"32000001"}]},{"Name":"Net Profit for the period","NameArabic":"صافي الربح للفتره","Description":"Net Profit for the period","IsActive":true,"Code":"321002","Accounts":[{"Name":"Net Profit for the period","NameArabic":"صافي الربح للفتره","Description":"Net Profit for the period","IsActive":true,"Code":"32100201"}]}]},{"Name":"Income","NameArabic":"ايرادات","IsActive":true,"CostCenters":[{"Name":"Sale","NameArabic":"مبيعات","Description":"Sale","IsActive":true,"Code":"420000","Accounts":[{"Name":"Sale","NameArabic":"مبيعات","Description":"Sale","IsActive":true,"Code":"42000001"}]},{"Name":"Teller","NameArabic":"الصندوق","Description":"Teller","IsActive":true,"Code":"421000","Accounts":[{"Name":"Teller","NameArabic":"الصندوق","Description":"Teller","IsActive":true,"Code":"42100001"}]},{"Name":"POS-Terminal","NameArabic":"نقاط البيع - بنك","Description":"POS-Terminal","IsActive":true,"Code":"425000","Accounts":[{"Name":"POS-Terminal","NameArabic":"نقاط البيع - بنك","Description":"POS-Terminal","IsActive":true,"Code":"42500001"}]},{"Name":"Discount Taken","NameArabic":"الخصم المأخوذ","Description":"Discount Taken","IsActive":true,"Code":"426000","Accounts":[{"Name":"Discount Taken","NameArabic":"الخصم المأخوذ","Description":"Discount Taken","IsActive":true,"Code":"42600001"}]}]},{"Name":"Expenses","NameArabic":"المصاريف","IsActive":true,"CostCenters":[{"Name":"Cost of ods Sold","NameArabic":"تكلفه البضاعه المباعه","Description":"Cost of ods Sold","IsActive":true,"Code":"600001","Accounts":[{"Name":"Cost of ods Sold","NameArabic":"تكلفه البضاعه المباعه","Description":"Cost of ods Sold","IsActive":true,"Code":"60000101"}]},{"Name":"Freight Paid","NameArabic":"مدفوعات الشحن","Description":"Freight Paid","IsActive":true,"Code":"608001","Accounts":[{"Name":"Freight Paid","NameArabic":"مدفوعات الشحن","Description":"Freight Paid","IsActive":true,"Code":"60800101"}]},{"Name":"Discount Given","NameArabic":"الخصم المقدم","Description":"Discount Given","IsActive":true,"Code":"607001","Accounts":[{"Name":"Discount Given","NameArabic":"الخصم المقدم","Description":"Discount Given","IsActive":true,"Code":"60700101"}]},{"Name":"Depreciation Expense","NameArabic":"مصاريف الاستقدام","Description":"Depreciation Expense","IsActive":true,"Code":"606001","Accounts":[{"Name":"Depreciation Expense","NameArabic":"مصاريف الاستقدام","Description":"Depreciation Expense","IsActive":true,"Code":"60600101"}]},{"Name":"General Expenses","NameArabic":"المصاريف العامة","Description":"General Expenses","IsActive":true,"Code":"605050","Accounts":[{"Name":"General Expenses","NameArabic":"المصاريف العامة","Description":"General Expenses","IsActive":true,"Code":"60505001"}]},{"Name":"Payroll","NameArabic":"الرواتب","Description":"Payroll","IsActive":true,"Code":"603001","Accounts":[{"Name":"Payroll","NameArabic":"الرواتب","Description":"Payroll","IsActive":true,"Code":"60300101"}]},{"Name":"Utilities","NameArabic":"الخدمات","Description":"Utilities","IsActive":true,"Code":"604001","Accounts":[{"Name":"Utilities","NameArabic":"الخدمات","Description":"Utilities","IsActive":true,"Code":"60400101"}]},{"Name":"Rent","NameArabic":"ايجارات","Description":"Rent","IsActive":true,"Code":"604050","Accounts":[{"Name":"Rent","NameArabic":"ايجارات","Description":"Rent","IsActive":true,"Code":"60405001"}]},{"Name":"Legal Expenses","NameArabic":"المصاريف القانونيه","Description":"Legal Expenses","IsActive":true,"Code":"605001","Accounts":[{"Name":"Legal Expenses","NameArabic":"المصاريف القانونيه","Description":"Legal Expenses","IsActive":true,"Code":"60500101"}]}]}]}'
 WHERE [Id] = 'ecfe29c8-c6af-4a3d-9c24-f87b30bf831c';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-25T07:36:10.2053683Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211125073612_COAinArabic', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [BusinessId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [ClientId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [CompanyId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [CounterId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [CreatedById] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [CreatedOn] datetime2 NOT NULL DEFAULT (GetUtcDate());
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [DayId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [IsDeleted] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [ModifiedById] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [ModifiedOn] datetime2 NOT NULL DEFAULT (GetUtcDate());
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD [UserId] uniqueidentifier NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-GO
+
 
 CREATE TABLE [Logistics] (
     [Id] uniqueidentifier NOT NULL,
@@ -7846,101 +7846,101 @@ CREATE TABLE [Logistics] (
     CONSTRAINT [FK_Logistics_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-29T07:01:27.3623205Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_InventoryBlindDetails_CompanyId] ON [InventoryBlindDetails] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_Logistics_ClearanceAgent] ON [Logistics] ([ClearanceAgent]);
 
-GO
+
 
 CREATE INDEX [IX_Logistics_CompanyId] ON [Logistics] ([CompanyId]);
 
-GO
+
 
 ALTER TABLE [InventoryBlindDetails] ADD CONSTRAINT [FK_InventoryBlindDetails_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211129070129_LogisticsInformation', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SaleOrders] ADD [ClientPurchaseNo] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [SaleOrders] ADD [IsQuotation] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-29T07:04:21.5529455Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211129070423_quotaion-check-in-saleorder', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SaleOrders] ADD [QuotationId] uniqueidentifier NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-29T10:43:29.2951527Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211129104331_quotaion-in-saleinvoice', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Companies] ADD [SaleOrder] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-29T13:06:15.8325703Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211129130618_saleOrder-check-in-company', N'2.2.6-servicing-10079');
 
-GO
+
 
 DELETE FROM [NobleModules]
 WHERE [Id] = 'f172d244-fef6-4cb0-826e-55778f3e196f';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-30T03:36:29.7837985Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ArabicName', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] ON;
@@ -7961,11 +7961,11 @@ VALUES ('e8217e77-786c-4e37-8fc1-d800a55d8fa9', NULL, 0, N'Super Product', N'Sup
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ArabicName', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] OFF;
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES ('daeeb948-fc4f-44ee-9747-23edc3918b9c', N'Touch Invoice', N'Can Void  Touch Invoice', 'c82f8189-5419-4268-a5b8-8a527e62e3a8'),
 ('21de1004-5a7b-4d6c-b21a-8775d023ef88', N'Expense', N'Can Void Daily Expense', 'cfcf2315-0697-401c-a5bb-38c8aaced1e1'),
 ('da645710-8dad-47f6-b602-b7be96103033', N'Product', N'Can View Updated Inventory Count List', 'ca3978f8-9aa3-49a3-95da-7bb35be89289'),
@@ -7983,343 +7983,343 @@ VALUES ('daeeb948-fc4f-44ee-9747-23edc3918b9c', N'Touch Invoice', N'Can Void  To
 ('00a03a14-4cc3-4a50-90f9-2d128c054241', N'Bank Pay', N'Can Reject Bank Pay', '29aac720-971b-43ef-9f02-9c60cd4e168b'),
 ('7e45912d-f341-4466-b00e-7ae1eba45593', N'Stock Transfer', N'Can Void  Stock Transfer', '7600596a-7cad-4514-91f3-21fe30628593'),
 ('6c5e1875-1b3f-410c-825c-9349d07a85a5', N'System', N'Push Record of Database', '0a00c448-c2ba-4ee4-972d-9352bc6175b8');
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'e328e825-8d13-4ccf-83ba-3ed0b2560e42'
 WHERE [Id] = '02651eb3-3f41-4c78-8d3b-92c8e401c37c';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '27f9aa66-5fde-49b3-a9d8-0a16e65d3f7a'
 WHERE [Id] = '053493a2-5755-4e07-bc3b-30942f506b92';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '27f9aa66-5fde-49b3-a9d8-0a16e65d3f7a'
 WHERE [Id] = '073faf36-caaa-4d70-876a-aff78e5a6530';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'a1c6ae96-a6b5-4a2b-b803-e688a7ecaa2c'
 WHERE [Id] = '091991aa-37ce-467a-9ef4-e9358a201d2a';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '8d800a27-2c0d-4d8c-b530-44cf83a8b7c8'
 WHERE [Id] = '0e469f66-b4fd-4627-8590-0761ad978259';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '5930455b-f54d-4c62-aae4-510cf844e3c9'
 WHERE [Id] = '11b73791-0e85-4edc-8089-260d79579a8d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '27f9aa66-5fde-49b3-a9d8-0a16e65d3f7a'
 WHERE [Id] = '155a03af-ebbd-4260-b010-2ed20d7cfd63';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'eb023060-25b5-4cf3-9850-b9a27dd82b8f'
 WHERE [Id] = '161b2ed5-2702-4c34-bbf5-9f49dbdafab4';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'fe448d69-e152-4d03-a68d-7e7d21420a74'
 WHERE [Id] = '2d116856-8144-43a8-8297-633c6e1fa69a';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '134a06ea-9447-4ea1-982e-2b688ca243d0'
 WHERE [Id] = '31bc4a88-10a6-493a-8fcb-5c2c6100d7ef';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'e328e825-8d13-4ccf-83ba-3ed0b2560e42'
 WHERE [Id] = '36bdc1cd-de83-4443-871a-07782e048499';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '59d41cda-8b68-46d5-b46f-aa0ae6592fab'
 WHERE [Id] = '379354e8-36ab-47d7-b023-4cea93a133eb';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '27f9aa66-5fde-49b3-a9d8-0a16e65d3f7a'
 WHERE [Id] = '3f145b00-bb89-4a5f-9cb8-babb540803db';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '5930455b-f54d-4c62-aae4-510cf844e3c9'
 WHERE [Id] = '508d3cb2-a1f7-4940-91ea-55fa3ca60567';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'eb023060-25b5-4cf3-9850-b9a27dd82b8f'
 WHERE [Id] = '5127c542-4bf8-4029-80c4-2b2149864152';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '8d800a27-2c0d-4d8c-b530-44cf83a8b7c8'
 WHERE [Id] = '53a5207a-2e57-4636-80b6-e1e0b9390b6f';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '134a06ea-9447-4ea1-982e-2b688ca243d0'
 WHERE [Id] = '5f290a32-02f2-4893-947d-dfa81b83f8cd';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '8d800a27-2c0d-4d8c-b530-44cf83a8b7c8'
 WHERE [Id] = '6143bb33-1034-448e-8433-e50f39f83360';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'eb023060-25b5-4cf3-9850-b9a27dd82b8f'
 WHERE [Id] = '637a753d-5f9f-490f-8f26-cf2060972f2b';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'fe448d69-e152-4d03-a68d-7e7d21420a74'
 WHERE [Id] = '66b335a9-85cb-45f8-8a40-8de42a214d48';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'daa49ef1-b2b3-4098-9a31-b5c0e501b1d0'
 WHERE [Id] = '855377c8-a74f-4542-acd0-8aa52ab7e7f5';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'eb023060-25b5-4cf3-9850-b9a27dd82b8f'
 WHERE [Id] = '8821831a-f344-4455-8ee0-be85389e20dc';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'a1c6ae96-a6b5-4a2b-b803-e688a7ecaa2c'
 WHERE [Id] = '8df1d3d9-358b-4062-9cd6-eff5efc7c5d3';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '27f9aa66-5fde-49b3-a9d8-0a16e65d3f7a'
 WHERE [Id] = '93449156-d2fc-4402-9e83-a168ba0fb4c3';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '5930455b-f54d-4c62-aae4-510cf844e3c9'
 WHERE [Id] = '9593897e-63b0-4d35-bd8c-d5f6ad49ed73';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'daa49ef1-b2b3-4098-9a31-b5c0e501b1d0'
 WHERE [Id] = 'a9008a7a-5c19-4ccd-97c7-42f9937529e1';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'a1c6ae96-a6b5-4a2b-b803-e688a7ecaa2c'
 WHERE [Id] = 'abb53fbb-7c75-4c1c-b5e5-b9b148c81218';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '27f9aa66-5fde-49b3-a9d8-0a16e65d3f7a'
 WHERE [Id] = 'adde6b14-a937-4b3b-998d-350d01fd198b';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '5930455b-f54d-4c62-aae4-510cf844e3c9'
 WHERE [Id] = 'af665ba5-4c02-45aa-ab00-cf533c037df2';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '27f9aa66-5fde-49b3-a9d8-0a16e65d3f7a'
 WHERE [Id] = 'c16c04d9-72e1-4bd6-8aec-f630d7b4a1f4';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'a1c6ae96-a6b5-4a2b-b803-e688a7ecaa2c'
 WHERE [Id] = 'c546ee15-506d-444c-aefd-1c86231bc0c9';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '59d41cda-8b68-46d5-b46f-aa0ae6592fab'
 WHERE [Id] = 'c9849a14-1b2c-4993-b50e-a6bc64f69095';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '59d41cda-8b68-46d5-b46f-aa0ae6592fab'
 WHERE [Id] = 'cb9d0f1e-4b2e-4cdb-8d66-8dcb05fab5b9';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '134a06ea-9447-4ea1-982e-2b688ca243d0'
 WHERE [Id] = 'd0a55259-37ff-4987-9a17-ec17b56107da';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '8d800a27-2c0d-4d8c-b530-44cf83a8b7c8'
 WHERE [Id] = 'd0c71d2a-06cc-45e3-8d63-6302bd85019a';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '8d800a27-2c0d-4d8c-b530-44cf83a8b7c8'
 WHERE [Id] = 'dadd482e-d6ea-466a-a32d-4a836070480e';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '8d800a27-2c0d-4d8c-b530-44cf83a8b7c8'
 WHERE [Id] = 'dcb93d01-a317-446f-a51b-80cc065c9415';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'e328e825-8d13-4ccf-83ba-3ed0b2560e42'
 WHERE [Id] = 'df4c05f4-afea-48cb-9b94-06aa7d04f1df';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '27f9aa66-5fde-49b3-a9d8-0a16e65d3f7a'
 WHERE [Id] = 'e09194b3-e355-4975-8247-c0170438e849';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '59d41cda-8b68-46d5-b46f-aa0ae6592fab'
 WHERE [Id] = 'e1b98cfa-d450-4c36-818d-296e16082a3a';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'daa49ef1-b2b3-4098-9a31-b5c0e501b1d0'
 WHERE [Id] = 'e303975e-5fb0-49dd-89dd-6550d9f796e4';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '8d800a27-2c0d-4d8c-b530-44cf83a8b7c8'
 WHERE [Id] = 'e9dd831f-02ec-4b41-baf8-5a5d96a3450a';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'fe448d69-e152-4d03-a68d-7e7d21420a74'
 WHERE [Id] = 'ee288fce-c3b4-45c6-9a98-68068ec3f5db';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'daa49ef1-b2b3-4098-9a31-b5c0e501b1d0'
 WHERE [Id] = 'f10732d2-0f61-4676-b86c-3530be9eff17';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'e328e825-8d13-4ccf-83ba-3ed0b2560e42'
 WHERE [Id] = 'f2a3751e-d8f9-49b3-95c9-0bc3116c11fc';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = 'fe448d69-e152-4d03-a68d-7e7d21420a74'
 WHERE [Id] = 'f8dcbdf3-fe8b-4251-9672-9dfd2535e6e8';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [NoblePermissions] SET [NobleModuleId] = '134a06ea-9447-4ea1-982e-2b688ca243d0'
 WHERE [Id] = 'fafa3dee-7560-4713-a664-9877470e485b';
 SELECT @@ROWCOUNT;
 
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES ('e66d99a3-92d3-4e85-a435-d427e024e057', N'Purchase Invoice as Post', N'Can Void Purchase Invoice', 'e328e825-8d13-4ccf-83ba-3ed0b2560e42'),
 ('655f9534-7685-40d1-a7fa-bd4a817f7317', N'Purchase Return', N'Can Void  Purchase Return', 'fe448d69-e152-4d03-a68d-7e7d21420a74'),
 ('5b5446ba-2274-4c23-bf1a-cec5bd014557', N'Super Product', N'Can Save Super Product', 'e8217e77-786c-4e37-8fc1-d800a55d8fa9'),
@@ -8361,35 +8361,35 @@ VALUES ('e66d99a3-92d3-4e85-a435-d427e024e057', N'Purchase Invoice as Post', N'C
 ('6d1bbe01-c642-47ad-9adb-2745a8e377f4', N'Opening Cash', N'Can Edit  Opening Cash as Post', 'bc9c5967-19b3-460e-ace7-77229907e1e3'),
 ('60d0f8fa-cef0-4b4d-8a31-088a3592767f', N'Petty Cash', N'Can Delete  Petty Cash as Draft', 'f9ceab2b-9eb3-4da1-bd35-49fe51375faf'),
 ('4634ce35-db20-44a9-a2a0-23b2ba6c80e2', N'Super Product', N'Can View  Super Product', 'e8217e77-786c-4e37-8fc1-d800a55d8fa9');
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211130033636_change-int-guid-remainig', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Products] ADD [Guarantee] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [Products] ADD [Serial] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-30T07:33:11.2444857Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211130073313_serial-guarantee-in-product', N'2.2.6-servicing-10079');
 
-GO
+
 
 DECLARE @var44 sysname;
 SELECT @var44 = [d].[name]
@@ -8399,7 +8399,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[InventoryBlindDetails]') AND [c].[n
 IF @var44 IS NOT NULL EXEC(N'ALTER TABLE [InventoryBlindDetails] DROP CONSTRAINT [' + @var44 + '];');
 ALTER TABLE [InventoryBlindDetails] DROP COLUMN [BusinessId];
 
-GO
+
 
 DECLARE @var45 sysname;
 SELECT @var45 = [d].[name]
@@ -8409,7 +8409,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[InventoryBlindDetails]') AND [c].[n
 IF @var45 IS NOT NULL EXEC(N'ALTER TABLE [InventoryBlindDetails] DROP CONSTRAINT [' + @var45 + '];');
 ALTER TABLE [InventoryBlindDetails] DROP COLUMN [ClientId];
 
-GO
+
 
 DECLARE @var46 sysname;
 SELECT @var46 = [d].[name]
@@ -8419,7 +8419,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[InventoryBlindDetails]') AND [c].[n
 IF @var46 IS NOT NULL EXEC(N'ALTER TABLE [InventoryBlindDetails] DROP CONSTRAINT [' + @var46 + '];');
 ALTER TABLE [InventoryBlindDetails] DROP COLUMN [CounterId];
 
-GO
+
 
 DECLARE @var47 sysname;
 SELECT @var47 = [d].[name]
@@ -8429,7 +8429,7 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[InventoryBlindDetails]') AND [c].[n
 IF @var47 IS NOT NULL EXEC(N'ALTER TABLE [InventoryBlindDetails] DROP CONSTRAINT [' + @var47 + '];');
 ALTER TABLE [InventoryBlindDetails] DROP COLUMN [DayId];
 
-GO
+
 
 DECLARE @var48 sysname;
 SELECT @var48 = [d].[name]
@@ -8439,546 +8439,546 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[InventoryBlindDetails]') AND [c].[n
 IF @var48 IS NOT NULL EXEC(N'ALTER TABLE [InventoryBlindDetails] DROP CONSTRAINT [' + @var48 + '];');
 ALTER TABLE [InventoryBlindDetails] DROP COLUMN [UserId];
 
-GO
+
 
 ALTER TABLE [Logistics] ADD [ContactName] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-11-30T09:55:11.9373550Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211130095514_ContactNameInLogistic', N'2.2.6-servicing-10079');
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '01471545-b55b-4820-9fa5-37a13da008b0';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '01b9e41d-c0dc-4065-9c04-fff087468616';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '0232b199-7c83-4199-bdc1-1e057d3678d3';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '06bff7fc-ecca-4305-886e-3d7aa5246bea';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '079f4f75-7b77-4339-bc73-fc3e40e36c8d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '082de882-9836-4869-abb1-698e264ef6f4';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '0bf63044-8c7a-42c5-8764-bf795bb37447';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '0f3caa9a-07ba-4c5f-b4c5-e8ccb88ea421';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '1438f661-3dd7-42d4-a9e9-81fc1d8a0c54';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '1f093ea3-814d-4338-8aa5-6b25013d5878';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '2a2a3400-d8e4-4d85-83e8-adfa8d3e6428';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '2c57f8de-23f6-4fdf-a99e-a87cd6a48083';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '38c57c94-31a9-48c5-ab03-b20b6fe24ef5';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '38df78a2-2e02-448e-8458-70ae509d2a5e';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '3aecc007-62cc-4657-9cff-f26e6d91d3f4';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '3c707a3b-16ef-4d69-8b8d-2906cd97c1a8';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '40e034fd-00dd-4ea8-8ff2-f5ae34e7cb7b';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '452c8428-fa7c-421d-89d6-cd12e6fc8439';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '48a7e968-c394-48b3-97f3-ca170d69bf07';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '4ad20abc-4e2d-4cdf-a70d-863ae4ee5588';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '52b993b9-65ee-45ed-b044-9f488f05ea9e';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '53805cd0-480d-49e3-a792-040611c2776f';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '5441b964-256b-4722-b761-3844fbf33532';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '57282478-e239-45e6-bf8c-3b11a84f5a8c';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '589a7313-8b15-40d1-9863-8b23bcf5f387';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '5e2a63e0-2cd3-43e5-825a-0ce263be0765';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '604ff746-2bd5-4558-a6b0-ef5f49ccd9e8';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '62a3710d-f16f-4ce5-ab72-04b717e48890';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '63b07e2c-eab5-4cce-b838-d592553f8d06';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '63edf9d4-feb8-44f3-8fee-12022aff1e54';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '669ed81d-96bc-4ed6-a3e5-0f3f01954114';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '6c5a8310-4508-48da-9228-c81da9b4f84a';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '6d11941f-4efc-4184-891b-95d1bb486d98';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '6e045010-76d2-4261-8c0b-378d5252af49';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '6f4cc69e-937e-416a-819f-591f83867984';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '7441b264-1d06-4c56-a80a-b0272110273f';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '75ef2940-38d4-41f2-8de0-89cb8c216592';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '7e04d43e-aa36-404c-9633-288da5ae072e';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '7e17ff28-b433-4d27-bf29-51afd7709dd0';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '804b8823-c980-4b11-9d7d-3936469dfde6';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '91b7b87b-9c39-49c4-89b9-19c52cfcc592';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '949ad470-96e6-4a46-bbfd-5384457bc2dc';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '977102ef-9524-4ab8-a163-1fe4672348a8';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '98558d0d-8032-4b8d-b91b-d97936b9fdb1';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '998e1ae2-071c-4687-ba77-4db8b7786888';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '99af4d7b-731f-4456-8d03-37fc76682625';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = '9ba25565-c988-499a-8c7c-604cd3d0b5fc';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'a3ad316c-7d58-4466-9920-5d421699d9ef';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'aa96f625-5526-4cb8-b0d7-01fbcaed6f45';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'ab6c2caa-fe02-4b01-8ae3-639318a4f09a';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'ae1a7c13-daa5-4466-a8a8-544dcd2b76d1';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'b11a0c0c-934c-4e0b-b652-932c8c507c1f';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'b4fd3f41-684d-413b-98d8-bbbbdb8eb0a8';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'c19e11d3-977f-4a77-8b6e-b87b5769bb5e';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'c6c23136-17b8-4787-8f96-563389a204ab';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'cff3d9a2-b4ed-46f9-b0c1-080f0c6e0d4e';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'd0f5705e-9bef-405b-a925-56b833d5c029';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'd65035c8-8f9d-463f-b528-8160f1a02f38';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'd79afa05-039b-4f3b-8038-ed835e7123ed';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'df168358-99a7-41cf-bc2d-32dcd6b62d03';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'e14bc4e1-8d09-4a3e-8550-04bcc331af1c';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'e14fd3bb-1d4a-4878-90db-5a29b56e6500';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'e2092c9b-7051-485e-9002-e4bdfb987005';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'e72be317-8c29-4487-9382-a0cca1aed819';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'ed83e71c-4949-485c-84fb-fe8c01ca279a';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'f09f60e6-8ac3-444f-86d8-b4489a40ec7b';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'f0f8183b-6e0a-4a47-8ba3-a49200d5c564';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'f161d9bd-7db7-467e-a86d-7eb812bead04';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'f1e667a4-b7d4-4105-a232-eac63c804ccd';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'f466e424-e5ec-4a8f-9893-675a5a96e526';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'f70377ca-2e6c-435f-9025-23c1361579b6';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 DELETE FROM [NoblePermissions]
 WHERE [Id] = 'f75adbd1-53ea-4713-873b-a21d4eb2c658';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-01T08:05:06.5839872Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211201080509_remove-setup', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-01T08:09:48.7151383Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ArabicName', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] ON;
@@ -8987,11 +8987,11 @@ VALUES ('f172d244-fef6-4cb0-826e-55778f3e196f', NULL, 0, N'Setup Form', N'Setup 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ArabicName', N'BusinessType', N'Description', N'ModuleName') AND [object_id] = OBJECT_ID(N'[NobleModules]'))
     SET IDENTITY_INSERT [NobleModules] OFF;
 
-GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] ON;
-INSERT INTO [NoblePermissions] ([Id], [Category], [Description], [NobleModuleId])
+INSERT INTO [NoblePermissions] ([Id], [Catery], [Description], [NobleModuleId])
 VALUES ('91b7b87b-9c39-49c4-89b9-19c52cfcc592', N'Brand', N'Can Save Brand', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('0232b199-7c83-4199-bdc1-1e057d3678d3', N'Currency', N'Can View Currency', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('6d11941f-4efc-4184-891b-95d1bb486d98', N'Currency', N'Can Delete Currency', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
@@ -9032,11 +9032,11 @@ VALUES ('91b7b87b-9c39-49c4-89b9-19c52cfcc592', N'Brand', N'Can Save Brand', 'f1
 ('53805cd0-480d-49e3-a792-040611c2776f', N'Color', N'Can Delete Color', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('b11a0c0c-934c-4e0b-b652-932c8c507c1f', N'Color', N'Can Edit Color', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('df168358-99a7-41cf-bc2d-32dcd6b62d03', N'Color', N'Can Save Color', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('669ed81d-96bc-4ed6-a3e5-0f3f01954114', N'Category', N'Can View Category', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('4ad20abc-4e2d-4cdf-a70d-863ae4ee5588', N'Category', N'Can Delete Category', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('06bff7fc-ecca-4305-886e-3d7aa5246bea', N'Category', N'Can Edit Category', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('669ed81d-96bc-4ed6-a3e5-0f3f01954114', N'Catery', N'Can View Catery', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('4ad20abc-4e2d-4cdf-a70d-863ae4ee5588', N'Catery', N'Can Delete Catery', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('06bff7fc-ecca-4305-886e-3d7aa5246bea', N'Catery', N'Can Edit Catery', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('2c57f8de-23f6-4fdf-a99e-a87cd6a48083', N'Color', N'Can View Color', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('079f4f75-7b77-4339-bc73-fc3e40e36c8d', N'Category', N'Can Save Category', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('079f4f75-7b77-4339-bc73-fc3e40e36c8d', N'Catery', N'Can Save Catery', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('f1e667a4-b7d4-4105-a232-eac63c804ccd', N'BarCode Printing', N'Can Delete BarCode Printing', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('6e045010-76d2-4261-8c0b-378d5252af49', N'BarCode Printing', N'Can Edit BarCode Printing', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('5e2a63e0-2cd3-43e5-825a-0ce263be0765', N'BarCode Printing', N'Can Save BarCode Printing', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
@@ -9057,46 +9057,46 @@ VALUES ('91b7b87b-9c39-49c4-89b9-19c52cfcc592', N'Brand', N'Can Save Brand', 'f1
 ('6c5a8310-4508-48da-9228-c81da9b4f84a', N'Tax Rate', N'Can Delete Tax Rate', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('2a2a3400-d8e4-4d85-83e8-adfa8d3e6428', N'Tax Rate', N'Can Edit Tax Rate', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('3aecc007-62cc-4657-9cff-f26e6d91d3f4', N'Tax Rate', N'Can Save Tax Rate', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('c6c23136-17b8-4787-8f96-563389a204ab', N'SubCategories', N'Can View SubCategories', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('7e04d43e-aa36-404c-9633-288da5ae072e', N'SubCategories', N'Can Delete SubCategories', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('977102ef-9524-4ab8-a163-1fe4672348a8', N'SubCategories', N'Can Edit SubCategories', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
-('e72be317-8c29-4487-9382-a0cca1aed819', N'SubCategories', N'Can Save SubCategories', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('c6c23136-17b8-4787-8f96-563389a204ab', N'SubCateries', N'Can View SubCateries', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('7e04d43e-aa36-404c-9633-288da5ae072e', N'SubCateries', N'Can Delete SubCateries', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('977102ef-9524-4ab8-a163-1fe4672348a8', N'SubCateries', N'Can Edit SubCateries', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
+('e72be317-8c29-4487-9382-a0cca1aed819', N'SubCateries', N'Can Save SubCateries', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('1f093ea3-814d-4338-8aa5-6b25013d5878', N'Origin', N'Can View Origin', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('6f4cc69e-937e-416a-819f-591f83867984', N'Denomination Setup', N'Can Delete Denomination Setup', 'f172d244-fef6-4cb0-826e-55778f3e196f'),
 ('a3ad316c-7d58-4466-9920-5d421699d9ef', N'Denomination Setup', N'Can View Denomination Setup', 'f172d244-fef6-4cb0-826e-55778f3e196f');
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Category', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Catery', N'Description', N'NobleModuleId') AND [object_id] = OBJECT_ID(N'[NoblePermissions]'))
     SET IDENTITY_INSERT [NoblePermissions] OFF;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211201080951_setupform', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PurchasePostItems] ADD [GuaranteeDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [PurchasePostItems] ADD [SerialNo] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseOrderItems] ADD [GuaranteeDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseOrderItems] ADD [SerialNo] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseItems] ADD [GuaranteeDate] datetime2 NULL;
 
-GO
+
 
 ALTER TABLE [PurchaseItems] ADD [SerialNo] nvarchar(max) NULL;
 
-GO
+
 
 CREATE TABLE [CompanyProcess] (
     [Id] uniqueidentifier NOT NULL,
@@ -9113,23 +9113,23 @@ CREATE TABLE [CompanyProcess] (
     CONSTRAINT [FK_CompanyProcess_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-02T07:49:46.0051731Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_CompanyProcess_CompanyId] ON [CompanyProcess] ([CompanyId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211202074947_company-process-db', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [PurchaseOrderActions] (
     [Id] uniqueidentifier NOT NULL,
@@ -9147,123 +9147,123 @@ CREATE TABLE [PurchaseOrderActions] (
     CONSTRAINT [FK_PurchaseOrderActions_PurchaseOrders_PurchaseOrderId] FOREIGN KEY ([PurchaseOrderId]) REFERENCES [PurchaseOrders] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-02T09:00:30.2360101Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrderActions_CompanyId] ON [PurchaseOrderActions] ([CompanyId]);
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrderActions_PurchaseOrderId] ON [PurchaseOrderActions] ([PurchaseOrderId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211202090032_PurchaseOrder-Action-Db', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [ArabicName] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [BlindPrint] bit NOT NULL DEFAULT 0;
 
-GO
 
-ALTER TABLE [PrintSettings] ADD [CargoName] bit NOT NULL DEFAULT 0;
 
-GO
+ALTER TABLE [PrintSettings] ADD [CarName] bit NOT NULL DEFAULT 0;
+
+
 
 ALTER TABLE [PrintSettings] ADD [CustomerAddress] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [CustomerNumber] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [CustomerTelephone] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [CustomerVat] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [EnglishName] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [ItemDescription] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [ItemPieceSize] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [ShowBankAccount] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [StyleNo] bit NOT NULL DEFAULT 0;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-02T12:04:48.0408144Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211202120450_ChangingInPrintSetting', N'2.2.6-servicing-10079');
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-02T13:10:43.3231631Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_PurchaseOrderActions_ProcessId] ON [PurchaseOrderActions] ([ProcessId]);
 
-GO
+
 
 ALTER TABLE [PurchaseOrderActions] ADD CONSTRAINT [FK_PurchaseOrderActions_CompanyProcess_ProcessId] FOREIGN KEY ([ProcessId]) REFERENCES [CompanyProcess] ([Id]) ON DELETE CASCADE;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211202131045_companyProcess-relation-with-purchaseorderaction', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PurchaseOrderActions] ADD [CurrentDate] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-02T13:53:05.1394667Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211202135307_date-in-PurchaseOrderAction', N'2.2.6-servicing-10079');
 
-GO
+
 
 CREATE TABLE [ApplicationUpdates] (
     [Id] uniqueidentifier NOT NULL,
@@ -9277,129 +9277,129 @@ CREATE TABLE [ApplicationUpdates] (
     CONSTRAINT [FK_ApplicationUpdates_Companies_CompanyId] FOREIGN KEY ([CompanyId]) REFERENCES [Companies] ([Id]) ON DELETE NO ACTION
 );
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-03T05:35:46.8187200Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_ApplicationUpdates_CompanyId] ON [ApplicationUpdates] ([CompanyId]);
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211203053548_ApplicationUpdate', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [PurchaseOrderItems] ADD [ReceiveQuantity] int NOT NULL DEFAULT 0;
 
-GO
+
 
 ALTER TABLE [PurchaseAttachments] ADD [Date] datetime2 NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-03T06:28:16.3338984Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211203062818_confirm-in-purchaseorder', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [LogisticId] uniqueidentifier NULL;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [BankAccount1] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [BankAccount2] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [BankIcon1] nvarchar(max) NULL;
 
-GO
+
 
 ALTER TABLE [PrintSettings] ADD [BankIcon2] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-03T10:42:56.9848236Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 CREATE INDEX [IX_Sales_LogisticId] ON [Sales] ([LogisticId]);
 
-GO
+
 
 ALTER TABLE [Sales] ADD CONSTRAINT [FK_Sales_Logistics_LogisticId] FOREIGN KEY ([LogisticId]) REFERENCES [Logistics] ([Id]) ON DELETE NO ACTION;
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20211203104259_LogisticCargoRelationWithSaleInvoice', N'2.2.6-servicing-10079');
+VALUES (N'20211203104259_LogisticCarRelationWithSaleInvoice', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Sales] ADD [CustomerAddressWalkIn] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-06T07:03:27.3025982Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211206070329_CustomerNameWalkIn', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [SalePayments] ADD [Name] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-06T11:32:11.8613017Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211206113213_name-insalepayment-db', N'2.2.6-servicing-10079');
 
-GO
+
 
 ALTER TABLE [Terminals] ADD [PrinterName] nvarchar(max) NULL;
 
-GO
+
 
 UPDATE [Companies] SET [CreatedDate] = '2021-12-06T13:05:44.6939042Z'
 WHERE [Id] = '5f8d5614-2c7e-4ec0-868c-d254e6516b4d';
 SELECT @@ROWCOUNT;
 
 
-GO
+
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20211206130546_printer-name-in-terminal', N'2.2.6-servicing-10079');
 
-GO
+
 
